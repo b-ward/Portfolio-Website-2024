@@ -1,0 +1,19 @@
+.video {
+    display: block;
+    width: 60vw;
+    height: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+}
+
+.photos-title {
+    margin-top: 56px;
+    text-align: center;
+    color: #ffc200;
+}
+
+.photos-subtitle {
+    text-align: center;
+    color: white;
+}

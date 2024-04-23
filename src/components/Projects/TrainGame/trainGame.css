@@ -1,0 +1,26 @@
+.trainGame-wrapper {
+    text-align: center;
+    color:#ffc200;
+    margin-top: 56px;
+    height: 100vh;
+}
+
+.trainGame-title {
+    padding-bottom: 2vh;
+    width: 60%;
+    margin: auto;
+}
+
+.solutions {
+    padding-top: 2vh;
+    padding-bottom: 20vh;
+}
+
+.error {
+    padding-top: 2vh;
+    color: red;
+}
+
+.app-image {
+    width: 50%;
+}

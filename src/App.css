@@ -1,0 +1,39 @@
+.App {
+  text-align: center;
+}
+
+.Layout {
+  background-color: #333134;
+}
+
+.page-content {
+  background-color: #333134;
+}
+
+/* Bootstrap button colour */
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #ffc200 !important;
+  border-color: #ffc200 !important;
+}
+
+.ball {
+  position: absolute;
+  border-radius: 100%;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.App::-webkit-scrollbar {
+  display: none;
+}
+
+/* .circle {
+  height: 80vh;
+  width: 80vh;
+  background-color: crimson;
+  border-radius: 50%;
+  display: inline-block;
+  bottom: -20vh;
+  right: -20vh;
+  position: fixed;
+} */

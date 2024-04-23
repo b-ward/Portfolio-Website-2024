@@ -1,0 +1,526 @@
+.trio-wrapper {
+  margin-top: 56px;
+}
+
+#play {
+  position:absolute;
+  padding-left: 20px;
+  padding-top: 20px;
+  width: 100%;
+  height: 700px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background-color: 	#006400;
+}
+#player_card_1 {
+  position:absolute;
+  top:450px;
+  left:200px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_2 {
+  position:absolute;
+  top:450px;
+  left:270px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_3 {
+  position:absolute;
+  top:450px;
+  left:340px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_4 {
+  position:absolute;
+  top:450px;
+  left:410px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_5 {
+  position:absolute;
+  top:450px;
+  left:480px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_6 {
+  position:absolute;
+  top:450px;
+  left:550px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_7 {
+  position:absolute;
+  top:450px;
+  left:620px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_8 {
+  position:absolute;
+  top:450px;
+  left:690px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_9 {
+  position:absolute;
+  top:450px;
+  left:760px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_10 {
+  position:absolute;
+  top:450px;
+  left:830px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_11 {
+  position:absolute;
+  top:450px;
+  left:900px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_12 {
+  position:absolute;
+  top:450px;
+  left:970px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#player_card_13 {
+  position:absolute;
+  top:450px;
+  left:1040px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+
+#player_trio_1_card_1 {
+  position:absolute;
+  top:330px;
+  left:310px;
+  width: 63px;
+  height: 91px;
+}
+#player_trio_1_card_2 {
+  position:absolute;
+  top:330px;
+  left:380px;
+  width: 63px;
+  height: 91px;
+}
+#player_trio_1_card_3 {
+  position:absolute;
+  top:330px;
+  left:450px;
+  width: 63px;
+  height: 91px;
+  color: black;
+}
+#player_trio_1_card_4 {
+  position:absolute;
+  top:330px;
+  left:520px;
+  width: 31px;
+  height: 45px;
+}
+#player_trio_1_card_5 {
+  position:absolute;
+  top:380px;
+  left:520px;
+  width: 31px;
+  height: 45px;
+}
+#player_trio_1_card_6 {
+  position:absolute;
+  top:330px;
+  left:560px;
+  width: 31px;
+  height: 45px;
+}
+#player_trio_1_card_7 {
+  position:absolute;
+  top:380px;
+  left:560px;
+  width: 31px;
+  height: 45px;
+}
+#player_trio_1_card_8 {
+  position:absolute;
+  top:353px;
+  left:600px;
+  width: 31px;
+  height: 45px;
+}
+
+
+#player_trio_2_card_1 {
+  position:absolute;
+  top:330px;
+  left:650px;
+  width: 63px;
+  height: 91px;
+}
+#player_trio_2_card_2 {
+  position:absolute;
+  top:330px;
+  left:720px;
+  width: 63px;
+  height: 91px;
+}
+#player_trio_2_card_3 {
+  position:absolute;
+  top:330px;
+  left:790px;
+  width: 63px;
+  height: 91px;
+}
+#player_trio_2_card_4 {
+  position:absolute;
+  top:330px;
+  left:860px;
+  width: 31px;
+  height: 45px;
+}
+#player_trio_2_card_5 {
+  position:absolute;
+  top:380px;
+  left:860px;
+  width: 31px;
+  height: 45px;
+}
+#player_trio_2_card_6 {
+  position:absolute;
+  top:330px;
+  left:900px;
+  width: 31px;
+  height: 45px;
+}
+#player_trio_2_card_7 {
+  position:absolute;
+  top:380px;
+  left:900px;
+  width: 31px;
+  height: 45px;
+}
+#player_trio_2_card_8 {
+  position:absolute;
+  top:353px;
+  left:940px;
+  width: 31px;
+  height: 45px;
+}
+
+
+#CPU_trio_1_card_1 {
+  position:absolute;
+  top:100px;
+  left:310px;
+  width: 63px;
+  height: 91px;
+}
+#CPU_trio_1_card_2 {
+  position:absolute;
+  top:100px;
+  left:380px;
+  width: 63px;
+  height: 91px;
+}
+#CPU_trio_1_card_3 {
+  position:absolute;
+  top:100px;
+  left:450px;
+  width: 63px;
+  height: 91px;
+}
+#CPU_trio_1_card_4 {
+  position:absolute;
+  top:100px;
+  left:520px;
+  width: 31px;
+  height: 45px;
+}
+#CPU_trio_1_card_5 {
+  position:absolute;
+  top:150px;
+  left:520px;
+  width: 31px;
+  height: 45px;
+}
+#CPU_trio_1_card_6 {
+  position:absolute;
+  top:100px;
+  left:560px;
+  width: 31px;
+  height: 45px;
+}
+#CPU_trio_1_card_7 {
+  position:absolute;
+  top:150px;
+  left:560px;
+  width: 31px;
+  height: 45px;
+}
+#CPU_trio_1_card_8 {
+  position:absolute;
+  top:123px;
+  left:600px;
+  width: 31px;
+  height: 45px;
+}
+
+#CPU_trio_2_card_1 {
+  position:absolute;
+  top:100px;
+  left:650px;
+  width: 63px;
+  height: 91px;
+}
+#CPU_trio_2_card_2 {
+  position:absolute;
+  top:100px;
+  left:720px;
+  width: 63px;
+  height: 91px;
+}
+#CPU_trio_2_card_3 {
+  position:absolute;
+  top:100px;
+  left:790px;
+  width: 63px;
+  height: 91px;
+}
+#CPU_trio_2_card_4 {
+  position:absolute;
+  top:100px;
+  left:860px;
+  width: 31px;
+  height: 45px;
+}
+#CPU_trio_2_card_5 {
+  position:absolute;
+  top:150px;
+  left:860px;
+  width: 31px;
+  height: 45px;
+}
+#CPU_trio_2_card_6 {
+  position:absolute;
+  top:100px;
+  left:900px;
+  width: 31px;
+  height: 45px;
+}
+#CPU_trio_2_card_7 {
+  position:absolute;
+  top:150px;
+  left:900px;
+  width: 31px;
+  height: 45px;
+}
+#CPU_trio_2_card_8 {
+  position:absolute;
+  top:123px;
+  left:940px;
+  width: 31px;
+  height: 45px;
+}
+
+
+
+#pile {
+  position:absolute;
+  top:220px;
+  left:570px;
+  width: 63px;
+  height: 91px;
+  cursor: hand;
+}
+#deck {
+  position:absolute;
+  top:217px;
+  left:640px;
+  width: 70px;
+  height: 100px;
+  cursor: hand;
+}
+#play_button {
+  position:absolute;
+  top: 220px;
+  left: 400px;
+  width: 100px;
+  height: 100px;
+  background-color: lime;
+  cursor: hand;
+}
+#discard_button {
+  position:absolute;
+  top: 220px;
+  left: 800px;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  cursor: hand;
+}
+#rearrange_button {
+  position:absolute;
+  top: 230px;
+  left: 1000px;
+  width: 75px;
+  height: 75px;
+  background-color: yellow;
+  cursor: hand;
+}
+#home_button {
+  position: absolute;
+  top:20px;
+  left:1150px;
+  width:100px;
+  height:100px;
+  cursor: hand;
+}
+#p1 {
+  position:absolute;
+  font-size: 12px;
+  font: Arial;
+  top:250px;
+  left: 400px;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+  text-align: center;
+  cursor: hand;
+}
+#p2 {
+  position:absolute;
+  font-size: 12px;
+  font: Arial;
+  top:250px;
+  left: 800px;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+  text-align: center;
+  cursor: hand;
+}
+#p3 {
+  position:absolute;
+  font-size: 12px;
+  font: Arial;
+  top:240px;
+  left: 1000px;
+  width: 75px;
+  height: 75px;
+  z-index: 1;
+  text-align: center;
+  cursor: hand;
+}
+#p4 {
+  position:absolute;
+  font-size: 20px;
+  font: Arial;
+  top:22px;
+  left: 75px;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
+
+#add_to_player_trio_1{
+  position:absolute;
+  top: 350px;
+  left: 200px;
+  width: 35px;
+  height: 35px;
+  background-color: orange;
+  cursor: hand;
+}
+#add_to_player_trio_2{
+  position:absolute;
+  top: 350px;
+  left: 950px;
+  width: 35px;
+  height: 35px;
+  background-color: orange;
+  cursor: hand;
+}
+
+#add_to_CPU_trio_1{
+  position:absolute;
+  top: 140px;
+  left: 200px;
+  width: 35px;
+  height: 35px;
+  background-color: orange;
+  cursor: hand;
+}
+#add_to_CPU_trio_2{
+  position:absolute;
+  top: 140px;
+  left: 950px;
+  width: 35px;
+  height: 35px;
+  background-color: orange;
+  cursor: hand;
+}
+#instruction_switch {
+  left: 20px;
+  top:20px;
+  cursor: hand;
+  height: 100px;
+  width: 50px;
+  position: absolute;
+}
+
+.trio-button:hover {
+  cursor: pointer;
+}
+
+.trio-title {
+  padding-bottom: 2vh;
+  width: 60%;
+  margin: auto;
+  text-align: center;
+  color: #ffc200;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+
+.instruction-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.instruction-image {
+  display: block;
+}

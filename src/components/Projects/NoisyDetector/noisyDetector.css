@@ -1,0 +1,29 @@
+.noisy-wrapper {
+    text-align: center;
+    color:#ffc200;
+}
+
+.noisy-title {
+    padding-bottom: 2vh;
+    width: 60%;
+    margin: auto;
+}
+
+#noisy-image {
+    width: 50vh;
+    height: 50vh;
+}
+
+.solutions {
+    padding-top: 2vh;
+    padding-bottom: 20vh;
+}
+
+.error {
+    padding-top: 2vh;
+    color: red;
+}
+
+.app-image {
+    width: 50%;
+}

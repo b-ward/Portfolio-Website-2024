@@ -1,0 +1,28 @@
+.projects-wrapper {
+    text-align: center;
+    margin-top: 56px;
+    height: 100vh;
+}
+
+.projects-title {
+    color:#ffc200;
+    padding-bottom: 2vh;
+}
+
+.cards-wrapper {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+}
+
+.project-card a {
+    color: black;
+    text-decoration: none;
+}
+
+.project-card a:hover,
+.project-card a:active {
+    color: black;
+    text-decoration: none;
+}

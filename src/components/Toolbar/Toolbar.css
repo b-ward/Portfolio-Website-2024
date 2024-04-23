@@ -1,0 +1,37 @@
+.toolbar {
+    width: 100%;
+    position: fixed;
+    background:rgba(0, 0, 255,0);/* give opacity to bg color only */
+    height: 56px;
+    z-index: 1;
+}
+
+.toolbar_navigation {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.toolbar_logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.toolbar_navigation-items ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.toolbar_navigation-items a {
+    color: white;
+    text-decoration: none;
+}
+
+.toolbar_navigation-items a:hover,
+.toolbar_navigation-items a:active {
+    color: #ffc200;
+}

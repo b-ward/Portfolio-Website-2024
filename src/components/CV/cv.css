@@ -1,0 +1,23 @@
+.cv-title {
+    margin-top: 20px;
+    color:#ffc200;
+}
+
+.about-img {
+    margin-top: 56px;
+    width: 40vw;
+    height: 40vw;
+    max-width: 300px;
+    max-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.cv-title.main {
+    text-align: center;
+}
+
+.cv-wrapper {
+    text-align: left;
+}
