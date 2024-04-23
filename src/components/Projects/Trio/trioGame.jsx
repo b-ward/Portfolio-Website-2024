@@ -991,7 +991,7 @@ class TrioGame extends Component {
         return(
             <div className="trio-wrapper">
               <div className="row" style={{width: '100%', margin: 'auto'}}>
-                    <div style={{position: "absolute", left: 20}}>
+                    <div style={{position: "absolute", left: "40%"}}>
                         <Button className="made-button" variant="primary" onClick={() => this.setState({madeModalShow: true})}>
                             Creation
                         </Button>
@@ -999,7 +999,7 @@ class TrioGame extends Component {
                     <div style={{width: '100%'}}>
                         <div className="trio-title"><h1>Trio</h1></div>
                     </div>
-                    <div style={{position: "absolute", right: 20}}>
+                    <div style={{position: "absolute", right: "40%"}}>
                         <Button className="help-button" variant="primary" onClick={() => this.setState({helpModalShow: true})}>
                             Help
                         </Button>

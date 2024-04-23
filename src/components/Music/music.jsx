@@ -7,6 +7,8 @@ class Music extends Component {
             <div>
                 <h3 className="music-title">Music</h3>
                 <div className="soundcloud-wrapper">
+                    <iframe className="soundcloud-audio" title="Mix 8" width="100%" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fbrendon-ward%2Fprogressive-house-mix-1%2F" frameborder="0" ></iframe>
+                    <iframe className="soundcloud-audio" title="Mix 7" width="100%" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fbrendon-ward%2Ftech-house-crowd-favs%2F" frameborder="0" ></iframe>
                     <iframe className="soundcloud-audio" title="Mix 6" width="100%" height="120" src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=0&feed=%2Fbrendon-ward%2Fnew-tech-house-mix%2F" frameborder="0" ></iframe>
                     <iframe className="soundcloud-audio" title="Mix 5" width="100%" height="120" src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=0&feed=%2Fbrendon-ward%2Fno-preparation-tech-house-mix%2F" frameborder="0" ></iframe>
                     <iframe className="soundcloud-audio" title="Mix 4" width="100%" height="120" src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=0&feed=%2Fbrendon-ward%2Funderrated-minimal-tech-house-set%2F" frameborder="0" ></iframe>

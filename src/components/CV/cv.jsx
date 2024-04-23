@@ -14,14 +14,23 @@ class CV extends Component {
                         <h3 className="cv-title">Career Summary</h3>
                     </div>
                     <SharedCard 
-                        cardBody="I am an enthusiastic and dedicated IT professional with experience in Cyber Security and Software Development from working at EY, Aleron, Nielsen and WiseTech Global. I use my strong communication, organisational and technical skills to lead and participate in cross functional teams. I am hard-working with a passion for all things tech which stems from the completion of the Bachelor of IT Co-op Scholarship at the University of Technology Sydney. I believe that the skills and experience I possess would make me an asset to your organisation."
+                        cardBody="G’day! I’m Brendon, an IT Professional with extensive experience in Software Development, Project Management and Cyber Security. I have strong communication, organisational and technical skills to lead cross-functional teams. I am hard working with a passion for all things tech."
                     />
                     <div className="col-sm-12 col-lg-12">
                         <h3 className="cv-title">Experience</h3>
                     </div>
                     <SharedCard 
+                        imageSrc="../CV/WTG.jpg"
+                        cardTitle="WiseTech Global | Product Specialist | April 2022 - Present"
+                        cardBody={["- Product lead for MDM CORE sub-team that specialises in Master Data Management, Address Validation (>1 million requests per month), Credit Reports (100 users/month) and Organisation Automation product suite for CargoWise One.", <br/>,
+                        "- Working closely with the Product Manager to develop team roadmap and goals.", <br/>,
+                        "- Developed ongoing relationships with CargoWise customers to identify industry problems and gaps in current solutions. ", <br/>,
+                        "- Responsible for the development and mentoring of new team members. Teaching skills in product design, usability testing and communication with customers. Selected and participated in Mentoring Program.", <br/>,
+                        "- Actioning technical customer service incidents, including defects, feature requests, quotations and training questions."]}
+                    />
+                    <SharedCard 
                         imageSrc="../CV/EY.png"
-                        cardTitle="EY | Senior Consultant | Nov 2019 - Present"
+                        cardTitle="EY | Senior Consultant | Nov 2019 - April 2022"
                         cardBody={["- Involved in development, testing, infrastructure support, requirements gathering and project management of eDNA, a web application for managing cyber security risks. The tool leverages a React front-end, C# back-end, MSSQL Server database and is hosted on Azure utilising Azure DevOps for automated deployment.", <br/>,
                         "- Completed third party supplier assessments on behalf of Pepper and Woolworths. This included assessing the suppliers against the company’s internal policies and cyber security standards such as ISO 27001, NIST and ASD-35." , <br/>,
                         "- Carried out security assessments at Macquarie bank and Blooms the chemist, determining risks within internal applications being implemented across the business." , <br/>,
@@ -57,6 +66,11 @@ class CV extends Component {
                     <div className="col-sm-12 col-lg-12">
                         <h3 className="cv-title">Certifications</h3>
                     </div>
+                    <SharedCard 
+                        imageSrc="../CV/BBIT.jpg"
+                        cardTitle="Black Belt in Thinking (Foundations) | April 2023"
+                        cardBody="Black Belt in Thinking is a course focused on improving critical thinking skills. Participants learn practical techniques to analyze information, make better decisions, and avoid common reasoning errors. The course covers logical reasoning, problem-solving, and creativity, helping individuals navigate challenges effectively."
+                    />
                     <SharedCard 
                         imageSrc="../CV/microsoft.png"
                         cardTitle="Microsoft Certified: Azure Security Engineer Associate (AZ-500) | Jul 2020"
