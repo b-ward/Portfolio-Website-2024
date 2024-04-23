@@ -79,7 +79,7 @@ class App extends Component {
     }
     return (
       <div className="app-background">
-        <div className='Layout'>
+        <div className="Layout">
           <Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>
           <SideDrawer show={this.state.sideDrawerOpen}/>
           {backdrop}

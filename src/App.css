@@ -3,11 +3,14 @@
 }
 
 .Layout {
-  background-color: #333134;
+  background-color: none;
+  display: flex;
+  flex-direction: row;
 }
 
 .page-content {
   background-color: #333134;
+  width: 100vw;
 }
 
 /* Bootstrap button colour */
