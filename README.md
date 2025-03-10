@@ -2,7 +2,7 @@
 
 Push code to GitHub
 Run "npm run dev" and ensure the local build is running as expected
-Run "npm run build" to build a production version of the application
+Run "npm run build" to build a production version of the application.
 Run "netlify deploy" and specify "dist" as the publish directory, this will publish the application to a draft URL. Check out this URL to ensure everything runs as expected.
 Run "netlify deploy --prod" and specify "dist" as the publish directory, this will deploy to the production version of the site: https://bward-portfolio.netlify.app
 
