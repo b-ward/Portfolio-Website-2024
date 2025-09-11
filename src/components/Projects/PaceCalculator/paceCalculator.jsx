@@ -193,7 +193,7 @@ function Chip({ checked, onChange, children }) {
 }
 
 const styles = {
-  wrap: { display: "grid", placeItems: "center", padding: "2rem 1rem", background: "var(--bg, #f7f9fc)", color: "var(--text, #0f172a)", width: "100%" },
+  wrap: { display: "grid", placeItems: "center", padding: "2rem 1rem", background: "var(--bg, #333134)", color: "var(--text, #0f172a)", width: "100%" },
   card: { background: "var(--panel, #fff)", border: "1px solid var(--line, #e5e7eb)", borderRadius: 16, maxWidth: 760, width: "100%", boxShadow: "0 10px 24px rgba(0,0,0,.05)" },
   header: { padding: "1.25rem 1.25rem .75rem" },
   h2: { margin: 0, fontSize: "clamp(1.5rem, 1.1rem + 1.2vw, 2rem)" },
