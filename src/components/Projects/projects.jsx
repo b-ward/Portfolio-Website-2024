@@ -86,6 +86,19 @@ class Projects extends Component {
                             </a>
                         </Card>
                     </div>
+                    <div className="col-sm-6 col-lg-3 py-2">
+                        <Card className="project-card" style={{minWidth: '200px', maxWidth: '300px'}}>
+                            <a href = "/Projects/PaceCalculator" >
+                                <Card.Img variant="top" src="../card-games.jpg" style={{height: '150px'}}/>
+                                <Card.Body>
+                                    <Card.Title>Pace Calculator</Card.Title>
+                                    <Card.Text style={{height: '80px', padding: '20px 0'}}>
+                                    Calculate your running pace as you go
+                                    </Card.Text>
+                                </Card.Body>
+                            </a>
+                        </Card>
+                    </div>
                 </CardGroup>
             </div>
         )
