@@ -99,6 +99,19 @@ class Projects extends Component {
                             </a>
                         </Card>
                     </div>
+                    <div className="col-sm-6 col-lg-3 py-2">
+                        <Card className="project-card" style={{minWidth: '200px', maxWidth: '300px'}}>
+                            <a href = "/Projects/FiveHundred" >
+                                <Card.Img variant="top" src="../500.jpg" style={{height: '150px'}}/>
+                                <Card.Body>
+                                    <Card.Title>500 Scorer</Card.Title>
+                                    <Card.Text style={{height: '80px'}}>
+                                    A scoring assistant for the 500 card game
+                                    </Card.Text>
+                                </Card.Body>
+                            </a>
+                        </Card>
+                    </div>
                 </CardGroup>
             </div>
         )

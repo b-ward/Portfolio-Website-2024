@@ -6,6 +6,7 @@ import CV from './CV/cv';
 import Projects from './Projects/projects';
 import TrainGame from './Projects/TrainGame/trainGame';
 import PaceCalculator from './Projects/PaceCalculator/paceCalculator';
+import FiveHundred from './Projects/500/500.jsx';
 import Photos from './Photos/photos';
 import NoisyDetector from './Projects/NoisyDetector/noisyDetector';
 import Arbitrage from './Projects/Arbitrage/arbitrage';
@@ -26,6 +27,7 @@ const Main = () => (
             <Route path="/Projects/TrioGame" exact element={<TrioGame/>}/>
             <Route path="/Projects/TrainGame" exact element={<TrainGame/>}/>
             <Route path="/Projects/PaceCalculator" exact element={<PaceCalculator/>}/>
+            <Route path="/Projects/FiveHundred" exact element={<FiveHundred/>}/>
             <Route path="/Projects/Noise" exact element={<NoisyDetector/>}/>
             <Route path="/Photos" exact element={<Photos/>}/>
             <Route path="/Music" exact element={<Music/>}/>
