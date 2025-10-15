@@ -4,10 +4,14 @@ import React, { useEffect, useMemo, useState } from "react";
 // THEME
 // ==========================
 const COLORS = {
-  primary: "#fcc001", // accent
-  surface: "#ffffff", // cards / panels / table background (white)
-  ink: "#000000", // black text
-  backdrop: "#333134", // page background
+  primary: "#fcc001",     // brand yellow
+  primaryDark: "#b48700",  // for borders/shadows
+  surface: "#ffffff",
+  ink: "#000000",
+  backdrop: "#333134",
+  success: "#16a34a",      // Made Bet
+  danger: "#dc2626",       // Failed Bet
+  selectedFill: "#ffef9c", // filled look for selected pills/badges
 };
 
 // ==========================
@@ -55,6 +59,19 @@ function usePersistentState(defaultValue) {
   return [state, setState];
 }
 
+function useSmallScreen(breakpoint = 520) {
+  const [isSmall, setIsSmall] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia(`(max-width:${breakpoint}px)`);
+    const update = () => setIsSmall(mq.matches);
+    update();
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
+  }, [breakpoint]);
+  return isSmall;
+}
+
 function describeBid(model) {
   if (model.special === "MISERE") return "Misère";
   if (model.special === "OPEN_MISERE") return "Open Misère";
@@ -83,6 +100,8 @@ export default function FiveHundredScorer() {
     showTable: false,
   });
 
+  const isSmall = useSmallScreen(520);
+
   const currentBidValue = useMemo(() => {
     if (model.special === "MISERE") return SCORE_TABLE.MISERE;
     if (model.special === "OPEN_MISERE") return SCORE_TABLE.OPEN_MISERE;
@@ -102,7 +121,7 @@ export default function FiveHundredScorer() {
 
   function applyRound(made) {
     const delta = made ? currentBidValue : -currentBidValue;
-    const reason = `${made ? "Made" : "Set"} ${describeBid(model)}`;
+    const reason = `${made ? "Made Bet" : "Failed Bet"}: ${describeBid(model)}`;
     record(model.biddingTeam, delta, reason);
   }
 
@@ -127,15 +146,42 @@ export default function FiveHundredScorer() {
     }));
   }
 
-  const renameTeam = (i, name) => setModel((m) => ({ ...m, teams: m.teams.map((t, idx) => (idx === i ? { ...t, name } : t)) }));
+  const renameTeam = (i, name) =>
+    setModel((m) => ({ ...m, teams: m.teams.map((t, idx) => (idx === i ? { ...t, name } : t)) }));
   const manualAdjust = (i, amt) => record(i, amt, `Manual +${amt}`);
 
+  // --- responsive style tweaks
+  const scoresRowStyle = {
+    ...styles.scoresRow,
+    ...(isSmall ? { gridTemplateColumns: "1fr" } : {}),
+  };
+  const grid3Style = {
+    ...styles.grid3,
+    ...(isSmall ? { gridTemplateColumns: "1fr" } : {}),
+  };
+  const ctaRowStyle = {
+    display: "flex",
+    gap: 12,
+    marginTop: 20,
+    ...(isSmall ? { flexDirection: "column" } : {}),
+  };
+  const appStyle = {
+    ...styles.app,
+    ...(isSmall ? { padding: "16px 12px calc(20px + env(safe-area-inset-bottom))" } : {}),
+  };
+  const panelHeadStyle = {
+    ...styles.panelHead,
+    ...(isSmall ? { flexDirection: "column", alignItems: "stretch", gap: 10 } : {}),
+  };
+  const titleStyle = { ...styles.title, fontSize: "clamp(1.25rem, 1rem + 2vw, 2.25rem)" };
+  const scoreNumberStyle = { ...styles.scoreNumber, fontSize: "clamp(2.75rem, 2.1rem + 4vw, 4rem)" };
+
   return (
-    <div style={styles.app}>
-      <Header />
+    <div style={appStyle}>
+      <Header titleStyle={titleStyle} />
 
       {/* Scores */}
-      <div style={styles.scoresRow}>
+      <div style={scoresRowStyle}>
         {model.teams.map((t, i) => (
           <TeamCard
             key={i}
@@ -144,26 +190,30 @@ export default function FiveHundredScorer() {
             onNameChange={(name) => renameTeam(i, name)}
             onAdjust={(amt) => manualAdjust(i, amt)}
             onSelectBidder={() => setModel((m) => ({ ...m, biddingTeam: i }))}
+            scoreNumberStyle={scoreNumberStyle}
+            isSmall={isSmall}
           />
         ))}
       </div>
 
-      {/* Bid selector */}
-      <section style={styles.panel}>
-        <div style={styles.panelHead}>
-          <h2 style={styles.panelTitle}>Current Contract</h2>
-          <div style={{ display: "flex", gap: 8 }}>
+      {/* Bet selector */}
+      <section style={{ ...styles.panel, ...(isSmall ? { padding: 12 } : {}) }}>
+        <div style={panelHeadStyle}>
+          <h2 style={styles.panelTitle}>Current Bet</h2>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
             <button style={styles.linkBtn} onClick={() => setModel((m) => ({ ...m, showTable: true }))}>
               View Scoring Table
             </button>
             <button style={styles.linkBtn} onClick={undo} disabled={!model.history.length}>
               Undo
             </button>
-            <button style={styles.linkBtn} onClick={resetScores}>Reset</button>
+            <button style={styles.linkBtn} onClick={resetScores}>
+              Reset
+            </button>
           </div>
         </div>
 
-        <div style={styles.grid3}>
+        <div style={grid3Style}>
           <div>
             <label style={styles.label}>Bidding Team</label>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -173,6 +223,7 @@ export default function FiveHundredScorer() {
                   style={{
                     ...styles.pill,
                     ...(model.biddingTeam === i ? styles.pillActive : {}),
+                    ...(isSmall ? { width: "100%" } : {}),
                   }}
                   onClick={() => setModel((m) => ({ ...m, biddingTeam: i }))}
                 >
@@ -183,7 +234,7 @@ export default function FiveHundredScorer() {
           </div>
 
           <div>
-            <label style={styles.label}>Contract Type</label>
+            <label style={styles.label}>Bet Type</label>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               {[
                 { key: "none", label: "Standard" },
@@ -195,6 +246,7 @@ export default function FiveHundredScorer() {
                   style={{
                     ...styles.pill,
                     ...(model.special === opt.key ? styles.pillActive : {}),
+                    ...(isSmall ? { width: "100%" } : {}),
                   }}
                   onClick={() => setModel((m) => ({ ...m, special: opt.key }))}
                 >
@@ -211,14 +263,18 @@ export default function FiveHundredScorer() {
         </div>
 
         {model.special === "none" && (
-          <div style={{ ...styles.grid3, marginTop: 16 }}>
+          <div style={{ ...grid3Style, marginTop: 16 }}>
             <div>
               <label style={styles.label}>Level</label>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {[6, 7, 8, 9, 10].map((lvl) => (
                   <button
                     key={lvl}
-                    style={{ ...styles.pill, ...(model.level === lvl ? styles.pillActive : {}) }}
+                    style={{
+                      ...styles.pill,
+                      ...(model.level === lvl ? styles.pillActive : {}),
+                      ...(isSmall ? { flex: "1 1 80px" } : {}),
+                    }}
                     onClick={() => setModel((m) => ({ ...m, level: lvl }))}
                   >
                     {lvl}
@@ -233,7 +289,11 @@ export default function FiveHundredScorer() {
                 {SUITS.map((s) => (
                   <button
                     key={s.key}
-                    style={{ ...styles.pill, ...(model.suit === s.key ? styles.pillActive : {}) }}
+                    style={{
+                      ...styles.pill,
+                      ...(model.suit === s.key ? styles.pillActive : {}),
+                      ...(isSmall ? { flex: "1 1 120px" } : {}),
+                    }}
                     onClick={() => setModel((m) => ({ ...m, suit: s.key }))}
                   >
                     <span style={{ marginRight: 6 }}>{s.icon}</span>
@@ -247,18 +307,27 @@ export default function FiveHundredScorer() {
           </div>
         )}
 
-        <div style={{ display: "flex", gap: 12, marginTop: 20 }}>
-          <button style={{ ...styles.cta, ...styles.ctaPrimary }} onClick={() => applyRound(true)}>
-            ✓ Made Contract (+{currentBidValue})
+        {/* Primary CTAs */}
+        <div style={ctaRowStyle}>
+          <button
+            style={styles.ctaSuccess}
+            onClick={() => applyRound(true)}
+            aria-label={`Made Bet worth ${currentBidValue}`}
+          >
+            ✓ Made Bet (+{currentBidValue})
           </button>
-          <button style={{ ...styles.cta, ...styles.ctaOutline }} onClick={() => applyRound(false)}>
-            ✗ Set Contract (−{currentBidValue})
+          <button
+            style={styles.ctaDanger}
+            onClick={() => applyRound(false)}
+            aria-label={`Failed Bet worth ${currentBidValue}`}
+          >
+            ✗ Failed Bet (−{currentBidValue})
           </button>
         </div>
       </section>
 
       {/* History */}
-      <section style={{ ...styles.panel, marginBottom: 64 }}>
+      <section style={{ ...styles.panel, marginBottom: 64, ...(isSmall ? { padding: 12 } : {}) }}>
         <div style={styles.panelHead}>
           <h2 style={styles.panelTitle}>History</h2>
         </div>
@@ -267,10 +336,16 @@ export default function FiveHundredScorer() {
         ) : (
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {model.history.map((h, idx) => (
-              <li key={idx} style={styles.historyItem}>
+              <li
+                key={idx}
+                style={{
+                  ...styles.historyItem,
+                  ...(isSmall ? { gridTemplateColumns: "1fr", gap: 4 } : {}),
+                }}
+              >
                 <span style={{ fontWeight: 600 }}>{model.teams[h.teamIndex]?.name}</span>
                 <span style={{ flex: 1, color: "#666" }}>{h.reason}</span>
-                <span style={{ fontWeight: 800, color: h.delta >= 0 ? COLORS.ink : "#c2410c" }}>
+                <span style={{ fontWeight: 800, color: h.delta >= 0 ? COLORS.success : COLORS.danger }}>
                   {h.delta >= 0 ? `+${h.delta}` : h.delta}
                 </span>
               </li>
@@ -290,28 +365,44 @@ export default function FiveHundredScorer() {
   );
 }
 
-function Header() {
+function Header({ titleStyle }) {
   return (
     <header style={styles.header}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
         <div style={styles.logoDot} />
-        <h1 style={styles.title}>500 Scorekeeper</h1>
+        <h1 style={titleStyle}>500 Scorekeeper</h1>
       </div>
     </header>
   );
 }
 
-function TeamCard({ team, onNameChange, onAdjust, onSelectBidder, active }) {
+function TeamCard({ team, onNameChange, onAdjust, onSelectBidder, active, scoreNumberStyle, isSmall }) {
   return (
-    <div style={styles.teamCard}>
+    <div style={{ ...styles.teamCard, ...(isSmall ? { padding: 12 } : {}) }}>
       <div style={styles.teamHeader}>
-        <input value={team.name} onChange={(e) => onNameChange(e.target.value)} style={styles.teamNameInput} />
-        <button onClick={onSelectBidder} style={{ ...styles.badge, ...(active ? styles.badgeActive : {}) }}>
+        <input
+          value={team.name}
+          onChange={(e) => onNameChange(e.target.value)}
+          style={{ ...styles.teamNameInput, ...(isSmall ? { width: "100%" } : {}) }}
+        />
+        <button
+          onClick={onSelectBidder}
+          style={{
+            ...styles.badge,
+            ...(active ? styles.badgeActive : {}),
+          }}
+          aria-pressed={active}
+        >
           {active ? "Bidding" : "Set Bidder"}
         </button>
       </div>
-      <div style={styles.scoreNumber}>{team.score}</div>
-      <div style={styles.adjustRow}>
+      <div style={scoreNumberStyle}>{team.score}</div>
+      <div
+        style={{
+          ...styles.adjustRow,
+          ...(isSmall ? { gridTemplateColumns: "repeat(5, minmax(44px, 1fr))" } : {}),
+        }}
+      >
         {[10, 20, 30, 40, 50].map((amt) => (
           <button key={amt} style={styles.adjustBtn} onClick={() => onAdjust(amt)}>
             +{amt}
@@ -348,17 +439,25 @@ function ScoringTable() {
             </tr>
           ))}
           <tr>
-            <td style={styles.td}><em>Misère</em></td>
-            <td style={styles.td} colSpan={5}>{SCORE_TABLE.MISERE}</td>
+            <td style={styles.td}>
+              <em>Misère</em>
+            </td>
+            <td style={styles.td} colSpan={5}>
+              {SCORE_TABLE.MISERE}
+            </td>
           </tr>
           <tr>
-            <td style={styles.td}><em>Open Misère</em></td>
-            <td style={styles.td} colSpan={5}>{SCORE_TABLE.OPEN_MISERE}</td>
+            <td style={styles.td}>
+              <em>Open Misère</em>
+            </td>
+            <td style={styles.td} colSpan={5}>
+              {SCORE_TABLE.OPEN_MISERE}
+            </td>
           </tr>
         </tbody>
       </table>
       <p style={{ color: "#666", marginTop: 12 }}>
-        Tip: Select a contract on the main screen, then click <strong>Made</strong> or <strong>Set</strong> to add or subtract that value for the bidding team.
+        Tip: Pick a bet above, then tap <strong>Made Bet</strong> or <strong>Failed Bet</strong>.
       </p>
     </div>
   );
@@ -376,7 +475,9 @@ function Modal({ title, onClose, children }) {
       <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
           <h3 style={{ margin: 0, color: COLORS.ink }}>{title}</h3>
-          <button style={styles.closeBtn} onClick={onClose} aria-label="Close">✕</button>
+          <button style={styles.closeBtn} onClick={onClose} aria-label="Close">
+            ✕
+          </button>
         </div>
         <div>{children}</div>
       </div>
@@ -385,13 +486,13 @@ function Modal({ title, onClose, children }) {
 }
 
 function StyleTag() {
-  // Global resets to keep content black on white; dark outer background handled by app.container
   return (
     <style>{`
       :root { color-scheme: light only; }
       * { box-sizing: border-box; }
       body { margin: 0; background: ${COLORS.backdrop}; color: ${COLORS.ink}; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
       button:disabled { opacity: .6; cursor: not-allowed; }
+      button:focus-visible { outline: 3px solid ${COLORS.primaryDark}; outline-offset: 2px; }
     `}</style>
   );
 }
@@ -441,7 +542,7 @@ const styles = {
     background: COLORS.surface,
     color: COLORS.ink,
   },
-  teamHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 },
+  teamHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, flexWrap: "wrap" },
   teamNameInput: {
     fontSize: 18,
     fontWeight: 700,
@@ -451,28 +552,35 @@ const styles = {
     color: COLORS.ink,
     background: COLORS.surface,
     outline: "none",
+    minWidth: 0,
+    flex: "1 1 180px",
   },
   scoreNumber: { fontSize: 64, fontWeight: 900, lineHeight: 1, marginTop: 8 },
   adjustRow: { display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 6, marginTop: 12 },
   adjustBtn: {
-    padding: "8px 6px",
+    padding: "10px 6px",
     background: COLORS.surface,
     border: `2px solid ${COLORS.primary}`,
     borderRadius: 10,
     cursor: "pointer",
+    fontWeight: 700,
   },
   badge: {
     border: `2px solid ${COLORS.primary}`,
-    padding: "4px 10px",
+    padding: "6px 12px",
     borderRadius: 999,
     background: COLORS.surface,
     color: COLORS.ink,
     cursor: "pointer",
-    fontWeight: 700,
+    fontWeight: 800,
   },
+  // CLEAR, FILLED SELECTED STATE
   badgeActive: {
-    boxShadow: `0 0 0 3px ${COLORS.primary}55 inset`,
+    background: COLORS.selectedFill,
+    borderColor: COLORS.primaryDark,
+    boxShadow: `0 0 0 3px ${COLORS.primary}70 inset`,
   },
+
   panel: {
     border: `2px solid ${COLORS.primary}`,
     borderRadius: 16,
@@ -491,31 +599,48 @@ const styles = {
   },
   label: { fontSize: 12, color: "#666", textTransform: "uppercase", letterSpacing: 0.6 },
   pill: {
-    padding: "8px 12px",
+    padding: "10px 12px",
     borderRadius: 999,
     border: `2px solid ${COLORS.primary}`,
     background: COLORS.surface,
     color: COLORS.ink,
     cursor: "pointer",
-    fontWeight: 700,
-  },
-  pillActive: {
-    boxShadow: `0 0 0 3px ${COLORS.primary}55 inset`,
-  },
-  cta: {
-    padding: "12px 16px",
-    borderRadius: 12,
     fontWeight: 800,
+    transition: "background .15s ease, box-shadow .15s ease, border-color .15s ease",
+  },
+  // CLEAR, FILLED SELECTED STATE
+  pillActive: {
+    background: COLORS.selectedFill,
+    borderColor: COLORS.primaryDark,
+    boxShadow: `0 0 0 4px ${COLORS.primary}50`,
+  },
+
+  // PROMINENT PRIMARY ACTIONS
+  ctaSuccess: {
+    width: "100%",
+    padding: "14px 18px",
+    borderRadius: 14,
+    fontWeight: 900,
+    fontSize: "1.05rem",
     cursor: "pointer",
-    background: COLORS.surface,
-    color: COLORS.ink,
+    background: COLORS.success,
+    color: "#fff",
+    border: `2px solid ${COLORS.success}`,
+    textAlign: "center",
   },
-  ctaPrimary: {
-    border: `2px solid ${COLORS.primary}`,
+  ctaDanger: {
+    width: "100%",
+    padding: "14px 18px",
+    borderRadius: 14,
+    fontWeight: 900,
+    fontSize: "1.05rem",
+    cursor: "pointer",
+    background: COLORS.danger,
+    color: "#fff",
+    border: `2px solid ${COLORS.danger}`,
+    textAlign: "center",
   },
-  ctaOutline: {
-    border: `2px dashed ${COLORS.primary}`,
-  },
+
   table: {
     width: "100%",
     borderCollapse: "separate",
@@ -541,15 +666,16 @@ const styles = {
     alignItems: "center",
     padding: "10px 6px",
     borderBottom: `1px solid ${COLORS.primary}55`,
+    gap: 8,
   },
   linkBtn: {
     background: COLORS.surface,
     border: `2px solid ${COLORS.primary}`,
     color: COLORS.ink,
-    padding: "6px 12px",
-    borderRadius: 10,
+    padding: "8px 14px",
+    borderRadius: 12,
     cursor: "pointer",
-    fontWeight: 700,
+    fontWeight: 800,
   },
   modalBackdrop: {
     position: "fixed",

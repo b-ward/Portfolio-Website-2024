@@ -11,6 +11,17 @@ export default function PaceCalcualtor() {
   const [ss, setSs] = useState("");
   const [error, setError] = useState("");
 
+  // --- NEW: simple viewport flag for small devices
+  const [isSmall, setIsSmall] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(max-width: 480px)");
+    const apply = () => setIsSmall(mq.matches);
+    apply();
+    mq.addEventListener?.("change", apply);
+    return () => mq.removeEventListener?.("change", apply);
+  }, []);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     const q = new URLSearchParams(window.location.search);
@@ -110,6 +121,18 @@ export default function PaceCalcualtor() {
   const mmRef = React.useRef(null);
   const ssRef = React.useRef(null);
 
+  // computed responsive tweaks
+  const inlineRowStyle = {
+    ...styles.inlineRow,
+    ...(isSmall ? { gridTemplateColumns: "1fr" } : { gridTemplateColumns: "1.1fr 0.9fr" })
+  };
+  const actionsStyle = {
+    ...styles.actions,
+    ...(isSmall ? { flexDirection: "column", alignItems: "stretch" } : {})
+  };
+  const primaryBtnStyle = { ...styles.primaryBtn, ...(isSmall ? { width: "100%" } : {}) };
+  const secondaryBtnStyle = { ...styles.secondaryBtn, ...(isSmall ? { width: "100%" } : {}) };
+
   return (
     <div style={styles.wrap}>
       <div style={styles.card}>
@@ -121,7 +144,7 @@ export default function PaceCalcualtor() {
         <form onSubmit={onCalculate} style={styles.content}>
           <div style={styles.row}>
             <label htmlFor="distance" style={styles.label}>Distance</label>
-            <div style={styles.inlineRow}>
+            <div style={inlineRowStyle}>
               <input
                 id="distance"
                 type="number"
@@ -146,9 +169,37 @@ export default function PaceCalcualtor() {
           <div style={styles.row}>
             <label style={styles.label}>Time</label>
             <div style={styles.timeInputs}>
-              <input aria-label="Hours" type="number" min="0" placeholder="hh" value={hh} onChange={autoAdvance(setHh, 2, mmRef)} style={styles.input} />
-              <input ref={mmRef} aria-label="Minutes" type="number" min="0" max="59" placeholder="mm" value={mm} onChange={autoAdvance(setMm, 2, ssRef)} style={styles.input} />
-              <input ref={ssRef} aria-label="Seconds" type="number" min="0" max="59" placeholder="ss" value={ss} onChange={(e)=>setSs(e.target.value.replace(/\D+/g, ""))} style={styles.input} />
+              <input
+                aria-label="Hours"
+                type="number"
+                min="0"
+                placeholder="hh"
+                value={hh}
+                onChange={autoAdvance(setHh, 2, mmRef)}
+                style={{ ...styles.input, ...styles.timeField }}
+              />
+              <input
+                ref={mmRef}
+                aria-label="Minutes"
+                type="number"
+                min="0"
+                max="59"
+                placeholder="mm"
+                value={mm}
+                onChange={autoAdvance(setMm, 2, ssRef)}
+                style={{ ...styles.input, ...styles.timeField }}
+              />
+              <input
+                ref={ssRef}
+                aria-label="Seconds"
+                type="number"
+                min="0"
+                max="59"
+                placeholder="ss"
+                value={ss}
+                onChange={(e) => setSs(e.target.value.replace(/\D+/g, ""))}
+                style={{ ...styles.input, ...styles.timeField }}
+              />
             </div>
           </div>
 
@@ -160,9 +211,9 @@ export default function PaceCalcualtor() {
             </div>
           </div>
 
-          <div style={{...styles.actions, justifyContent: "flex-start"}}>
-            <button type="submit" style={styles.primaryBtn}>Calculate</button>
-            <button type="button" style={styles.secondaryBtn} onClick={onReset}>Reset</button>
+          <div style={actionsStyle}>
+            <button type="submit" style={primaryBtnStyle}>Calculate</button>
+            <button type="button" style={secondaryBtnStyle} onClick={onReset}>Reset</button>
           </div>
         </form>
 
@@ -182,10 +233,12 @@ export default function PaceCalcualtor() {
 
 function Chip({ checked, onChange, children }) {
   return (
-    <label style={{
-      ...styles.chip,
-      ...(checked ? styles.chipChecked : null),
-    }}>
+    <label
+      style={{
+        ...styles.chip,
+        ...(checked ? styles.chipChecked : null),
+      }}
+    >
       <input type="radio" checked={checked} onChange={onChange} style={{ display: "none" }} />
       {children}
     </label>
@@ -193,28 +246,91 @@ function Chip({ checked, onChange, children }) {
 }
 
 const styles = {
-  wrap: { display: "grid", placeItems: "center", padding: "2rem 1rem", background: "var(--bg, #333134)", color: "var(--text, #0f172a)", width: "100%" },
-  card: { background: "var(--panel, #fff)", border: "1px solid var(--line, #e5e7eb)", borderRadius: 16, maxWidth: 760, width: "100%", boxShadow: "0 10px 24px rgba(0,0,0,.05)" },
+  // Add safe-area padding so nothing gets obscured by mobile browser chrome
+  wrap: {
+    display: "grid",
+    placeItems: "center",
+    padding: "2rem 1rem calc(2rem + env(safe-area-inset-bottom))",
+    background: "var(--bg, #333134)",
+    color: "var(--text, #0f172a)",
+    width: "100%",
+  },
+  card: {
+    background: "var(--panel, #fff)",
+    border: "1px solid var(--line, #e5e7eb)",
+    borderRadius: 16,
+    maxWidth: 760,
+    width: "100%",
+    boxShadow: "0 10px 24px rgba(0,0,0,.05)",
+  },
   header: { padding: "1.25rem 1.25rem .75rem" },
   h2: { margin: 0, fontSize: "clamp(1.5rem, 1.1rem + 1.2vw, 2rem)" },
   muted: { margin: ".35rem 0 0", color: "var(--muted, #64748b)" },
   content: { padding: "1rem 1.25rem", display: "grid", gap: "1rem" },
   row: { display: "grid", gap: ".5rem" },
-  inlineRow: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: ".75rem" },
+
+  // will be overridden responsively in component via inlineRowStyle
+  inlineRow: { display: "grid", gap: ".75rem" },
+
   label: { fontWeight: 600, fontSize: ".95rem" },
   mutedSmall: { color: "var(--muted, #64748b)", fontWeight: 500 },
-  input: { background: "var(--panel, #fff)", color: "inherit", border: "1px solid var(--line, #e5e7eb)", borderRadius: 10, padding: ".85rem 1rem", fontSize: "1rem", outline: "none" },
-  timeInputs: { display: "flex", gap: ".5rem" },
+
+  input: {
+    background: "var(--panel, #fff)",
+    color: "inherit",
+    border: "1px solid var(--line, #e5e7eb)",
+    borderRadius: 10,
+    padding: ".85rem 1rem",
+    fontSize: "1rem",
+    outline: "none",
+    width: "100%",
+  },
+
+  // NEW: make time inputs share the row evenly and never overflow
+  timeInputs: { display: "flex", gap: ".5rem", width: "100%" },
+  timeField: { flex: "1 1 0", minWidth: 0 },
+
   chips: { display: "flex", gap: ".5rem", flexWrap: "wrap", alignItems: "center" },
-  chip: { display: "inline-flex", alignItems: "center", gap: ".5rem", background: "var(--panel, #fff)", border: "1px solid var(--line, #e5e7eb)", padding: ".45rem .75rem", borderRadius: 999, cursor: "pointer", userSelect: "none" },
+  chip: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: ".5rem",
+    background: "var(--panel, #fff)",
+    border: "1px solid var(--line, #e5e7eb)",
+    padding: ".55rem .9rem", // a bit larger for touch
+    borderRadius: 999,
+    cursor: "pointer",
+    userSelect: "none",
+  },
   chipChecked: { borderColor: "var(--accent, #2563eb)", boxShadow: "0 0 0 4px rgba(37,99,235,.2)" },
+
+  // buttons stack on small via actionsStyle computed above
   actions: { display: "flex", gap: ".75rem", flexWrap: "wrap", alignItems: "center" },
-  primaryBtn: { background: "var(--accent, #2563eb)", color: "#fff", border: 0, borderRadius: 10, padding: ".85rem 1.1rem", fontSize: "1rem", fontWeight: 700, cursor: "pointer" },
-  secondaryBtn: { background: "transparent", color: "inherit", border: "1px solid var(--line, #e5e7eb)", borderRadius: 10, padding: ".85rem 1.1rem", fontSize: "1rem", fontWeight: 700, cursor: "pointer" },
+  primaryBtn: {
+    background: "var(--accent, #2563eb)",
+    color: "#fff",
+    border: 0,
+    borderRadius: 10,
+    padding: ".95rem 1.1rem",
+    fontSize: "1rem",
+    fontWeight: 700,
+    cursor: "pointer",
+  },
+  secondaryBtn: {
+    background: "transparent",
+    color: "inherit",
+    border: "1px solid var(--line, #e5e7eb)",
+    borderRadius: 10,
+    padding: ".95rem 1.1rem",
+    fontSize: "1rem",
+    fontWeight: 700,
+    cursor: "pointer",
+  },
+
   divider: { height: 1, background: "var(--line, #e5e7eb)", margin: ".25rem 0" },
   result: { padding: ".75rem 1.25rem 1.25rem", display: "grid", gap: ".5rem" },
   pace: { fontSize: "clamp(2.1rem, 1.6rem + 2vw, 3rem)", fontWeight: 800 },
   paceSup: { fontSize: "55%", color: "var(--muted, #64748b)", fontWeight: 700, marginLeft: ".2rem" },
   detail: { color: "var(--muted, #64748b)" },
-  error: { color: "var(--danger, #dc2626)", fontWeight: 600 }
+  error: { color: "var(--danger, #dc2626)", fontWeight: 600 },
 };
