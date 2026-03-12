@@ -2,8 +2,9 @@
 Push code to 
 
 Run "npm run dev" and ensure the local build is running as expected
-
 Run "npm run build" to build a production version of the application.
+OR
+Run "netlify dev" to run the app locally (it will also consider the netlify functions and env variables)
 
 Run "netlify deploy" and specify "dist" as the publish directory, this will publish the application to a draft URL. Check out this URL to ensure everything runs as expected.
 

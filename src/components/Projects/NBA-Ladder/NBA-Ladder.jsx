@@ -1,12 +1,9 @@
   import React, { useEffect, useState } from 'react'
   import './nbaLadder.css'
 
-  // Replace the placeholder below with your Sportradar API key
-  const API_KEY = 'lqNXAWRvTp0TxnSI7PpFF15ALGQrZyQgRZd8DLex'
-
-  // Use the Vite dev-server proxy prefix so requests are same-origin in dev.
-  // Requests to `/sportradar/*` are forwarded to https://api.sportradar.com by Vite.
-  const API_URL = `/sportradar/nba/trial/v8/en/seasons/2025/REG/standings.json?api_key=${API_KEY}`
+  // In production we proxy the Sportradar request via a Netlify Function so the
+  // API key is kept server-side. Locally `netlify dev` will run the function too.
+  const API_URL = '/.netlify/functions/standings'
 
   export default function NBALadder() {
     const [conferences, setConferences] = useState([])
