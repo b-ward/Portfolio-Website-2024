@@ -7,10 +7,21 @@
   display: flex;
   flex-direction: row;
 }
+.app-background {
+  /* ensure the app background fills the viewport */
+  min-height: 100vh;
+  /* use the global CSS variable so the background is consistent across pages
+     and respects the user's color-scheme preference */
+  background-color: var(--app-background, #333134);
+}
 
 .page-content {
-  background-color: #333134;
-  width: 100vw;
+  /* use the app background variable so the page background is uniform */
+  background-color: var(--app-background, #333134);
+  width: 100%;
+  /* make page content take remaining height; subtract an approximate toolbar height */
+  min-height: calc(100vh - 72px);
+  box-sizing: border-box;
 }
 
 /* Bootstrap button colour */
