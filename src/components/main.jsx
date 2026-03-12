@@ -14,6 +14,8 @@ import TrioHome from './Projects/Trio/trioHome';
 import TrioGame from './Projects/Trio/trioGame';
 import Music from './Music/music';
 import BusinessBrains from './BusinessBrains/businessBrains';
+import NBALadder from './Projects/NBA-Ladder/NBA-Ladder';
+
 
 const Main = () => (
     <BrowserRouter>
@@ -29,6 +31,7 @@ const Main = () => (
             <Route path="/Projects/PaceCalculator" exact element={<PaceCalculator/>}/>
             <Route path="/Projects/FiveHundred" exact element={<FiveHundred/>}/>
             <Route path="/Projects/Noise" exact element={<NoisyDetector/>}/>
+            <Route path="/Projects/NBA-Ladder" exact element={<NBALadder/>}/>
             <Route path="/Photos" exact element={<Photos/>}/>
             <Route path="/Music" exact element={<Music/>}/>
             <Route path="/BusinessBrains" exact element={<BusinessBrains/>}/>

@@ -1,0 +1,104 @@
+.nba-ladder {
+  padding: 16px;
+  color: var(--text-color, #222);
+  background: var(--card-background, #fff);
+  /* more prominent border so the toolbar isn't visually obstructed */
+  border: 3px solid rgba(15, 23, 42, 0.12);
+  border-radius: 12px;
+  /* leave a larger left gap to avoid overlapping the toolbar */
+  margin: 18px 18px 18px 80px;
+  /* keep the component a bit more compact instead of full-bleed */
+  max-width: calc(100% - 110px);
+}
+
+.nba-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.nba-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: var(--heading-color, #1f2937);
+}
+
+.conf-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.conf-tab {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--muted-color, #374151);
+}
+
+.conf-tab.active {
+  background: var(--accent, #111827);
+  color: #fff;
+  border-color: transparent;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border-radius: 8px;
+  background: transparent;
+  margin-top: 8px;
+  border: 1px solid rgba(0,0,0,0.04);
+  padding: 6px 6px;
+}
+
+.nba-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  table-layout: fixed;
+  font-size: 0.98rem;
+}
+
+.nba-table thead th {
+  padding: 10px 8px;
+  color: var(--muted-color, #374151);
+  font-weight: 700;
+}
+
+/* align header columns to match body cells */
+.nba-table thead th:first-child { text-align: left }
+.nba-table thead th:nth-child(n+2) { text-align: right }
+
+.nba-table tbody td {
+  padding: 10px 8px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  color: var(--text-color, #111827);
+  font-size: 1rem;
+}
+
+.nba-table tbody tr:nth-child(even) {
+  background: rgba(0,0,0,0.02);
+}
+
+.team-name { overflow: hidden; text-overflow: ellipsis }
+.team-w, .team-l, .team-pct { text-align: right; padding-right: 18px; width: 84px }
+
+/* make the PCT column a little narrower */
+.team-pct { width: 96px }
+
+.nba-loading, .nba-error, .nba-empty { padding: 12px 0; color: var(--muted-color, #6b7280) }
+
+@media (max-width: 900px) {
+  .nba-ladder { margin-left: 16px; max-width: calc(100% - 32px) }
+}
+
+@media (max-width: 520px) {
+  .nba-header h2 { font-size: 1.25rem }
+  .nba-table tbody td { padding: 8px 6px }
+  .team-w, .team-l, .team-pct { padding-right: 10px }
+}
