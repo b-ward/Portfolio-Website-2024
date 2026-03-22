@@ -13,9 +13,6 @@ Run "netlify deploy --prod" and specify "dist" as the publish directory, this wi
 # Spotify Top Artists World Map setup
 Set these environment variables for local/dev/prod:
 - `VITE_SPOTIFY_CLIENT_ID` = your Spotify app client ID
-- `VITE_SPOTIFY_REDIRECT_URI` = optional override (defaults to `https://<site>/Projects/TopArtistsMap`)
-- `SPOTIFY_REDIRECT_URI` in Spotify app settings must include your exact redirect URI
-
 The feature route is `/Projects/TopArtistsMap`.
 
 # Update dependencies
