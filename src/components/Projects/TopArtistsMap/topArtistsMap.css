@@ -81,6 +81,11 @@
   font-size: 0.95rem;
 }
 
+.top-artists-hint-link {
+  color: #ffc200;
+  text-decoration: underline;
+}
+
 .map-wrapper {
   position: relative;
   width: 100%;
@@ -90,6 +95,7 @@
   overflow: hidden;
   background: #ffffff;
   margin: 0.75rem auto 0;
+  touch-action: none;
 }
 
 .map-zoom-controls {
@@ -160,6 +166,42 @@
 
 .country-tooltip.tapped {
   margin-top: 0.75rem;
+}
+
+.country-tooltip-tapped-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.country-tooltip-tapped-header h4 {
+  margin: 0;
+  color: #fb923c;
+}
+
+.country-tooltip-close {
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 1.4rem;
+  line-height: 1;
+  padding: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.country-tooltip-close:hover {
+  color: #ffffff;
+}
+
+.map-mobile-hint {
+  display: none;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.78rem;
+  margin-top: 0.35rem;
 }
 
 .map-legend {
@@ -297,16 +339,36 @@
     display: none;
   }
 
+  /* Larger zoom buttons in a vertical column on the left for easy thumb access */
   .map-zoom-controls {
-    top: 0.5rem;
-    right: 0.5rem;
-    gap: 0.3rem;
+    top: auto;
+    bottom: 0.6rem;
+    right: 0.6rem;
+    flex-direction: column;
+    gap: 0.45rem;
   }
 
   .map-zoom-button {
-    min-width: 1.8rem;
-    height: 1.8rem;
-    font-size: 0.95rem;
+    min-width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.4rem;
+    border-radius: 8px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+  }
+
+  .map-zoom-button.reset {
+    font-size: 0.8rem;
+    padding: 0;
+    min-width: 2.75rem;
+  }
+
+  /* Show pinch hint on mobile */
+  .map-mobile-hint {
+    display: block;
   }
 
   .info-modal {

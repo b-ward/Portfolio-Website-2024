@@ -153,7 +153,7 @@ function TopArtistsMapContent() {
   }
 
   function updateMapZoom(nextZoom) {
-    const clampedZoom = Math.max(1, Math.min(4, nextZoom))
+    const clampedZoom = Math.max(1, Math.min(8, nextZoom))
     setMapPosition((previous) => ({
       ...previous,
       zoom: clampedZoom,
@@ -215,7 +215,27 @@ function TopArtistsMapContent() {
           </p>
         )}
 
-        {authError && <p className="top-artists-hint">Auth error: {authError}</p>}
+        {authError && (
+          <p className="top-artists-hint">
+            {/register|quota|access_denied|not authorized/i.test(authError) ? (
+              <>
+                This app is in development mode — only approved users can sign in. Email{' '}
+                <a href="mailto:brendon.c.ward@gmail.com" className="top-artists-hint-link">
+                  brendon.c.ward@gmail.com
+                </a>{' '}
+                to request access (include your Spotify account email).
+              </>
+            ) : (
+              <>
+                Sign-in failed: {authError}. Email{' '}
+                <a href="mailto:brendon.c.ward@gmail.com" className="top-artists-hint-link">
+                  brendon.c.ward@gmail.com
+                </a>{' '}
+                if this persists.
+              </>
+            )}
+          </p>
+        )}
         {error && <p className="top-artists-hint">Error: {error}</p>}
 
         <div
@@ -227,10 +247,10 @@ function TopArtistsMapContent() {
           }}
         >
           <div className="map-zoom-controls">
-            <button type="button" className="map-zoom-button" onClick={() => updateMapZoom(mapPosition.zoom + 0.35)}>
+            <button type="button" className="map-zoom-button" onClick={() => updateMapZoom(mapPosition.zoom + 0.5)}>
               +
             </button>
-            <button type="button" className="map-zoom-button" onClick={() => updateMapZoom(mapPosition.zoom - 0.35)}>
+            <button type="button" className="map-zoom-button" onClick={() => updateMapZoom(mapPosition.zoom - 0.5)}>
               −
             </button>
             <button
@@ -247,7 +267,7 @@ function TopArtistsMapContent() {
               zoom={mapPosition.zoom}
               center={mapPosition.coordinates}
               minZoom={1}
-              maxZoom={4}
+              maxZoom={8}
               onMoveEnd={(position) => setMapPosition(position)}
             >
               <Geographies geography={GEO_URL}>
@@ -280,6 +300,7 @@ function TopArtistsMapContent() {
                         onClick={(event) => {
                           event.preventDefault()
                           event.stopPropagation()
+                          setHoveredCountry(null)
 
                           if (!bucket) {
                             setSelectedCountry(null)
@@ -300,20 +321,20 @@ function TopArtistsMapContent() {
                         style={{
                           default: {
                             fill: fillColor,
-                            stroke: '#9ca3af',
-                            strokeWidth: 0.4,
+                            stroke: bucket ? '#6b7280' : '#9ca3af',
+                            strokeWidth: bucket ? 0.8 : 0.4,
                             outline: 'none',
                           },
                           hover: {
                             fill: HOVER_FILL,
-                            stroke: '#6b7280',
-                            strokeWidth: 0.6,
+                            stroke: '#475569',
+                            strokeWidth: 1.0,
                             outline: 'none',
                           },
                           pressed: {
                             fill: HOVER_FILL,
-                            stroke: '#6b7280',
-                            strokeWidth: 0.6,
+                            stroke: '#475569',
+                            strokeWidth: 1.0,
                             outline: 'none',
                           },
                         }}
@@ -344,6 +365,8 @@ function TopArtistsMapContent() {
           )}
         </div>
 
+        <p className="map-mobile-hint">Pinch to zoom &bull; Tap a highlighted country to see artists</p>
+
         {hasData && (
           <div className="map-legend" aria-label="Country intensity legend">
             <span className="map-legend-label">Few artists</span>
@@ -356,12 +379,22 @@ function TopArtistsMapContent() {
           </div>
         )}
 
-        {selectedCountry && !hoveredCountry && (
+        {selectedCountry && (
           <div className="country-tooltip tapped">
-            <h4>
-              {selectedCountry.countryName} ({selectedCountry.countryCode}) • {selectedCountry.count} artist
-              {selectedCountry.count > 1 ? 's' : ''}
-            </h4>
+            <div className="country-tooltip-tapped-header">
+              <h4>
+                {selectedCountry.countryName} ({selectedCountry.countryCode}) • {selectedCountry.count} artist
+                {selectedCountry.count > 1 ? 's' : ''}
+              </h4>
+              <button
+                type="button"
+                className="country-tooltip-close"
+                onClick={() => setSelectedCountry(null)}
+                aria-label="Dismiss"
+              >
+                ×
+              </button>
+            </div>
             <ul>
               {selectedCountry.artists.map((artist) => (
                 <li key={artist.id}>{artist.name}</li>
