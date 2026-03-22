@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: '127.0.0.1',
+    port: 5173,
+    strictPort: true,
     proxy: {
       // Proxy requests starting with /sportradar to the Sportradar API
       // Dev only; this avoids CORS errors during local development.
