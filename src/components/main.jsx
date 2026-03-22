@@ -15,6 +15,7 @@ import TrioGame from './Projects/Trio/trioGame';
 import Music from './Music/music';
 import BusinessBrains from './BusinessBrains/businessBrains';
 import NBALadder from './Projects/NBA-Ladder/NBA-Ladder';
+import TopArtistsMap from './Projects/TopArtistsMap/topArtistsMap';
 
 
 const Main = () => (
@@ -32,6 +33,7 @@ const Main = () => (
             <Route path="/Projects/FiveHundred" exact element={<FiveHundred/>}/>
             <Route path="/Projects/Noise" exact element={<NoisyDetector/>}/>
             <Route path="/Projects/NBA-Ladder" exact element={<NBALadder/>}/>
+            <Route path="/Projects/TopArtistsMap" exact element={<TopArtistsMap/>}/>
             <Route path="/Photos" exact element={<Photos/>}/>
             <Route path="/Music" exact element={<Music/>}/>
             <Route path="/BusinessBrains" exact element={<BusinessBrains/>}/>
