@@ -108,6 +108,16 @@
   margin: 0 auto;
 }
 
+.arb-diagnostics {
+  margin-bottom: 0.9rem;
+  color: #94a3b8;
+  font-size: 0.86rem;
+  background: rgba(148, 163, 184, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+}
+
 .arb-tabs {
   display: flex;
   gap: 0;

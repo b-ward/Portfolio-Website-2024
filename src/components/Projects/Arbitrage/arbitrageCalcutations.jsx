@@ -4,13 +4,52 @@ async function getArbitrageBets() {
     return results
 }
 
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+async function fetchWithRetry(url, retryCount = 3) {
+    let attempt = 0
+    let lastResponse = null
+
+    while (attempt <= retryCount) {
+        const response = await fetch(url)
+        lastResponse = response
+
+        if (response.status === 429 && attempt < retryCount) {
+            const retryAfterHeader = response.headers.get('Retry-After')
+            const retryAfterMs = retryAfterHeader ? Number(retryAfterHeader) * 1000 : 0
+            const backoffMs = retryAfterMs || 900 * (attempt + 1)
+            await sleep(backoffMs)
+            attempt += 1
+            continue
+        }
+
+        if (response.status >= 500 && response.status < 600 && attempt < retryCount) {
+            await sleep(500 * (attempt + 1))
+            attempt += 1
+            continue
+        }
+
+        return response
+    }
+
+    return lastResponse
+}
+
 async function getSportsNames() {
     // v4 sports endpoint — returns an array directly, no .data wrapper
-    const response = await fetch(
+    const response = await fetchWithRetry(
         `https://api.the-odds-api.com/v4/sports/?apiKey=f039cbd515b8e6e21ac8130decb39023`
     )
     const data = await response.json()
-    return data.filter((s) => s.active).map((s) => s.key)
+
+    // Avoid outright/futures markets, which commonly return 422 for h2h requests.
+    return data
+        .filter((sport) => sport.active)
+        .filter((sport) => !sport.has_outrights)
+        .filter((sport) => !sport.key.includes('_winner'))
+        .map((sport) => sport.key)
 }
 
 async function getOdds(sports) {
@@ -31,13 +70,22 @@ async function getOdds(sports) {
     // Find a valid API key using v4 endpoint
     let validApiKey = null
     for (const apiKey of apiKeyList) {
-        const testResponse = await fetch(
+        const testResponse = await fetchWithRetry(
             `https://api.the-odds-api.com/v4/sports/${sports[0]}/odds/?apiKey=${apiKey}&regions=au&markets=h2h&oddsFormat=decimal`
         )
+
+        if (testResponse.status === 429) {
+            diagnostics.rateLimitHits += 1
+            await sleep(300)
+            continue
+        }
+
         if (testResponse.status === 200) {
             validApiKey = apiKey
             break
         }
+
+        await sleep(180)
     }
 
     if (!validApiKey) {
@@ -46,22 +94,44 @@ async function getOdds(sports) {
 
     const arbitrageBets = []
     const layBets = []
+    const diagnostics = {
+        sportsRequested: sports.length,
+        sportsScanned: 0,
+        sportsWithErrors: 0,
+        matchesScanned: 0,
+        matchesWithBookmakers: 0,
+        rateLimitHits: 0,
+    }
 
     for (const sport of sports) {
         // Fetch h2h and h2h_lay in one request to save quota
-        const response = await fetch(
+        const response = await fetchWithRetry(
             `https://api.the-odds-api.com/v4/sports/${sport}/odds/?apiKey=${validApiKey}&regions=au&markets=h2h,h2h_lay&oddsFormat=decimal`
         )
 
-        if (!response.ok) break
+        if (!response.ok) {
+            if (response.status === 429) {
+                diagnostics.rateLimitHits += 1
+            }
+            diagnostics.sportsWithErrors += 1
+            await sleep(250)
+            continue
+        }
 
         // v4 returns an array directly — no .data wrapper
         const matches = await response.json()
-        if (!Array.isArray(matches)) break
+        if (!Array.isArray(matches)) {
+            diagnostics.sportsWithErrors += 1
+            continue
+        }
+
+        diagnostics.sportsScanned += 1
 
         for (const match of matches) {
+            diagnostics.matchesScanned += 1
             const bookmakers = match.bookmakers
             if (!bookmakers || bookmakers.length === 0) continue
+            diagnostics.matchesWithBookmakers += 1
 
             const teams = [match.home_team, match.away_team]
             const gameTime = new Date(match.commence_time)
@@ -151,9 +221,12 @@ async function getOdds(sports) {
                 })
             }
         }
+
+        // Pace requests to reduce 429s on free-tier limits.
+        await sleep(180)
     }
 
-    return { arbitrageBets, layBets }
+    return { arbitrageBets, layBets, diagnostics }
 }
 
 export default getArbitrageBets

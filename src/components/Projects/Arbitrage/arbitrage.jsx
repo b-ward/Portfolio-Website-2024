@@ -133,6 +133,7 @@ export default function Arbitrage() {
 
   const arbCount = results?.arbitrageBets?.length ?? 0
   const layCount = results?.layBets?.length ?? 0
+  const diagnostics = results?.diagnostics
 
   return (
     <div className="arb-page">
@@ -171,6 +172,15 @@ export default function Arbitrage() {
       {/* Results */}
       {results && (
         <div className="arb-results">
+          {diagnostics && (
+            <div className="arb-diagnostics" role="status" aria-live="polite">
+              Scanned {diagnostics.matchesWithBookmakers}/{diagnostics.matchesScanned} matches with bookmaker odds
+              across {diagnostics.sportsScanned}/{diagnostics.sportsRequested} sports
+              {diagnostics.sportsWithErrors > 0 ? ` (${diagnostics.sportsWithErrors} sports returned API errors)` : ''}
+              {diagnostics.rateLimitHits > 0 ? `, ${diagnostics.rateLimitHits} rate-limit retries` : ''}.
+            </div>
+          )}
+
           {/* Tab switcher */}
           <div className="arb-tabs">
             <button
