@@ -23,7 +23,7 @@
     "react-simple-maps": "^3.0.0"
   },
   "devDependencies": {
-    "@eslint/plugin-kit": "^0.3.5",
+    "@eslint/plugin-kit": "^0.4.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
