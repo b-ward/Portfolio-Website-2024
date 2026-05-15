@@ -13,7 +13,7 @@ This milestone modernises an existing React portfolio site by replacing Bootstra
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Tailwind Setup** - Install Tailwind, define theme tokens, and remove all Bootstrap dependencies (completed 2026-05-15)
-- [ ] **Phase 2: Layout & Navigation** - Rewrite the app shell and navigation components with Tailwind
+- [x] **Phase 2: Layout & Navigation** - Rewrite the app shell and navigation components with Tailwind (completed 2026-05-15)
 - [ ] **Phase 3: Landing Page** - Convert landing page class component to functional and rewrite with Tailwind
 - [ ] **Phase 4: About & CV Pages** - Replace react-bootstrap Card/CardGroup with Tailwind equivalents
 - [ ] **Phase 5: Projects Index** - Rewrite project listing page and shared card component with Tailwind
@@ -58,7 +58,9 @@ Plans:
   1. The landing page typing animation plays correctly on load with no console errors
   2. No `document.querySelector` or `document.getElementById` calls exist anywhere in the React component tree
   3. The landing page layout is correct on both desktop and mobile viewport widths
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 03-01-PLAN.md — Rewrite landingpage.jsx as functional component with Tailwind; delete landingpage.css
 **UI hint**: yes
 
 ### Phase 4: About & CV Pages
@@ -123,8 +125,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Tailwind Setup | 2/2 | Complete   | 2026-05-15 |
-| 2. Layout & Navigation | 0/? | Not started | - |
-| 3. Landing Page | 0/? | Not started | - |
+| 2. Layout & Navigation | 4/4 | Complete | 2026-05-15 |
+| 3. Landing Page | 0/1 | Not started | - |
 | 4. About & CV Pages | 0/? | Not started | - |
 | 5. Projects Index | 0/? | Not started | - |
 | 6. Mini-Projects | 0/? | Not started | - |
