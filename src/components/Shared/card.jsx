@@ -7,7 +7,7 @@ const SharedCard = ({ cardTitle, cardBody, imageSrc }) => (
         <img
           src={imageSrc}
           alt=""
-          className="max-h-[100px] w-auto pr-4 self-start mt-6 ml-6"
+          className="max-h-[100px] w-auto pr-4 self-start mt-6 ml-6 mb-6"
         />
       )}
       <div className="p-6">

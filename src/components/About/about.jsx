@@ -6,9 +6,9 @@ const About = () => (
     <img
       src="/BrendonWard.png"
       alt="Brendon Ward"
-      className="mt-14 w-[40vw] h-[40vw] max-w-[300px] max-h-[300px] mx-auto block"
+      className="mt-8 w-[30vw] h-[30vw] max-w-[200px] max-h-[200px] mx-auto block"
     />
-    <div className="mx-[8vw] my-8">
+    <div className="mx-[8vw] mt-8 pb-8">
       <SharedCard
         cardTitle="About Me"
         cardBody="Hi! I'm Brendon. I'm a Product Specialist based in Sydney, Australia and have a passion for IT and all things in between. I've built this site to show off some of my personal projects I've worked on and highlight my experience in an online CV. Feel free to reach out through my contact details below!"
@@ -23,7 +23,7 @@ const About = () => (
               href="https://www.linkedin.com/in/brendon-c-ward/"
               target="_blank"
               rel="noreferrer"
-              className="text-accent no-underline hover:underline"
+              className="text-blue-600 underline hover:text-blue-800"
             >
               https://www.linkedin.com/in/brendon-c-ward/
             </a>
@@ -51,7 +51,7 @@ const About = () => (
               href="https://www.youtube.com/watch?v=n8iA18R76jk"
               target="_blank"
               rel="noreferrer"
-              className="text-accent no-underline hover:underline"
+              className="text-blue-600 underline hover:text-blue-800"
             >
               https://www.youtube.com/watch?v=n8iA18R76jk
             </a>
@@ -63,7 +63,7 @@ const About = () => (
               href="https://www.youtube.com/watch?v=l6nmysZKHFU"
               target="_blank"
               rel="noreferrer"
-              className="text-accent no-underline hover:underline"
+              className="text-blue-600 underline hover:text-blue-800"
             >
               https://www.youtube.com/watch?v=l6nmysZKHFU
             </a>
@@ -74,7 +74,7 @@ const About = () => (
               href="https://github.com/b-ward/Portfolio-Website-2024"
               target="_blank"
               rel="noreferrer"
-              className="text-accent no-underline hover:underline"
+              className="text-blue-600 underline hover:text-blue-800"
             >
               https://github.com/b-ward/Portfolio-Website-2024
             </a>

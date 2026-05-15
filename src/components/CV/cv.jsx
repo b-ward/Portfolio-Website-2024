@@ -6,15 +6,15 @@ const CV = () => (
     <img
       src="/BrendonWard.png"
       alt="Brendon Ward"
-      className="mt-14 w-[40vw] h-[40vw] max-w-[300px] max-h-[300px] mx-auto block"
+      className="mt-8 w-[30vw] h-[30vw] max-w-[200px] max-h-[200px] mx-auto block"
     />
     <h1 className="text-center">CV</h1>
-    <div className="mx-[8vw] my-8">
-      <h3 className="text-accent mt-5">Career Summary</h3>
+    <div className="mx-[8vw] mt-8 pb-8">
+      <h3 className="text-accent text-xl font-bold mt-5">Career Summary</h3>
       <SharedCard
         cardBody="G'day! I'm Brendon, an IT Professional with extensive experience in Software Development, Project Management and Cyber Security. I have strong communication, organisational and technical skills to lead cross-functional teams. I am hard working with a passion for all things tech."
       />
-      <h3 className="text-accent mt-5">Experience</h3>
+      <h3 className="text-accent text-xl font-bold mt-5">Experience</h3>
       <SharedCard
         imageSrc="/CV/WTG.jpg"
         cardTitle="WiseTech Global | Product Specialist | April 2022 - Present"
@@ -58,7 +58,7 @@ const CV = () => (
         cardTitle="Hoyts | Crew Member & Host | Nov 2013 - May 2017"
         cardBody="Involved ticket collection, cleaning, sales and ushering. Trained new starters between June 2015 and May 2017."
       />
-      <h3 className="text-accent mt-5">Certifications</h3>
+      <h3 className="text-accent text-xl font-bold mt-5">Certifications</h3>
       <SharedCard
         imageSrc="/CV/BBIT.jpg"
         cardTitle="Black Belt in Thinking (Foundations) | April 2023"
@@ -69,7 +69,7 @@ const CV = () => (
         cardTitle="Microsoft Certified: Azure Security Engineer Associate (AZ-500) | Jul 2020"
         cardBody="This exam assesses the ability to accomplish the following technical tasks within Azure: manage identity and access; implement platform protection; manage security operations; and secure data and applications."
       />
-      <h3 className="text-accent mt-5">Education</h3>
+      <h3 className="text-accent text-xl font-bold mt-5">Education</h3>
       <SharedCard
         imageSrc="/CV/uts.png"
         cardTitle="UTS | Bachelor of Information Technology (Co-op) | 2017 - 2019 | 6.35 GPA/83.09 WAM"
