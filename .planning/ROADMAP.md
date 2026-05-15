@@ -1,0 +1,129 @@
+# Roadmap: Portfolio Website 2024 — Modernisation
+
+## Overview
+
+This milestone modernises an existing React portfolio site by replacing Bootstrap with Tailwind CSS, converting legacy class components to functional components with hooks, and fixing layout and navigation issues throughout. The work proceeds page-by-page from the shared shell outward: setup and infrastructure first, then navigation, then each page group in dependency order, finishing with the highest-risk Spotify integration last. All content is preserved; only styling and component patterns change.
+
+## Phases
+
+**Phase Numbering:**
+- Integer phases (1, 2, 3): Planned milestone work
+- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+
+Decimal phases appear between their surrounding integers in numeric order.
+
+- [ ] **Phase 1: Tailwind Setup** - Install Tailwind, define theme tokens, and remove all Bootstrap dependencies
+- [ ] **Phase 2: Layout & Navigation** - Rewrite the app shell and navigation components with Tailwind
+- [ ] **Phase 3: Landing Page** - Convert landing page class component to functional and rewrite with Tailwind
+- [ ] **Phase 4: About & CV Pages** - Replace react-bootstrap Card/CardGroup with Tailwind equivalents
+- [ ] **Phase 5: Projects Index** - Rewrite project listing page and shared card component with Tailwind
+- [ ] **Phase 6: Mini-Projects** - Migrate all 7 interactive tools to Tailwind styling
+- [ ] **Phase 7: Remaining Pages** - Migrate Photos, Music, and BusinessBrains pages to Tailwind
+- [ ] **Phase 8: TopArtistsMap / Spotify** - Rewrite Spotify integration UI shell with Tailwind, preserving all auth/API logic
+
+## Phase Details
+
+### Phase 1: Tailwind Setup
+**Goal**: Tailwind CSS is installed and configured with the project colour tokens, and Bootstrap is fully removed from the dependency tree.
+**Depends on**: Nothing (first phase)
+**Requirements**: SETUP-01, SETUP-02, SETUP-03, SETUP-04, QUAL-03
+**Success Criteria** (what must be TRUE):
+  1. `npm install` completes with no Bootstrap or react-bootstrap packages in node_modules
+  2. `tailwind.config.js` defines `bg` (#242424), `surface` (#333134), `accent` (#ffc200), and `text` (#ffffff) as theme tokens
+  3. `npm run dev` starts and serves the app with no CSS import errors in the terminal or browser console
+  4. `npm run build` produces a production bundle without errors
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 2: Layout & Navigation
+**Goal**: The app shell (App.jsx, Toolbar, SideDrawer) is fully converted to functional components with Tailwind styling, and all navigation links use React Router.
+**Depends on**: Phase 1
+**Requirements**: NAV-01, NAV-02, NAV-03, NAV-04, NAV-05, QUAL-02
+**Success Criteria** (what must be TRUE):
+  1. The toolbar renders correctly on desktop with gold accent colours and no Bootstrap classes present in the DOM
+  2. The hamburger menu opens and closes the side drawer on a mobile-width viewport
+  3. Navigating between pages via the nav links does not trigger a full page reload
+  4. The active route link is visually distinct (e.g., accent colour or underline) in the navigation
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 3: Landing Page
+**Goal**: The landing page is a functional React component that uses refs for DOM access and renders correctly with Tailwind styling.
+**Depends on**: Phase 2
+**Requirements**: LAND-01, LAND-02, LAND-03, QUAL-01
+**Success Criteria** (what must be TRUE):
+  1. The landing page typing animation plays correctly on load with no console errors
+  2. No `document.querySelector` or `document.getElementById` calls exist anywhere in the React component tree
+  3. The landing page layout is correct on both desktop and mobile viewport widths
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 4: About & CV Pages
+**Goal**: The About and CV pages render with correct Tailwind layouts, replacing all react-bootstrap Card and CardGroup usage.
+**Depends on**: Phase 3
+**Requirements**: CONT-01, CONT-02, CONT-03
+**Success Criteria** (what must be TRUE):
+  1. The About page displays all content sections with correct card-style layout using Tailwind (no react-bootstrap imports)
+  2. The CV page renders all sections with correct layout using Tailwind
+  3. The shared `card.jsx` component uses Tailwind classes exclusively and renders correctly wherever it is used
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 5: Projects Index
+**Goal**: The projects index page and shared card component are fully migrated to Tailwind, with all project cards routing correctly.
+**Depends on**: Phase 4
+**Requirements**: PROJ-01, PROJ-02
+**Success Criteria** (what must be TRUE):
+  1. The projects index page displays all project cards in a correct grid or list layout using Tailwind
+  2. Clicking any project card navigates to the correct project route without a full page reload
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 6: Mini-Projects
+**Goal**: All 7 interactive mini-project tools are migrated to Tailwind styling with all game and calculation logic verified as working.
+**Depends on**: Phase 5
+**Requirements**: TOOL-01, TOOL-02, TOOL-03, TOOL-04, TOOL-05, TOOL-06, TOOL-07
+**Success Criteria** (what must be TRUE):
+  1. The Arbitrage calculator renders with Tailwind styling and produces correct odds calculations
+  2. The Trio game renders and all card interactions, scoring, and win/lose states function correctly end-to-end
+  3. The Train game, Pace calculator, 500 card game, and Noisy detector each render and function correctly after migration
+  4. The NBA Ladder renders standings data fetched from the Netlify serverless function
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 7: Remaining Pages
+**Goal**: The Photos, Music, and BusinessBrains pages are migrated to Tailwind with correct layouts and no Bootstrap remnants.
+**Depends on**: Phase 6
+**Requirements**: PAGE-01, PAGE-02, PAGE-03
+**Success Criteria** (what must be TRUE):
+  1. The Photos page renders its content with correct Tailwind layout
+  2. The Music page renders its content with correct Tailwind layout
+  3. The BusinessBrains page renders its content with correct Tailwind layout
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 8: TopArtistsMap / Spotify
+**Goal**: The TopArtistsMap UI shell is rewritten with Tailwind while the Spotify OAuth flow and MusicBrainz API integration remain fully intact.
+**Depends on**: Phase 7
+**Requirements**: SPOT-01, SPOT-02
+**Success Criteria** (what must be TRUE):
+  1. The Spotify OAuth login flow initiates and completes successfully, returning the user to the app with a valid session
+  2. The TopArtistsMap renders correctly with Tailwind styling after authentication, displaying the expected map and artist data
+**Plans**: TBD
+**UI hint**: yes
+
+## Progress
+
+**Execution Order:**
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
+
+| Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
+| 1. Tailwind Setup | 0/? | Not started | - |
+| 2. Layout & Navigation | 0/? | Not started | - |
+| 3. Landing Page | 0/? | Not started | - |
+| 4. About & CV Pages | 0/? | Not started | - |
+| 5. Projects Index | 0/? | Not started | - |
+| 6. Mini-Projects | 0/? | Not started | - |
+| 7. Remaining Pages | 0/? | Not started | - |
+| 8. TopArtistsMap / Spotify | 0/? | Not started | - |
