@@ -24,10 +24,11 @@ Every page and interactive tool works correctly and looks polished, with a consi
 
 - ✓ All Bootstrap / react-bootstrap dependencies replaced with Tailwind CSS — validated in Phase 1
 - ✓ Colour scheme (bg `#242424`, accent `#ffc200`) defined as Tailwind theme tokens (`@theme` block in `src/index.css`) — validated in Phase 1
+- ✓ Landing page converted from class component — useRef/useEffect replace DOM manipulation, Tailwind replaces CSS file — validated in Phase 3
+- ✓ No `document.querySelector` or `document.getElementById` anywhere in the React component tree (QUAL-01) — validated in Phase 3
 
 ### Active
 - [ ] App.jsx converted from class component to functional component
-- [ ] Landing page converted from class component, DOM manipulation replaced with useRef/useEffect
 - [ ] All internal links use React Router `<Link>` (no bare `<a href>` causing full reloads)
 - [ ] Router routes updated to react-router-dom v7 API (remove `exact` prop)
 - [ ] All pages and tools render correctly with Tailwind styling
@@ -87,4 +88,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-15 after initialization*
+*Last updated: 2026-05-15 after Phase 3 completion*

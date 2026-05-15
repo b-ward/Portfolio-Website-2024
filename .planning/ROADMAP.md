@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Tailwind Setup** - Install Tailwind, define theme tokens, and remove all Bootstrap dependencies (completed 2026-05-15)
 - [x] **Phase 2: Layout & Navigation** - Rewrite the app shell and navigation components with Tailwind (completed 2026-05-15)
-- [ ] **Phase 3: Landing Page** - Convert landing page class component to functional and rewrite with Tailwind
+- [x] **Phase 3: Landing Page** - Convert landing page class component to functional and rewrite with Tailwind (completed 2026-05-15)
 - [ ] **Phase 4: About & CV Pages** - Replace react-bootstrap Card/CardGroup with Tailwind equivalents
 - [ ] **Phase 5: Projects Index** - Rewrite project listing page and shared card component with Tailwind
 - [ ] **Phase 6: Mini-Projects** - Migrate all 7 interactive tools to Tailwind styling
@@ -60,7 +60,7 @@ Plans:
   3. The landing page layout is correct on both desktop and mobile viewport widths
 **Plans**: 1 plan
 Plans:
-- [ ] 03-01-PLAN.md — Rewrite landingpage.jsx as functional component with Tailwind; delete landingpage.css
+- [x] 03-01-PLAN.md — Rewrite landingpage.jsx as functional component with Tailwind; delete landingpage.css
 **UI hint**: yes
 
 ### Phase 4: About & CV Pages

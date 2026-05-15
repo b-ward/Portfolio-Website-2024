@@ -22,9 +22,9 @@
 
 ### Landing Page
 
-- [ ] **LAND-01**: Landing page is a functional component (no class component)
-- [ ] **LAND-02**: Typing animation initialised via `useRef` + `useEffect` (no `document.querySelector`)
-- [ ] **LAND-03**: Landing page layout renders correctly on desktop and mobile with Tailwind styling
+- [x] **LAND-01**: Landing page is a functional component (no class component)
+- [x] **LAND-02**: Typing animation initialised via `useRef` + `useEffect` (no `document.querySelector`)
+- [x] **LAND-03**: Landing page layout renders correctly on desktop and mobile with Tailwind styling
 
 ### Content Pages
 
@@ -60,7 +60,7 @@
 
 ### Code Quality
 
-- [ ] **QUAL-01**: No direct DOM manipulation (`document.querySelector`, `document.getElementById`) in any React component
+- [x] **QUAL-01**: No direct DOM manipulation (`document.querySelector`, `document.getElementById`) in any React component
 - [ ] **QUAL-02**: Router routes use react-router-dom v7 API (no `exact` prop)
 - [x] **QUAL-03**: No per-component Bootstrap CSS files imported (all component `.css` files removed or converted to Tailwind)
 
@@ -105,9 +105,9 @@
 | NAV-03 | Phase 2 | Pending |
 | NAV-04 | Phase 2 | Pending |
 | NAV-05 | Phase 2 | Pending |
-| LAND-01 | Phase 3 | Pending |
-| LAND-02 | Phase 3 | Pending |
-| LAND-03 | Phase 3 | Pending |
+| LAND-01 | Phase 3 | Complete |
+| LAND-02 | Phase 3 | Complete |
+| LAND-03 | Phase 3 | Complete |
 | CONT-01 | Phase 4 | Pending |
 | CONT-02 | Phase 4 | Pending |
 | CONT-03 | Phase 4 | Pending |
@@ -125,7 +125,7 @@
 | PAGE-03 | Phase 7 | Pending |
 | SPOT-01 | Phase 8 | Pending |
 | SPOT-02 | Phase 8 | Pending |
-| QUAL-01 | Phase 3 | Pending |
+| QUAL-01 | Phase 3 | Complete |
 | QUAL-02 | Phase 2 | Pending |
 | QUAL-03 | Phase 1 | Complete |
 
