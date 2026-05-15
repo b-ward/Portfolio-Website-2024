@@ -7,7 +7,7 @@
 
 ### Setup
 
-- [ ] **SETUP-01**: Site builds and renders without any Bootstrap or react-bootstrap imports
+- [x] **SETUP-01**: Site builds and renders without any Bootstrap or react-bootstrap imports
 - [ ] **SETUP-02**: Tailwind CSS configured with custom theme tokens — `bg` (#242424), `surface` (#333134), `accent` (#ffc200), `text` (#ffffff)
 - [ ] **SETUP-03**: Dev server (`npm run dev`) starts cleanly with no CSS import errors
 - [ ] **SETUP-04**: Production build (`npm run build`) completes without errors
@@ -96,7 +96,7 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SETUP-01 | Phase 1 | Pending |
+| SETUP-01 | Phase 1 | Complete |
 | SETUP-02 | Phase 1 | Pending |
 | SETUP-03 | Phase 1 | Pending |
 | SETUP-04 | Phase 1 | Pending |

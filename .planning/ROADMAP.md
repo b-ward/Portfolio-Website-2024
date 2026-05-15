@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. `npm run build` produces a production bundle without errors
 **Plans**: 2 plans
 Plans:
-- [ ] 01-01-PLAN.md — Uninstall Bootstrap, install Tailwind v4 packages (npm only)
+- [x] 01-01-PLAN.md — Uninstall Bootstrap, install Tailwind v4 packages (npm only)
 - [ ] 01-02-PLAN.md — Register Vite plugin, rewrite index.css with @theme tokens, remove Bootstrap imports from index.jsx and App.css; verify build
 **UI hint**: yes
 
@@ -122,7 +122,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Tailwind Setup | 0/2 | Not started | - |
+| 1. Tailwind Setup | 1/2 | In Progress|  |
 | 2. Layout & Navigation | 0/? | Not started | - |
 | 3. Landing Page | 0/? | Not started | - |
 | 4. About & CV Pages | 0/? | Not started | - |
