@@ -87,7 +87,7 @@ Plans:
   2. Clicking any project card navigates to the correct project route without a full page reload
 **Plans**: 1 plan
 Plans:
-- [ ] 05-01-PLAN.md — Create ProjectCard.jsx, rewrite projects.jsx as functional Tailwind component, delete projects.css
+- [x] 05-01-PLAN.md — Create ProjectCard.jsx, rewrite projects.jsx as functional Tailwind component, delete projects.css
 **UI hint**: yes
 
 ### Phase 6: Mini-Projects
