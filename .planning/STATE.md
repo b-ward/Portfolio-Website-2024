@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 01-01-PLAN.md - Bootstrap removed, Tailwind v4 installed
-last_updated: "2026-05-15T13:24:42.112Z"
+stopped_at: Completed 01-02-PLAN.md — Tailwind v4 active, Bootstrap removed, build passes
+last_updated: "2026-05-15T13:33:53.151Z"
 last_activity: 2026-05-15
 progress:
   total_phases: 8
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
-  percent: 50
+  completed_plans: 2
+  percent: 100
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-05-15)
 ## Current Position
 
 Phase: 1 of 8 (Tailwind Setup)
-Plan: 1 of 2 in current phase
+Plan: 2 of 2 in current phase
 Status: Ready to execute
 Last activity: 2026-05-15
 
@@ -53,6 +53,7 @@ Progress: [░░░░░░░░░░] 0%
 
 *Updated after each plan completion*
 | Phase 01-tailwind-setup P01 | 1min | 1 tasks | 2 files |
+| Phase 01-tailwind-setup P02 | 5min | - tasks | - files |
 
 ## Accumulated Context
 
@@ -65,6 +66,9 @@ Recent decisions affecting current work:
 - Keep React + Vite: Netlify compatible, minimal change, preserves routing logic
 - Phase TopArtistsMap last: Spotify OAuth + MusicBrainz integration is highest regression risk
 - [Phase ?]: Tailwind v4 zero-config: no postcss.config.js or tailwind.config.js needed, Vite plugin handles integration — Tailwind v4 changed architecture to eliminate config files; CSS import + Vite plugin replaces PostCSS pipeline
+- [Phase ?]: react-bootstrap externalised in Rollup build config to keep build passing during incremental removal in Phases 2-7
+- [Phase ?]: ESLint v9 flat config created — 250 pre-existing lint errors deferred to component migration phases
+- [Phase ?]: dark-only site: light mode media query removed from index.css, color-scheme set to dark
 
 ### Pending Todos
 
@@ -83,6 +87,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-15T13:24:42.107Z
-Stopped at: Completed 01-01-PLAN.md - Bootstrap removed, Tailwind v4 installed
+Last session: 2026-05-15T13:33:53.146Z
+Stopped at: Completed 01-02-PLAN.md — Tailwind v4 active, Bootstrap removed, build passes
 Resume file: None

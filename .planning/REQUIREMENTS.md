@@ -8,9 +8,9 @@
 ### Setup
 
 - [x] **SETUP-01**: Site builds and renders without any Bootstrap or react-bootstrap imports
-- [ ] **SETUP-02**: Tailwind CSS configured with custom theme tokens — `bg` (#242424), `surface` (#333134), `accent` (#ffc200), `text` (#ffffff)
-- [ ] **SETUP-03**: Dev server (`npm run dev`) starts cleanly with no CSS import errors
-- [ ] **SETUP-04**: Production build (`npm run build`) completes without errors
+- [x] **SETUP-02**: Tailwind CSS configured with custom theme tokens — `bg` (#242424), `surface` (#333134), `accent` (#ffc200), `text` (#ffffff)
+- [x] **SETUP-03**: Dev server (`npm run dev`) starts cleanly with no CSS import errors
+- [x] **SETUP-04**: Production build (`npm run build`) completes without errors
 
 ### Navigation
 
@@ -62,7 +62,7 @@
 
 - [ ] **QUAL-01**: No direct DOM manipulation (`document.querySelector`, `document.getElementById`) in any React component
 - [ ] **QUAL-02**: Router routes use react-router-dom v7 API (no `exact` prop)
-- [ ] **QUAL-03**: No per-component Bootstrap CSS files imported (all component `.css` files removed or converted to Tailwind)
+- [x] **QUAL-03**: No per-component Bootstrap CSS files imported (all component `.css` files removed or converted to Tailwind)
 
 ## v2 Requirements
 
@@ -97,9 +97,9 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | SETUP-01 | Phase 1 | Complete |
-| SETUP-02 | Phase 1 | Pending |
-| SETUP-03 | Phase 1 | Pending |
-| SETUP-04 | Phase 1 | Pending |
+| SETUP-02 | Phase 1 | Complete |
+| SETUP-03 | Phase 1 | Complete |
+| SETUP-04 | Phase 1 | Complete |
 | NAV-01 | Phase 2 | Pending |
 | NAV-02 | Phase 2 | Pending |
 | NAV-03 | Phase 2 | Pending |
@@ -127,7 +127,7 @@
 | SPOT-02 | Phase 8 | Pending |
 | QUAL-01 | Phase 3 | Pending |
 | QUAL-02 | Phase 2 | Pending |
-| QUAL-03 | Phase 1 | Pending |
+| QUAL-03 | Phase 1 | Complete |
 
 **Coverage:**
 - v1 requirements: 32 total

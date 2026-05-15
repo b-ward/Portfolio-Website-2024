@@ -12,7 +12,7 @@ This milestone modernises an existing React portfolio site by replacing Bootstra
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Tailwind Setup** - Install Tailwind, define theme tokens, and remove all Bootstrap dependencies
+- [x] **Phase 1: Tailwind Setup** - Install Tailwind, define theme tokens, and remove all Bootstrap dependencies (completed 2026-05-15)
 - [ ] **Phase 2: Layout & Navigation** - Rewrite the app shell and navigation components with Tailwind
 - [ ] **Phase 3: Landing Page** - Convert landing page class component to functional and rewrite with Tailwind
 - [ ] **Phase 4: About & CV Pages** - Replace react-bootstrap Card/CardGroup with Tailwind equivalents
@@ -35,7 +35,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 2 plans
 Plans:
 - [x] 01-01-PLAN.md — Uninstall Bootstrap, install Tailwind v4 packages (npm only)
-- [ ] 01-02-PLAN.md — Register Vite plugin, rewrite index.css with @theme tokens, remove Bootstrap imports from index.jsx and App.css; verify build
+- [x] 01-02-PLAN.md — Register Vite plugin, rewrite index.css with @theme tokens, remove Bootstrap imports from index.jsx and App.css; verify build
 **UI hint**: yes
 
 ### Phase 2: Layout & Navigation
@@ -122,7 +122,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Tailwind Setup | 1/2 | In Progress|  |
+| 1. Tailwind Setup | 2/2 | Complete   | 2026-05-15 |
 | 2. Layout & Navigation | 0/? | Not started | - |
 | 3. Landing Page | 0/? | Not started | - |
 | 4. About & CV Pages | 0/? | Not started | - |
