@@ -30,7 +30,8 @@
 }
 
 .intro .right .wrapper {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     height: 600px;
     padding-left: 50px;
     padding-right: 50px;
