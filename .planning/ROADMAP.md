@@ -71,7 +71,11 @@ Plans:
   1. The About page displays all content sections with correct card-style layout using Tailwind (no react-bootstrap imports)
   2. The CV page renders all sections with correct layout using Tailwind
   3. The shared `card.jsx` component uses Tailwind classes exclusively and renders correctly wherever it is used
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 04-01-PLAN.md — Rewrite card.jsx as functional Tailwind component; delete card.css
+- [ ] 04-02-PLAN.md — Rewrite about.jsx as functional Tailwind component; delete about.css
+- [ ] 04-03-PLAN.md — Rewrite cv.jsx as functional Tailwind component; delete cv.css
 **UI hint**: yes
 
 ### Phase 5: Projects Index
@@ -127,7 +131,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 1. Tailwind Setup | 2/2 | Complete   | 2026-05-15 |
 | 2. Layout & Navigation | 4/4 | Complete | 2026-05-15 |
 | 3. Landing Page | 0/1 | Not started | - |
-| 4. About & CV Pages | 0/? | Not started | - |
+| 4. About & CV Pages | 0/3 | Not started | - |
 | 5. Projects Index | 0/? | Not started | - |
 | 6. Mini-Projects | 0/? | Not started | - |
 | 7. Remaining Pages | 0/? | Not started | - |
