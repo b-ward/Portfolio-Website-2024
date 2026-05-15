@@ -7,7 +7,7 @@ import {init} from 'ityped';
 class Landing extends Component {
     componentDidMount(){
         const typing = document.querySelector('#typing')
-        init(typing, { showCursor: false, backDelay: 1500, strings: ['Product Specialist', 'Tester', 'Developer', 'Project Manager', 'Technology Enthusiast' ] })
+        init(typing, { showCursor: false, backDelay: 1500, strings: ['Product Manager', 'Tester', 'Developer', 'Technology Enthusiast' ] })
     }
 
     render() {

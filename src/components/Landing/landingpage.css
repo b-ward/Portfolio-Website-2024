@@ -2,7 +2,7 @@
     background-color: none;
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    height: calc(100vh - 3.5rem);
 }
 
 .intro .left {
@@ -13,7 +13,7 @@
 .intro .left .imgContainer {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 3.5rem);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,6 +44,7 @@
     margin: 10px 0;
     background-color: #333134;
     color:white;
+    white-space: nowrap;
 }
 
 .intro .right .wrapper h2 {
