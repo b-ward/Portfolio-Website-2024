@@ -85,7 +85,9 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. The projects index page displays all project cards in a correct grid or list layout using Tailwind
   2. Clicking any project card navigates to the correct project route without a full page reload
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 05-01-PLAN.md — Create ProjectCard.jsx, rewrite projects.jsx as functional Tailwind component, delete projects.css
 **UI hint**: yes
 
 ### Phase 6: Mini-Projects
@@ -132,7 +134,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 2. Layout & Navigation | 4/4 | Complete | 2026-05-15 |
 | 3. Landing Page | 1/1 | Complete | 2026-05-15 |
 | 4. About & CV Pages | 3/3 | Complete | 2026-05-15 |
-| 5. Projects Index | 0/? | Not started | - |
+| 5. Projects Index | 0/1 | Not started | - |
 | 6. Mini-Projects | 0/? | Not started | - |
 | 7. Remaining Pages | 0/? | Not started | - |
 | 8. TopArtistsMap / Spotify | 0/? | Not started | - |
