@@ -5,6 +5,14 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  build: {
+    // react-bootstrap is being removed phase-by-phase (Phases 2–7).
+    // Externalising it keeps the build passing until all per-component
+    // imports are replaced with Tailwind equivalents.
+    rollupOptions: {
+      external: ['react-bootstrap'],
+    },
+  },
   server: {
     host: '127.0.0.1',
     port: 5173,

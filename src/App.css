@@ -24,12 +24,6 @@
   box-sizing: border-box;
 }
 
-/* Bootstrap button colour */
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-  background-color: #ffc200 !important;
-  border-color: #ffc200 !important;
-}
-
 .ball {
   position: absolute;
   border-radius: 100%;
