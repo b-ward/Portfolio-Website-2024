@@ -13,6 +13,10 @@
     "@spotify/web-api-ts-sdk": "^1.2.0",
     "@vitejs/plugin-react": "^4.2.1",
     "bootstrap": "^5.2.3",
+    "d3-color": "^3.1.0",
+    "d3-interpolate": "^3.0.1",
+    "d3-transition": "^3.0.1",
+    "d3-zoom": "^3.0.0",
     "eslint-config-react-app": "^7.0.1",
     "ityped": "^1.0.3",
     "react": "^18.2.0",
@@ -20,7 +24,7 @@
     "react-dom": "^18.2.0",
     "react-mdl": "^2.1.0",
     "react-router-dom": "^7.12.0",
-    "react-simple-maps": "^3.0.0"
+    "react-simple-maps": "^1.0.0"
   },
   "devDependencies": {
     "@eslint/plugin-kit": "^0.5.1",

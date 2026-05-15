@@ -96,6 +96,15 @@
   background: #ffffff;
   margin: 0.75rem auto 0;
   touch-action: none;
+  height: 420px;
+}
+
+.map-wrapper.is-zoomed {
+  cursor: grab;
+}
+
+.map-wrapper.is-dragging {
+  cursor: grabbing;
 }
 
 .map-zoom-controls {
@@ -130,7 +139,8 @@
 .top-artists-svg {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  touch-action: none;
 }
 
 .country-tooltip {
