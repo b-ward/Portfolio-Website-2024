@@ -61,7 +61,7 @@ const CV = () => (
       <h3 className="text-accent text-xl font-bold mt-5">Certifications</h3>
       <SharedCard
         imageSrc="/CV/BBIT.jpg"
-        cardTitle="Black Belt in Thinking (Foundations) | April 2023"
+        cardTitle="Black Belt in Thinking | September 2025"
         cardBody="Black Belt in Thinking is a course focused on improving critical thinking skills. Participants learn practical techniques to analyze information, make better decisions, and avoid common reasoning errors. The course covers logical reasoning, problem-solving, and creativity, helping individuals navigate challenges effectively."
       />
       <SharedCard
