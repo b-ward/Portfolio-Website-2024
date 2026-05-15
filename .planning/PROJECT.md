@@ -20,10 +20,12 @@ Every page and interactive tool works correctly and looks polished, with a consi
 - ✓ SPA fallback routing via `public/_redirects` on Netlify — existing
 - ✓ About, CV, Photos, Music, BusinessBrains content pages — existing
 
-### Active
+### Validated
 
-- [ ] All Bootstrap / react-bootstrap dependencies replaced with Tailwind CSS
-- [ ] Colour scheme (bg `#242424`, accent `#ffc200`) defined as Tailwind theme tokens
+- ✓ All Bootstrap / react-bootstrap dependencies replaced with Tailwind CSS — validated in Phase 1
+- ✓ Colour scheme (bg `#242424`, accent `#ffc200`) defined as Tailwind theme tokens (`@theme` block in `src/index.css`) — validated in Phase 1
+
+### Active
 - [ ] App.jsx converted from class component to functional component
 - [ ] Landing page converted from class component, DOM manipulation replaced with useRef/useEffect
 - [ ] All internal links use React Router `<Link>` (no bare `<a href>` causing full reloads)
@@ -62,8 +64,8 @@ Brownfield modernisation of an existing portfolio site. The codebase has working
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Replace Bootstrap with Tailwind CSS | Eliminates `!important` overrides, gives full design control, more modern DX | — Pending |
-| Keep React + Vite (no Astro/Next.js) | Netlify compatible, minimal change, preserves existing routing logic | — Pending |
+| Replace Bootstrap with Tailwind CSS | Eliminates `!important` overrides, gives full design control, more modern DX | Done — Tailwind v4 installed, @theme tokens defined, Bootstrap removed (Phase 1) |
+| Keep React + Vite (no Astro/Next.js) | Netlify compatible, minimal change, preserves existing routing logic | Confirmed — build and dev server clean after Phase 1 |
 | Content-preserving rewrite (no content changes) | Reduces risk, keeps focus on visual/code quality | — Pending |
 | Phase TopArtistsMap last | Spotify OAuth + MusicBrainz integration makes it highest regression risk | — Pending |
 
