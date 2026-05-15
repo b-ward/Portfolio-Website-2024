@@ -4,14 +4,14 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: ~
-last_updated: "2026-05-15T18:00:00.000Z"
-last_activity: 2026-05-15 — Phase 4 context gathered (About & CV Pages)
+last_updated: "2026-05-15T22:00:00.000Z"
+last_activity: 2026-05-15 — Phase 4 complete (About & CV Pages — 3/3 plans)
 progress:
   total_phases: 8
-  completed_phases: 3
-  total_plans: 8
-  completed_plans: 7
-  percent: 37
+  completed_phases: 4
+  total_plans: 11
+  completed_plans: 10
+  percent: 50
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-15)
 
 **Core value:** Every page and interactive tool works correctly and looks polished, with a consistent visual style using the existing dark + gold colour scheme.
-**Current focus:** Phase 4 — About & CV Pages
+**Current focus:** Phase 5 — Projects Index
 
 ## Current Position
 
-Phase: 4 of 8 (About & CV Pages)
-Plan: 0 of TBD in current phase
+Phase: 5 of 8 (Projects Index)
+Plan: 0 of ? in current phase
 Status: Ready to plan
-Last activity: 2026-05-15 — Phase 3 complete (Landing Page functional rewrite verified)
+Last activity: 2026-05-15 — Phase 4 complete (About & CV Pages — 3/3 plans, human UAT approved)
 
-Progress: [███░░░░░░░] 37%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 

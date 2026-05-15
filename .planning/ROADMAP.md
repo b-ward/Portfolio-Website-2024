@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Tailwind Setup** - Install Tailwind, define theme tokens, and remove all Bootstrap dependencies (completed 2026-05-15)
 - [x] **Phase 2: Layout & Navigation** - Rewrite the app shell and navigation components with Tailwind (completed 2026-05-15)
 - [x] **Phase 3: Landing Page** - Convert landing page class component to functional and rewrite with Tailwind (completed 2026-05-15)
-- [ ] **Phase 4: About & CV Pages** - Replace react-bootstrap Card/CardGroup with Tailwind equivalents
+- [x] **Phase 4: About & CV Pages** - Replace react-bootstrap Card/CardGroup with Tailwind equivalents (completed 2026-05-15)
 - [ ] **Phase 5: Projects Index** - Rewrite project listing page and shared card component with Tailwind
 - [ ] **Phase 6: Mini-Projects** - Migrate all 7 interactive tools to Tailwind styling
 - [ ] **Phase 7: Remaining Pages** - Migrate Photos, Music, and BusinessBrains pages to Tailwind
@@ -73,9 +73,9 @@ Plans:
   3. The shared `card.jsx` component uses Tailwind classes exclusively and renders correctly wherever it is used
 **Plans**: 3 plans
 Plans:
-- [ ] 04-01-PLAN.md — Rewrite card.jsx as functional Tailwind component; delete card.css
-- [ ] 04-02-PLAN.md — Rewrite about.jsx as functional Tailwind component; delete about.css
-- [ ] 04-03-PLAN.md — Rewrite cv.jsx as functional Tailwind component; delete cv.css
+- [x] 04-01-PLAN.md — Rewrite card.jsx as functional Tailwind component; delete card.css
+- [x] 04-02-PLAN.md — Rewrite about.jsx as functional Tailwind component; delete about.css
+- [x] 04-03-PLAN.md — Rewrite cv.jsx as functional Tailwind component; delete cv.css
 **UI hint**: yes
 
 ### Phase 5: Projects Index
@@ -130,8 +130,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 |-------|----------------|--------|-----------|
 | 1. Tailwind Setup | 2/2 | Complete   | 2026-05-15 |
 | 2. Layout & Navigation | 4/4 | Complete | 2026-05-15 |
-| 3. Landing Page | 0/1 | Not started | - |
-| 4. About & CV Pages | 0/3 | Not started | - |
+| 3. Landing Page | 1/1 | Complete | 2026-05-15 |
+| 4. About & CV Pages | 3/3 | Complete | 2026-05-15 |
 | 5. Projects Index | 0/? | Not started | - |
 | 6. Mini-Projects | 0/? | Not started | - |
 | 7. Remaining Pages | 0/? | Not started | - |
