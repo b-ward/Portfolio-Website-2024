@@ -8,7 +8,7 @@ const CV = () => (
       alt="Brendon Ward"
       className="mt-8 w-[30vw] h-[30vw] max-w-[200px] max-h-[200px] mx-auto block"
     />
-    <h1 className="text-center">CV</h1>
+    <h1 className="text-center mt-6">CV</h1>
     <div className="mx-[8vw] mt-8 pb-8">
       <h3 className="text-accent text-xl font-bold mt-5">Career Summary</h3>
       <SharedCard
