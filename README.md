@@ -14,12 +14,13 @@ Run "netlify deploy --prod" and specify "dist" as the publish directory, this wi
 Set these environment variables for local/dev/prod:
 - `VITE_SPOTIFY_CLIENT_ID` = your Spotify app client ID
 - Keep `VITE_SPOTIFY_CLIENT_ID` in `.env.local`
-- Put `VITE_SPOTIFY_REDIRECT_URI=http://127.0.0.1:5173/Projects/TopArtistsMap` in `.env.development.local` only
-- Do **not** set `VITE_SPOTIFY_REDIRECT_URI` for production builds; production should fall back to the current site origin automatically
-- Spotify app redirect URIs must include both:
-	- `http://127.0.0.1:5173/Projects/TopArtistsMap`
+- Spotify callback URL rules can differ by app/account. In this project, localhost/IP redirect URLs could not be added in Spotify Developer Dashboard.
+- Because of that, do auth testing on deployed URLs (Netlify draft or production), not local dev URLs.
+- Set `VITE_SPOTIFY_REDIRECT_URI` to the deployed callback URL when needed.
+- Spotify app redirect URIs should include deployed callbacks such as:
+	- `https://<netlify-draft-url>/Projects/TopArtistsMap`
 	- `https://bward-portfolio.netlify.app/Projects/TopArtistsMap`
-The feature route is `/Projects/TopArtistsMap`.
+- The feature route is `/Projects/TopArtistsMap`.
 
 # Update dependencies
 Run "npm update -g"

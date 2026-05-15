@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps'
 import { SpotifyAuthProvider, useSpotifyAuth } from './auth/SpotifyAuthProvider'
 import { aggregateArtistsByCountry, resolveArtistsWithCountry } from './services/musicBrainzService'
 import './topArtistsMap.css'
@@ -14,6 +13,13 @@ const TIME_RANGE_OPTIONS = [
 const MAP_COLOR_SCALE = ['#fde68a', '#fbbf24', '#f59e0b', '#f97316', '#ef4444', '#b91c1c']
 const NO_DATA_FILL = '#d1d5db'
 const HOVER_FILL = '#fb7185'
+const MAP_WIDTH = 980
+const MAP_HEIGHT = 420
+const MIN_ZOOM = 1
+const MAX_ZOOM = 8
+const ZOOM_STEP = 1.25
+const LAT_MIN = -60
+const LAT_MAX = 85
 
 function getCountryIsoCode(geo) {
   const isoCode =
@@ -59,14 +65,26 @@ function TopArtistsMapContent() {
   const [selectedCountry, setSelectedCountry] = useState(null)
   const [showInfoModal, setShowInfoModal] = useState(false)
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
-  const [mapPosition, setMapPosition] = useState({ coordinates: [0, 0], zoom: 1 })
   const [unmappedArtists, setUnmappedArtists] = useState([])
+  const [geojsonData, setGeojsonData] = useState(null)
+  const [zoomLevel, setZoomLevel] = useState(1)
+  const [panOffset, setPanOffset] = useState({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
 
   const mapWrapperRef = useRef(null)
-  const tooltipRef = useRef(null)
+  const pinchStartDistanceRef = useRef(null)
+  const pinchStartZoomRef = useRef(1)
+  const dragStartPointRef = useRef(null)
+  const dragStartPanRef = useRef({ x: 0, y: 0 })
+  const suppressClickRef = useRef(false)
 
   useEffect(() => {
     refreshAuthState()
+    // Load GeoJSON data
+    fetch(GEO_URL)
+      .then((res) => res.json())
+      .then((data) => setGeojsonData(data))
+      .catch((err) => console.error('Failed to load GeoJSON:', err))
   }, [refreshAuthState])
 
   const hasData = useMemo(() => Object.keys(countryBuckets).length > 0, [countryBuckets])
@@ -115,34 +133,6 @@ function TopArtistsMapContent() {
     }
   }
 
-  function updateTooltipPosition(event) {
-    const wrapper = mapWrapperRef.current
-    if (!wrapper || !event) {
-      return
-    }
-
-    const bounds = wrapper.getBoundingClientRect()
-    const tooltipWidth = tooltipRef.current?.offsetWidth || 320
-    const tooltipHeight = tooltipRef.current?.offsetHeight || 180
-    const margin = 8
-
-    let x = event.clientX - bounds.left + 12
-    let y = event.clientY - bounds.top + 12
-
-    if (x + tooltipWidth > bounds.width - margin) {
-      x = bounds.width - tooltipWidth - margin
-    }
-
-    if (y + tooltipHeight > bounds.height - margin) {
-      y = bounds.height - tooltipHeight - margin
-    }
-
-    x = Math.max(margin, x)
-    y = Math.max(margin, y)
-
-    setTooltipPosition({ x, y })
-  }
-
   function createCountryDetails(geo, countryCode, bucket) {
     return {
       countryCode,
@@ -152,12 +142,342 @@ function TopArtistsMapContent() {
     }
   }
 
-  function updateMapZoom(nextZoom) {
-    const clampedZoom = Math.max(1, Math.min(8, nextZoom))
-    setMapPosition((previous) => ({
-      ...previous,
-      zoom: clampedZoom,
-    }))
+  function projectToViewport(lon, lat) {
+    const safeLat = Math.max(LAT_MIN, Math.min(LAT_MAX, lat))
+    const x = ((lon + 180) / 360) * MAP_WIDTH
+    const y = ((LAT_MAX - safeLat) / (LAT_MAX - LAT_MIN)) * MAP_HEIGHT
+    return [x, y]
+  }
+
+  function clampZoom(nextZoom) {
+    return Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, nextZoom))
+  }
+
+  function clampPan(nextPan, targetZoom = zoomLevel) {
+    const width = MAP_WIDTH / targetZoom
+    const height = MAP_HEIGHT / targetZoom
+    const maxPanX = (MAP_WIDTH - width) / 2
+    const maxPanY = (MAP_HEIGHT - height) / 2
+
+    return {
+      x: Math.max(-maxPanX, Math.min(maxPanX, nextPan.x)),
+      y: Math.max(-maxPanY, Math.min(maxPanY, nextPan.y)),
+    }
+  }
+
+  function getTouchDistance(touches) {
+    const [a, b] = touches
+    if (!a || !b) {
+      return 0
+    }
+
+    const dx = a.clientX - b.clientX
+    const dy = a.clientY - b.clientY
+    return Math.hypot(dx, dy)
+  }
+
+  function handlePinchStart(event) {
+    if (event.touches.length === 2) {
+      pinchStartDistanceRef.current = getTouchDistance(event.touches)
+      pinchStartZoomRef.current = zoomLevel
+      setIsDragging(false)
+      dragStartPointRef.current = null
+      return
+    }
+
+    if (event.touches.length === 1 && zoomLevel > 1) {
+      const touch = event.touches[0]
+      dragStartPointRef.current = { x: touch.clientX, y: touch.clientY }
+      dragStartPanRef.current = panOffset
+      suppressClickRef.current = false
+      setIsDragging(true)
+    }
+  }
+
+  function handlePinchMove(event) {
+    if (event.touches.length === 2 && pinchStartDistanceRef.current) {
+      if (event.cancelable) {
+        event.preventDefault()
+      }
+      const currentDistance = getTouchDistance(event.touches)
+      if (!currentDistance) {
+        return
+      }
+
+      const scale = currentDistance / pinchStartDistanceRef.current
+      const nextZoom = clampZoom(pinchStartZoomRef.current * scale)
+      setZoomLevel(nextZoom)
+      setPanOffset((previous) => clampPan(previous, nextZoom))
+      return
+    }
+
+    if (event.touches.length !== 1 || !dragStartPointRef.current || zoomLevel <= 1) {
+      return
+    }
+
+    if (event.cancelable) {
+      event.preventDefault()
+    }
+
+    const touch = event.touches[0]
+    const bounds = mapWrapperRef.current?.getBoundingClientRect()
+    if (!bounds) {
+      return
+    }
+
+    const dx = touch.clientX - dragStartPointRef.current.x
+    const dy = touch.clientY - dragStartPointRef.current.y
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+      suppressClickRef.current = true
+    }
+
+    const viewWidth = MAP_WIDTH / zoomLevel
+    const viewHeight = MAP_HEIGHT / zoomLevel
+    const dxSvg = (dx / bounds.width) * viewWidth
+    const dySvg = (dy / bounds.height) * viewHeight
+
+    setPanOffset(
+      clampPan({
+        x: dragStartPanRef.current.x - dxSvg,
+        y: dragStartPanRef.current.y - dySvg,
+      })
+    )
+  }
+
+  function handlePinchEnd() {
+    if (pinchStartDistanceRef.current) {
+      pinchStartDistanceRef.current = null
+    }
+
+    if (dragStartPointRef.current) {
+      dragStartPointRef.current = null
+    }
+
+    setIsDragging(false)
+  }
+
+  function zoomIn() {
+    setZoomLevel((previous) => {
+      const next = clampZoom(previous * ZOOM_STEP)
+      setPanOffset((current) => clampPan(current, next))
+      return next
+    })
+  }
+
+  function zoomOut() {
+    setZoomLevel((previous) => {
+      const next = clampZoom(previous / ZOOM_STEP)
+      setPanOffset((current) => clampPan(current, next))
+      return next
+    })
+  }
+
+  function resetZoom() {
+    setZoomLevel(1)
+    setPanOffset({ x: 0, y: 0 })
+  }
+
+  function getViewBox() {
+    const width = MAP_WIDTH / zoomLevel
+    const height = MAP_HEIGHT / zoomLevel
+    const centerX = (MAP_WIDTH - width) / 2
+    const centerY = (MAP_HEIGHT - height) / 2
+    const x = centerX + panOffset.x
+    const y = centerY + panOffset.y
+    return { x, y, width, height }
+  }
+
+  function handleDragStart(event) {
+    if (zoomLevel <= 1) {
+      return
+    }
+
+    dragStartPointRef.current = { x: event.clientX, y: event.clientY }
+    dragStartPanRef.current = panOffset
+    suppressClickRef.current = false
+    setIsDragging(true)
+  }
+
+  function handleDragMove(event) {
+    if (!isDragging || !dragStartPointRef.current || zoomLevel <= 1) {
+      return
+    }
+
+    const bounds = mapWrapperRef.current?.getBoundingClientRect()
+    if (!bounds) {
+      return
+    }
+
+    const dx = event.clientX - dragStartPointRef.current.x
+    const dy = event.clientY - dragStartPointRef.current.y
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+      suppressClickRef.current = true
+    }
+
+    const viewWidth = MAP_WIDTH / zoomLevel
+    const viewHeight = MAP_HEIGHT / zoomLevel
+    const dxSvg = (dx / bounds.width) * viewWidth
+    const dySvg = (dy / bounds.height) * viewHeight
+
+    setPanOffset(
+      clampPan({
+        x: dragStartPanRef.current.x - dxSvg,
+        y: dragStartPanRef.current.y - dySvg,
+      })
+    )
+  }
+
+  function handleDragEnd() {
+    if (!isDragging) {
+      return
+    }
+
+    dragStartPointRef.current = null
+    setIsDragging(false)
+  }
+
+  function handleWheelZoom(event) {
+    if (event.cancelable) {
+      event.preventDefault()
+    }
+
+    const wrapper = mapWrapperRef.current
+    if (!wrapper) {
+      return
+    }
+
+    const bounds = wrapper.getBoundingClientRect()
+    if (!bounds.width || !bounds.height) {
+      return
+    }
+
+    const relativeX = (event.clientX - bounds.left) / bounds.width
+    const relativeY = (event.clientY - bounds.top) / bounds.height
+    const safeRelativeX = Math.max(0, Math.min(1, relativeX))
+    const safeRelativeY = Math.max(0, Math.min(1, relativeY))
+
+    const currentView = getViewBox()
+    const focalX = currentView.x + safeRelativeX * currentView.width
+    const focalY = currentView.y + safeRelativeY * currentView.height
+
+    const wheelScale = Math.exp(-event.deltaY * 0.002)
+    const nextZoom = clampZoom(zoomLevel * wheelScale)
+
+    if (nextZoom === zoomLevel) {
+      return
+    }
+
+    const nextWidth = MAP_WIDTH / nextZoom
+    const nextHeight = MAP_HEIGHT / nextZoom
+    const nextCenterX = (MAP_WIDTH - nextWidth) / 2
+    const nextCenterY = (MAP_HEIGHT - nextHeight) / 2
+
+    const nextPan = clampPan(
+      {
+        x: focalX - safeRelativeX * nextWidth - nextCenterX,
+        y: focalY - safeRelativeY * nextHeight - nextCenterY,
+      },
+      nextZoom
+    )
+
+    setZoomLevel(nextZoom)
+    setPanOffset(nextPan)
+  }
+
+  function updateTooltipPosition(event) {
+    const wrapper = mapWrapperRef.current
+    if (!wrapper || !event) {
+      return
+    }
+
+    const bounds = wrapper.getBoundingClientRect()
+    const margin = 8
+    let x = event.clientX - bounds.left + 12
+    let y = event.clientY - bounds.top + 12
+
+    x = Math.max(margin, Math.min(bounds.width - 240, x))
+    y = Math.max(margin, Math.min(bounds.height - 120, y))
+
+    setTooltipPosition({ x, y })
+  }
+
+  function coordinatesToPath(coordinates) {
+    if (!Array.isArray(coordinates[0])) {
+      return null
+    }
+    return coordinates
+      .map((coord) => projectToViewport(coord[0], coord[1]))
+      .map((point, i) => `${i === 0 ? 'M' : 'L'} ${point[0]} ${point[1]}`)
+      .join(' ')
+  }
+
+  function renderGeoJSONFeature(feature, index) {
+    const countryCode = getCountryIsoCode(feature)
+    const bucket = countryCode ? countryBuckets[countryCode] : null
+    const count = bucket?.count || 0
+    const fillColor = getFillColor(count, maxCountryCount)
+    
+    const geometry = feature.geometry
+    let pathData = ''
+
+    if (geometry.type === 'Polygon') {
+      pathData = geometry.coordinates
+        .map((ring) => coordinatesToPath(ring) + ' Z')
+        .join(' ')
+    } else if (geometry.type === 'MultiPolygon') {
+      pathData = geometry.coordinates
+        .map((polygon) =>
+          polygon
+            .map((ring) => coordinatesToPath(ring) + ' Z')
+            .join(' ')
+        )
+        .join(' ')
+    }
+
+    if (!pathData) return null
+
+    return (
+      <path
+        key={`${countryCode}-${index}`}
+        d={pathData}
+        fill={fillColor}
+        stroke={bucket ? '#6b7280' : '#9ca3af'}
+        strokeWidth={bucket ? 0.8 : 0.4}
+        opacity={1}
+        fillOpacity={0.7}
+        onMouseEnter={(event) => {
+          if (bucket) {
+            updateTooltipPosition(event)
+            setHoveredCountry(createCountryDetails(feature, countryCode, bucket))
+          }
+        }}
+        onMouseMove={(event) => {
+          if (bucket) {
+            updateTooltipPosition(event)
+          }
+        }}
+        onMouseLeave={() => setHoveredCountry(null)}
+        onClick={(event) => {
+          if (suppressClickRef.current) {
+            suppressClickRef.current = false
+            return
+          }
+
+          event.stopPropagation()
+          if (!bucket) {
+            setSelectedCountry(null)
+            return
+          }
+          const details = createCountryDetails(feature, countryCode, bucket)
+          setSelectedCountry((previous) => (previous?.countryCode === details.countryCode ? null : details))
+        }}
+        style={{
+          cursor: bucket ? 'pointer' : 'default',
+          transition: 'fill 0.2s ease',
+        }}
+        className={hoveredCountry?.countryCode === countryCode ? 'hovered' : ''}
+      />
+    )
   }
 
   return (
@@ -239,119 +559,50 @@ function TopArtistsMapContent() {
         {error && <p className="top-artists-hint">Error: {error}</p>}
 
         <div
-          className="map-wrapper"
+          className={`map-wrapper ${zoomLevel > 1 ? 'is-zoomed' : ''} ${isDragging ? 'is-dragging' : ''}`}
           ref={mapWrapperRef}
           onClick={() => {
+            if (suppressClickRef.current) {
+              suppressClickRef.current = false
+              return
+            }
             setSelectedCountry(null)
-            setHoveredCountry(null)
           }}
+          onTouchStart={handlePinchStart}
+          onTouchMove={handlePinchMove}
+          onTouchEnd={handlePinchEnd}
+          onTouchCancel={handlePinchEnd}
+          onMouseDown={handleDragStart}
+          onMouseMove={handleDragMove}
+          onMouseUp={handleDragEnd}
+          onMouseLeave={handleDragEnd}
+          onWheel={handleWheelZoom}
         >
           <div className="map-zoom-controls">
-            <button type="button" className="map-zoom-button" onClick={() => updateMapZoom(mapPosition.zoom + 0.5)}>
+            <button type="button" className="map-zoom-button" onClick={zoomIn}>
               +
             </button>
-            <button type="button" className="map-zoom-button" onClick={() => updateMapZoom(mapPosition.zoom - 0.5)}>
+            <button type="button" className="map-zoom-button" onClick={zoomOut}>
               −
             </button>
-            <button
-              type="button"
-              className="map-zoom-button reset"
-              onClick={() => setMapPosition({ coordinates: [0, 0], zoom: 1 })}
-            >
+            <button type="button" className="map-zoom-button reset" onClick={resetZoom}>
               Reset
             </button>
           </div>
 
-          <ComposableMap className="top-artists-svg" width={980} height={420} projectionConfig={{ scale: 145 }}>
-            <ZoomableGroup
-              zoom={mapPosition.zoom}
-              center={mapPosition.coordinates}
-              minZoom={1}
-              maxZoom={8}
-              onMoveEnd={(position) => setMapPosition(position)}
-            >
-              <Geographies geography={GEO_URL}>
-                {({ geographies }) =>
-                  geographies.map((geo) => {
-                    const countryCode = getCountryIsoCode(geo)
-                    const bucket = countryCode ? countryBuckets[countryCode] : null
-                    const count = bucket?.count || 0
-                    const fillColor = getFillColor(count, maxCountryCount)
-
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        onMouseEnter={(event) => {
-                          if (!bucket) {
-                            setHoveredCountry(null)
-                            return
-                          }
-
-                          updateTooltipPosition(event)
-                          setHoveredCountry(createCountryDetails(geo, countryCode, bucket))
-                        }}
-                        onMouseMove={(event) => {
-                          if (bucket) {
-                            updateTooltipPosition(event)
-                          }
-                        }}
-                        onMouseLeave={() => setHoveredCountry(null)}
-                        onClick={(event) => {
-                          event.preventDefault()
-                          event.stopPropagation()
-                          setHoveredCountry(null)
-
-                          if (!bucket) {
-                            setSelectedCountry(null)
-                            return
-                          }
-
-                          updateTooltipPosition(event)
-                          const details = createCountryDetails(geo, countryCode, bucket)
-
-                          setSelectedCountry((previous) => {
-                            if (previous?.countryCode === details.countryCode) {
-                              return null
-                            }
-
-                            return details
-                          })
-                        }}
-                        style={{
-                          default: {
-                            fill: fillColor,
-                            stroke: bucket ? '#6b7280' : '#9ca3af',
-                            strokeWidth: bucket ? 0.8 : 0.4,
-                            outline: 'none',
-                          },
-                          hover: {
-                            fill: HOVER_FILL,
-                            stroke: '#475569',
-                            strokeWidth: 1.0,
-                            outline: 'none',
-                          },
-                          pressed: {
-                            fill: HOVER_FILL,
-                            stroke: '#475569',
-                            strokeWidth: 1.0,
-                            outline: 'none',
-                          },
-                        }}
-                      />
-                    )
-                  })
-                }
-              </Geographies>
-            </ZoomableGroup>
-          </ComposableMap>
+          <svg
+            className="top-artists-svg"
+            width="100%"
+            height={MAP_HEIGHT}
+            viewBox={`${getViewBox().x} ${getViewBox().y} ${getViewBox().width} ${getViewBox().height}`}
+            preserveAspectRatio="xMidYMid meet"
+            style={{ background: '#ffffff', display: 'block' }}
+          >
+            {geojsonData?.features?.map((feature, index) => renderGeoJSONFeature(feature, index))}
+          </svg>
 
           {hoveredCountry && (
-            <div
-              ref={tooltipRef}
-              className="country-tooltip floating"
-              style={{ left: `${tooltipPosition.x}px`, top: `${tooltipPosition.y}px` }}
-            >
+            <div className="country-tooltip floating" style={{ left: `${tooltipPosition.x}px`, top: `${tooltipPosition.y}px` }}>
               <h4>
                 {hoveredCountry.countryName} ({hoveredCountry.countryCode}) • {hoveredCountry.count} artist
                 {hoveredCountry.count > 1 ? 's' : ''}
