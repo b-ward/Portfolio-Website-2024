@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-bg">
+      <div className="min-h-screen bg-surface">
         <Toolbar drawerClickHandler={drawerToggleClickHandler} />
         <SideDrawer show={sideDrawerOpen} closeDrawer={backdropClickHandler} />
         {sideDrawerOpen && <Backdrop click={backdropClickHandler} />}
