@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import Landing from './Landing/landingpage';
 import About from './About/about';
 import CV from './CV/cv';
@@ -19,26 +19,24 @@ import TopArtistsMap from './Projects/TopArtistsMap/topArtistsMap';
 
 
 const Main = () => (
-    <BrowserRouter>
-        <Routes>
-            <Route path="/" exact element={<Landing/>}/>
-            <Route path="/About" exact element={<About/>}/>
-            <Route path="/CV" exact element={<CV/>}/>
-            <Route path="/Projects" exact element={<Projects/>}/>
-            <Route path="/Projects/Arbitrage" exact element={<Arbitrage/>}/>
-            <Route path="/Projects/Trio" exact element={<TrioHome/>}/>
-            <Route path="/Projects/TrioGame" exact element={<TrioGame/>}/>
-            <Route path="/Projects/TrainGame" exact element={<TrainGame/>}/>
-            <Route path="/Projects/PaceCalculator" exact element={<PaceCalculator/>}/>
-            <Route path="/Projects/FiveHundred" exact element={<FiveHundred/>}/>
-            <Route path="/Projects/Noise" exact element={<NoisyDetector/>}/>
-            <Route path="/Projects/NBA-Ladder" exact element={<NBALadder/>}/>
-            <Route path="/Projects/TopArtistsMap" exact element={<TopArtistsMap/>}/>
-            <Route path="/Photos" exact element={<Photos/>}/>
-            <Route path="/Music" exact element={<Music/>}/>
-            <Route path="/BusinessBrains" exact element={<BusinessBrains/>}/>
-        </Routes>
-    </BrowserRouter>
+    <Routes>
+        <Route path="/" element={<Landing/>}/>
+        <Route path="/About" element={<About/>}/>
+        <Route path="/CV" element={<CV/>}/>
+        <Route path="/Projects" element={<Projects/>}/>
+        <Route path="/Projects/Arbitrage" element={<Arbitrage/>}/>
+        <Route path="/Projects/Trio" element={<TrioHome/>}/>
+        <Route path="/Projects/TrioGame" element={<TrioGame/>}/>
+        <Route path="/Projects/TrainGame" element={<TrainGame/>}/>
+        <Route path="/Projects/PaceCalculator" element={<PaceCalculator/>}/>
+        <Route path="/Projects/FiveHundred" element={<FiveHundred/>}/>
+        <Route path="/Projects/Noise" element={<NoisyDetector/>}/>
+        <Route path="/Projects/NBA-Ladder" element={<NBALadder/>}/>
+        <Route path="/Projects/TopArtistsMap" element={<TopArtistsMap/>}/>
+        <Route path="/Photos" element={<Photos/>}/>
+        <Route path="/Music" element={<Music/>}/>
+        <Route path="/BusinessBrains" element={<BusinessBrains/>}/>
+    </Routes>
 )
 
 export default Main;
