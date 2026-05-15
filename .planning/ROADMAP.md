@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Layout & Navigation** - Rewrite the app shell and navigation components with Tailwind (completed 2026-05-15)
 - [x] **Phase 3: Landing Page** - Convert landing page class component to functional and rewrite with Tailwind (completed 2026-05-15)
 - [x] **Phase 4: About & CV Pages** - Replace react-bootstrap Card/CardGroup with Tailwind equivalents (completed 2026-05-15)
-- [ ] **Phase 5: Projects Index** - Rewrite project listing page and shared card component with Tailwind
+- [x] **Phase 5: Projects Index** - Rewrite project listing page and shared card component with Tailwind (completed 2026-05-15)
 - [ ] **Phase 6: Mini-Projects** - Migrate all 7 interactive tools to Tailwind styling
 - [ ] **Phase 7: Remaining Pages** - Migrate Photos, Music, and BusinessBrains pages to Tailwind
 - [ ] **Phase 8: TopArtistsMap / Spotify** - Rewrite Spotify integration UI shell with Tailwind, preserving all auth/API logic
@@ -134,7 +134,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 2. Layout & Navigation | 4/4 | Complete | 2026-05-15 |
 | 3. Landing Page | 1/1 | Complete | 2026-05-15 |
 | 4. About & CV Pages | 3/3 | Complete | 2026-05-15 |
-| 5. Projects Index | 0/1 | Not started | - |
+| 5. Projects Index | 1/1 | Complete | 2026-05-15 |
 | 6. Mini-Projects | 0/? | Not started | - |
 | 7. Remaining Pages | 0/? | Not started | - |
 | 8. TopArtistsMap / Spotify | 0/? | Not started | - |

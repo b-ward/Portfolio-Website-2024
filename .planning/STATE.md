@@ -4,11 +4,11 @@ milestone: v1.0
 milestone_name: milestone
 status: ready_to_execute
 stopped_at: ""
-last_updated: "2026-05-15T20:00:00.000Z"
-last_activity: 2026-05-15 — Phase 5 executed (Projects Index — 1/1 plans complete)
+last_updated: "2026-05-15T20:30:00.000Z"
+last_activity: 2026-05-15 — Phase 5 complete (Projects Index — verified and approved)
 progress:
   total_phases: 8
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 10
   completed_plans: 10
   percent: 100
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-15)
 
 **Core value:** Every page and interactive tool works correctly and looks polished, with a consistent visual style using the existing dark + gold colour scheme.
-**Current focus:** Phase 5 — Projects Index
+**Current focus:** Phase 6 — Mini-Projects
 
 ## Current Position
 
-Phase: 5 of 8 (Projects Index)
-Plan: 0 of 1 in current phase
-Status: Ready to execute
-Last activity: 2026-05-15 — Phase 5 planned (Projects Index — 1/1 plans, verification passed)
+Phase: 6 of 8 (Mini-Projects)
+Plan: 0 of ? in current phase
+Status: Ready to plan
+Last activity: 2026-05-15 — Phase 5 complete (Projects Index — verified and approved)
 
-Progress: [█████░░░░░] 50%
+Progress: [██████░░░░] 62%
 
 ## Performance Metrics
 
