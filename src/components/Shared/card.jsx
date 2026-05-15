@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SharedCard = ({ cardTitle, cardBody, imageSrc }) => (
-  <div className="bg-surface rounded-lg mb-8">
+  <div className="bg-white text-black rounded-lg mb-8">
     <div className="flex flex-row">
       {imageSrc && (
         <img
