@@ -17,7 +17,7 @@ const PROJECTS = [
 const Projects = () => (
   <div className="py-8 px-4 sm:px-8 lg:px-20">
     <h1 className="text-accent text-center mb-6">Personal Projects</h1>
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {PROJECTS.map((card) => (
         <ProjectCard key={card.route} {...card} />
       ))}
