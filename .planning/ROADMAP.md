@@ -99,7 +99,17 @@ Plans:
   2. The Trio game renders and all card interactions, scoring, and win/lose states function correctly end-to-end
   3. The Train game, Pace calculator, 500 card game, and Noisy detector each render and function correctly after migration
   4. The NBA Ladder renders standings data fetched from the Netlify serverless function
-**Plans**: TBD
+**Plans**: 9 plans
+Plans:
+- [ ] 06-01-PLAN.md — Create shared Modal.jsx component (Wave 1 foundation)
+- [ ] 06-02-PLAN.md — TrainGame: class→functional, Bootstrap→shared Modal, delete trainGame.css
+- [ ] 06-03-PLAN.md — TrioHome: class→functional, Bootstrap→shared Modal, delete trioHome.css
+- [ ] 06-04-PLAN.md — NoisyDetector: class→functional stub, delete dead code, delete noisyDetector.css
+- [ ] 06-05-PLAN.md — Arbitrage: replace all arb-* CSS classes with Tailwind inline, delete arbitrage.css
+- [ ] 06-06-PLAN.md — NBALadder: replace nba-* CSS classes with dark Tailwind, delete nbaLadder.css
+- [ ] 06-07-PLAN.md — PaceCalculator: replace inline styles object with Tailwind classes
+- [ ] 06-08-PLAN.md — 500 Scorer: delete StyleTag, delete COLORS, replace inline styles with Tailwind
+- [ ] 06-09-PLAN.md — TrioGame: Bootstrap removal only (stay class component), Carousel→step indicator, trim trioGame.css
 **UI hint**: yes
 
 ### Phase 7: Remaining Pages
@@ -135,6 +145,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 3. Landing Page | 1/1 | Complete | 2026-05-15 |
 | 4. About & CV Pages | 3/3 | Complete | 2026-05-15 |
 | 5. Projects Index | 1/1 | Complete | 2026-05-15 |
-| 6. Mini-Projects | 0/? | Not started | - |
+| 6. Mini-Projects | 0/9 | Not started | - |
 | 7. Remaining Pages | 0/? | Not started | - |
 | 8. TopArtistsMap / Spotify | 0/? | Not started | - |
