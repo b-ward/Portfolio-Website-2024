@@ -28,7 +28,7 @@ function ArbitrageCard({ bet }) {
           <span className="block h-full bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full" style={{ width: `${bet.margin}%` }} />
         </span>
       </div>
-      <table className="w-full border-collapse text-sm">
+      <div className="overflow-x-auto"><table className="w-full border-collapse text-sm">
         <thead>
           <tr>
             <th className="text-slate-500 font-semibold text-left px-2 py-1.5 border-b border-white/10 text-xs uppercase tracking-wider">Outcome</th>
@@ -47,7 +47,7 @@ function ArbitrageCard({ bet }) {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table></div>
     </div>
   )
 }
@@ -124,7 +124,7 @@ export default function Arbitrage() {
   return (
     <div className="min-h-screen p-5 text-white sm:p-3">
       {/* Header */}
-      <div className="flex items-center justify-between gap-4 mb-5 sm:flex-wrap">
+      <div className="flex flex-col items-center gap-2 mb-5 sm:flex-row sm:justify-between">
         <div className="flex-none">
           <button className="bg-transparent border border-accent/50 text-accent rounded-lg px-3.5 py-1.5 text-sm font-semibold cursor-pointer hover:bg-accent/10 hover:border-accent" onClick={() => setMadeOpen(true)}>Creation</button>
         </div>

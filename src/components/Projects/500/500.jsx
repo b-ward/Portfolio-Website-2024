@@ -366,7 +366,7 @@ function TeamCard({ team, onNameChange, onAdjust, onSelectBidder, active }) {
 
 function ScoringTable() {
   return (
-    <div className="text-black">
+    <div className="text-black overflow-x-auto">
       <table className="w-full border-collapse border-2 border-accent rounded-xl overflow-hidden">
         <thead>
           <tr>

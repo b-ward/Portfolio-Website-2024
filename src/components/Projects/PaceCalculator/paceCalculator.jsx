@@ -111,14 +111,14 @@ export default function PaceCalcualtor() {
   const ssRef = React.useRef(null);
 
   return (
-    <div className="grid place-items-center p-8 sm:p-4 w-full">
+    <div className="grid place-items-center p-2 sm:p-8 w-full">
       <div className="bg-white border border-gray-200 rounded-2xl max-w-[760px] w-full shadow-lg text-gray-900">
-        <header className="px-5 pt-5 pb-3">
+        <header className="px-3 sm:px-5 pt-5 pb-3">
           <h2 className="m-0 text-2xl font-semibold text-gray-900">Runner Pace</h2>
           <p className="mt-1.5 text-slate-500 text-sm">Enter distance and time. Pace shown first.</p>
         </header>
 
-        <form onSubmit={onCalculate} className="px-5 pb-5 grid gap-4">
+        <form onSubmit={onCalculate} className="px-3 sm:px-5 pb-5 grid gap-4">
           <div className="grid gap-2">
             <label htmlFor="distance" className="font-semibold text-sm text-gray-700">Distance</label>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -196,7 +196,7 @@ export default function PaceCalcualtor() {
 
         <div className="h-px bg-gray-200 my-1" />
 
-        <section className="px-5 pb-5 pt-3 grid gap-2" aria-live="polite" aria-atomic="true">
+        <section className="px-3 sm:px-5 pb-5 pt-3 grid gap-2" aria-live="polite" aria-atomic="true">
           {error ? <div className="text-red-600 font-semibold text-sm">{error}</div> : null}
           <div className="text-5xl font-extrabold text-gray-900">
             {calc.pace}<sup className="text-[55%] text-slate-500 font-bold ml-1">{calc.paceUnit}</sup>

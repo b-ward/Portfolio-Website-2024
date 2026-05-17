@@ -35,22 +35,22 @@ const TrainGame = () => {
 
   return (
     <div className="text-center text-accent min-h-screen">
-      <div className="flex items-center justify-between px-4 py-3">
-        <button
-          onClick={() => setMadeModalShow(true)}
-          className="bg-accent text-black font-semibold px-4 py-2 rounded"
-        >
-          Creation
-        </button>
-        <div className="pb-2 w-3/5 mx-auto">
-          <h1>Train Game</h1>
+      <div className="px-4 py-3">
+        <div className="pb-2"><h1>Train Game</h1></div>
+        <div className="flex justify-center gap-3">
+          <button
+            onClick={() => setMadeModalShow(true)}
+            className="bg-accent text-black font-semibold px-4 py-2 rounded"
+          >
+            Creation
+          </button>
+          <button
+            onClick={() => setHelpModalShow(true)}
+            className="bg-accent text-black font-semibold px-4 py-2 rounded"
+          >
+            Help
+          </button>
         </div>
-        <button
-          onClick={() => setHelpModalShow(true)}
-          className="bg-accent text-black font-semibold px-4 py-2 rounded"
-        >
-          Help
-        </button>
       </div>
 
       <div className="flex items-center justify-center gap-2">
