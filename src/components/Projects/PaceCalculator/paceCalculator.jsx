@@ -11,17 +11,6 @@ export default function PaceCalcualtor() {
   const [ss, setSs] = useState("");
   const [error, setError] = useState("");
 
-  // --- NEW: simple viewport flag for small devices
-  const [isSmall, setIsSmall] = useState(false);
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(max-width: 480px)");
-    const apply = () => setIsSmall(mq.matches);
-    apply();
-    mq.addEventListener?.("change", apply);
-    return () => mq.removeEventListener?.("change", apply);
-  }, []);
-
   useEffect(() => {
     if (typeof window === "undefined") return;
     const q = new URLSearchParams(window.location.search);
@@ -121,30 +110,18 @@ export default function PaceCalcualtor() {
   const mmRef = React.useRef(null);
   const ssRef = React.useRef(null);
 
-  // computed responsive tweaks
-  const inlineRowStyle = {
-    ...styles.inlineRow,
-    ...(isSmall ? { gridTemplateColumns: "1fr" } : { gridTemplateColumns: "1.1fr 0.9fr" })
-  };
-  const actionsStyle = {
-    ...styles.actions,
-    ...(isSmall ? { flexDirection: "column", alignItems: "stretch" } : {})
-  };
-  const primaryBtnStyle = { ...styles.primaryBtn, ...(isSmall ? { width: "100%" } : {}) };
-  const secondaryBtnStyle = { ...styles.secondaryBtn, ...(isSmall ? { width: "100%" } : {}) };
-
   return (
-    <div style={styles.wrap}>
-      <div style={styles.card}>
-        <header style={styles.header}>
-          <h2 style={styles.h2}>Runner Pace</h2>
-          <p style={styles.muted}>Enter distance and time. Pace shown first.</p>
+    <div className="grid place-items-center p-8 sm:p-4 w-full">
+      <div className="bg-white border border-gray-200 rounded-2xl max-w-[760px] w-full shadow-lg text-gray-900">
+        <header className="px-5 pt-5 pb-3">
+          <h2 className="m-0 text-2xl font-semibold text-gray-900">Runner Pace</h2>
+          <p className="mt-1.5 text-slate-500 text-sm">Enter distance and time. Pace shown first.</p>
         </header>
 
-        <form onSubmit={onCalculate} style={styles.content}>
-          <div style={styles.row}>
-            <label htmlFor="distance" style={styles.label}>Distance</label>
-            <div style={inlineRowStyle}>
+        <form onSubmit={onCalculate} className="px-5 pb-5 grid gap-4">
+          <div className="grid gap-2">
+            <label htmlFor="distance" className="font-semibold text-sm text-gray-700">Distance</label>
+            <div className="grid gap-4 sm:grid-cols-2">
               <input
                 id="distance"
                 type="number"
@@ -154,11 +131,11 @@ export default function PaceCalcualtor() {
                 placeholder="e.g., 10"
                 value={distance}
                 onChange={(e) => setDistance(e.target.value)}
-                style={styles.input}
+                className="bg-white text-gray-900 border border-gray-200 rounded-xl p-3.5 text-base outline-none w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               />
               <div>
-                <span style={styles.mutedSmall}>Units</span>
-                <div style={styles.chips}>
+                <span className="text-slate-500 font-medium text-sm">Units</span>
+                <div className="flex gap-2 flex-wrap items-center mt-1">
                   <Chip checked={unit === "km"} onChange={() => setUnit("km")}>km</Chip>
                   <Chip checked={unit === "mi"} onChange={() => setUnit("mi")}>miles</Chip>
                 </div>
@@ -166,9 +143,9 @@ export default function PaceCalcualtor() {
             </div>
           </div>
 
-          <div style={styles.row}>
-            <label style={styles.label}>Time</label>
-            <div style={styles.timeInputs}>
+          <div className="grid gap-2">
+            <label className="font-semibold text-sm text-gray-700">Time</label>
+            <div className="flex gap-2 w-full">
               <input
                 aria-label="Hours"
                 type="number"
@@ -176,7 +153,7 @@ export default function PaceCalcualtor() {
                 placeholder="hh"
                 value={hh}
                 onChange={autoAdvance(setHh, 2, mmRef)}
-                style={{ ...styles.input, ...styles.timeField }}
+                className="bg-white text-gray-900 border border-gray-200 rounded-xl p-3.5 text-base outline-none flex-1 min-w-0 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               />
               <input
                 ref={mmRef}
@@ -187,7 +164,7 @@ export default function PaceCalcualtor() {
                 placeholder="mm"
                 value={mm}
                 onChange={autoAdvance(setMm, 2, ssRef)}
-                style={{ ...styles.input, ...styles.timeField }}
+                className="bg-white text-gray-900 border border-gray-200 rounded-xl p-3.5 text-base outline-none flex-1 min-w-0 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               />
               <input
                 ref={ssRef}
@@ -198,33 +175,33 @@ export default function PaceCalcualtor() {
                 placeholder="ss"
                 value={ss}
                 onChange={(e) => setSs(e.target.value.replace(/\D+/g, ""))}
-                style={{ ...styles.input, ...styles.timeField }}
+                className="bg-white text-gray-900 border border-gray-200 rounded-xl p-3.5 text-base outline-none flex-1 min-w-0 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               />
             </div>
           </div>
 
-          <div style={styles.row}>
-            <span style={styles.mutedSmall}>Show pace as</span>
-            <div style={styles.chips}>
+          <div className="grid gap-2">
+            <span className="text-slate-500 font-medium text-sm">Show pace as</span>
+            <div className="flex gap-2 flex-wrap items-center">
               <Chip checked={pacePref === "per_km"} onChange={() => setPacePref("per_km")}>min/km</Chip>
               <Chip checked={pacePref === "per_mile"} onChange={() => setPacePref("per_mile")}>min/mile</Chip>
             </div>
           </div>
 
-          <div style={actionsStyle}>
-            <button type="submit" style={primaryBtnStyle}>Calculate</button>
-            <button type="button" style={secondaryBtnStyle} onClick={onReset}>Reset</button>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <button type="submit" className="bg-blue-600 text-white border-0 rounded-xl p-3.5 text-base font-bold cursor-pointer w-full hover:bg-blue-700">Calculate</button>
+            <button type="button" className="bg-transparent border border-gray-200 rounded-xl p-3.5 text-base font-bold cursor-pointer w-full text-gray-700 hover:border-gray-400" onClick={onReset}>Reset</button>
           </div>
         </form>
 
-        <div style={styles.divider} />
+        <div className="h-px bg-gray-200 my-1" />
 
-        <section style={styles.result} aria-live="polite" aria-atomic="true">
-          {error ? <div style={styles.error}>{error}</div> : null}
-          <div style={styles.pace}>
-            {calc.pace}<sup style={styles.paceSup}>{calc.paceUnit}</sup>
+        <section className="px-5 pb-5 pt-3 grid gap-2" aria-live="polite" aria-atomic="true">
+          {error ? <div className="text-red-600 font-semibold text-sm">{error}</div> : null}
+          <div className="text-5xl font-extrabold text-gray-900">
+            {calc.pace}<sup className="text-[55%] text-slate-500 font-bold ml-1">{calc.paceUnit}</sup>
           </div>
-          <small style={styles.detail}>{calc.detail}</small>
+          <small className="text-slate-500 text-sm">{calc.detail}</small>
         </section>
       </div>
     </div>
@@ -234,103 +211,10 @@ export default function PaceCalcualtor() {
 function Chip({ checked, onChange, children }) {
   return (
     <label
-      style={{
-        ...styles.chip,
-        ...(checked ? styles.chipChecked : null),
-      }}
+      className={`inline-flex items-center gap-2 bg-white border px-4 py-2 rounded-full cursor-pointer select-none text-gray-700 text-sm ${checked ? 'border-blue-600 shadow-[0_0_0_4px_rgba(37,99,235,0.2)]' : 'border-gray-200'}`}
     >
       <input type="radio" checked={checked} onChange={onChange} style={{ display: "none" }} />
       {children}
     </label>
   );
 }
-
-const styles = {
-  // Add safe-area padding so nothing gets obscured by mobile browser chrome
-  wrap: {
-    display: "grid",
-    placeItems: "center",
-    padding: "2rem 1rem calc(2rem + env(safe-area-inset-bottom))",
-    background: "var(--bg, #333134)",
-    color: "var(--text, #0f172a)",
-    width: "100%",
-  },
-  card: {
-    background: "var(--panel, #fff)",
-    border: "1px solid var(--line, #e5e7eb)",
-    borderRadius: 16,
-    maxWidth: 760,
-    width: "100%",
-    boxShadow: "0 10px 24px rgba(0,0,0,.05)",
-  },
-  header: { padding: "1.25rem 1.25rem .75rem" },
-  h2: { margin: 0, fontSize: "clamp(1.5rem, 1.1rem + 1.2vw, 2rem)" },
-  muted: { margin: ".35rem 0 0", color: "var(--muted, #64748b)" },
-  content: { padding: "1rem 1.25rem", display: "grid", gap: "1rem" },
-  row: { display: "grid", gap: ".5rem" },
-
-  // will be overridden responsively in component via inlineRowStyle
-  inlineRow: { display: "grid", gap: ".75rem" },
-
-  label: { fontWeight: 600, fontSize: ".95rem" },
-  mutedSmall: { color: "var(--muted, #64748b)", fontWeight: 500 },
-
-  input: {
-    background: "var(--panel, #fff)",
-    color: "inherit",
-    border: "1px solid var(--line, #e5e7eb)",
-    borderRadius: 10,
-    padding: ".85rem 1rem",
-    fontSize: "1rem",
-    outline: "none",
-    width: "100%",
-  },
-
-  // NEW: make time inputs share the row evenly and never overflow
-  timeInputs: { display: "flex", gap: ".5rem", width: "100%" },
-  timeField: { flex: "1 1 0", minWidth: 0 },
-
-  chips: { display: "flex", gap: ".5rem", flexWrap: "wrap", alignItems: "center" },
-  chip: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: ".5rem",
-    background: "var(--panel, #fff)",
-    border: "1px solid var(--line, #e5e7eb)",
-    padding: ".55rem .9rem", // a bit larger for touch
-    borderRadius: 999,
-    cursor: "pointer",
-    userSelect: "none",
-  },
-  chipChecked: { borderColor: "var(--accent, #2563eb)", boxShadow: "0 0 0 4px rgba(37,99,235,.2)" },
-
-  // buttons stack on small via actionsStyle computed above
-  actions: { display: "flex", gap: ".75rem", flexWrap: "wrap", alignItems: "center" },
-  primaryBtn: {
-    background: "var(--accent, #2563eb)",
-    color: "#fff",
-    border: 0,
-    borderRadius: 10,
-    padding: ".95rem 1.1rem",
-    fontSize: "1rem",
-    fontWeight: 700,
-    cursor: "pointer",
-  },
-  secondaryBtn: {
-    background: "transparent",
-    color: "inherit",
-    border: "1px solid var(--line, #e5e7eb)",
-    borderRadius: 10,
-    padding: ".95rem 1.1rem",
-    fontSize: "1rem",
-    fontWeight: 700,
-    cursor: "pointer",
-  },
-
-  divider: { height: 1, background: "var(--line, #e5e7eb)", margin: ".25rem 0" },
-  result: { padding: ".75rem 1.25rem 1.25rem", display: "grid", gap: ".5rem" },
-  pace: { fontSize: "clamp(2.1rem, 1.6rem + 2vw, 3rem)", fontWeight: 800 },
-  paceSup: { fontSize: "55%", color: "var(--muted, #64748b)", fontWeight: 700, marginLeft: ".2rem" },
-  detail: { color: "var(--muted, #64748b)" },
-  error: { color: "var(--danger, #dc2626)", fontWeight: 600 },
-};
