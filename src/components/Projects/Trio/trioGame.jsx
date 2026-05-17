@@ -1,78 +1,68 @@
 import React, {Component} from 'react';
 import './trioGame.css';
-import {Modal, Button, Carousel} from 'react-bootstrap';
+import Modal from '../../Shared/Modal';
 
-function HelpModal(props) {
-  var instructionImages = []
-  for (var i = 1; i < 14; i++) {
-    instructionImages.push(<Carousel.Item><img key={i} className="d-block w-100" src={`../Trio/Instruction_images/Trio - User Manual - ${i}.png`} alt="Instruction" /></Carousel.Item>);
-  }
-
+function HelpModal({ show, onHide }) {
+  const [slide, setSlide] = React.useState(0);
+  const total = 13;
+  if (!show) return null;
   return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-          Help
-          </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <p>
-          This program is based off the popular card game Trio. A video explanation of the game can be found below:
-        </p>
-        <div className="video-container">
-          <iframe className="instruction-video" title="Trio rules" width="300" height="200" src="https://www.youtube.com/embed/OvWgewf9uEA" frameborder="0" allow="fullscreen;"></iframe>
+    <Modal title="Help" onClose={onHide}>
+      <div className="aspect-video mb-4">
+        <iframe
+          className="w-full h-full rounded"
+          src="https://www.youtube.com/embed/OvWgewf9uEA"
+          title="Trio instructions"
+          frameBorder="0"
+          allowFullScreen
+        />
+      </div>
+      <div className="flex flex-col items-center gap-4">
+        <img
+          src={`../Trio/Instruction_images/Trio - User Manual - ${slide + 1}.png`}
+          alt={`Instruction ${slide + 1} of ${total}`}
+          className="w-full"
+        />
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setSlide(s => Math.max(0, s - 1))}
+            disabled={slide === 0}
+            className="px-3 py-1 bg-surface border border-white/20 rounded disabled:opacity-40"
+          >←</button>
+          <span className="text-sm text-slate-400">{slide + 1} / {total}</span>
+          <button
+            onClick={() => setSlide(s => Math.min(total - 1, s + 1))}
+            disabled={slide === total - 1}
+            className="px-3 py-1 bg-surface border border-white/20 rounded disabled:opacity-40"
+          >→</button>
         </div>
-        <p>
-          Instruction images can also be found below:
-        </p>
-        <div className="images-container">
-          <Carousel> 
-              {instructionImages}
-          </Carousel>
-        </div>
-      </Modal.Body>
+      </div>
     </Modal>
   );
 }
 
 /*Needs to be updated*/
-function MadeModal(props) {
+function MadeModal({ show, onHide }) {
+  if (!show) return null;
   return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-          How this was made
-          </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <p>
-          During the COVID-19 lockdown, I didn't have much to do in the evenings after work so I was wondering if 
-          there was any way of making some money from my laptop at home. I stumbled across this YouTube video that explained the arbitrage process: 
-          <a href="https://www.youtube.com/watch?v=TGinzvSDayU&ab_channel=NewMoney">https://www.youtube.com/watch?v=TGinzvSDayU&ab_channel=NewMoney</a>
-          I found that you can actually make a little bit of money off this method, however, it could be quite time consuming as you have to score multiple betting sites in order to find odds that produce a profitable outcome.
-          Having a developer background, I thought that there should be an easier way to find profitable arbitrage bets so I got to work on writing some python code that would
-          leverage an API called The Odds API (<a href="https://the-odds-api.com/">https://the-odds-api.com/</a>) which returns betting odds from around 10 betting sites for over 50 different sports.
-        </p>
-        <p>
-          Arbitrage betting isn't breaking any laws, however, it is frowned upon by betting sites and they can ban you from their sites if they suspect you
-          are guaranteed profits. So be cautious on how much money you place on bets (the closer to a dollar value, the better eg. $7).
-        </p>
-        <p>
-          Once I set up this website, I wanted to add my arbitrage betting program so that it was publicly accessible and meant that I didn't have to run a Python script from my laptop.
-          So I got to work at converting the code from Python to Javascript, which was a lot more tedious than I initially though it would be. Eventually, I got everything working and, due to API Keys only allowing 50 requests per month, I've also implemented an API Key rotation feature
-          so that users can make more requests. 
-        </p>
-      </Modal.Body>
+    <Modal title="How this was made" onClose={onHide}>
+      <p>
+        During the COVID-19 lockdown, I didn't have much to do in the evenings after work so I was wondering if
+        there was any way of making some money from my laptop at home. I stumbled across this YouTube video that explained the arbitrage process:
+        <a href="https://www.youtube.com/watch?v=TGinzvSDayU&ab_channel=NewMoney">https://www.youtube.com/watch?v=TGinzvSDayU&ab_channel=NewMoney</a>
+        I found that you can actually make a little bit of money off this method, however, it could be quite time consuming as you have to score multiple betting sites in order to find odds that produce a profitable outcome.
+        Having a developer background, I thought that there should be an easier way to find profitable arbitrage bets so I got to work on writing some python code that would
+        leverage an API called The Odds API (<a href="https://the-odds-api.com/">https://the-odds-api.com/</a>) which returns betting odds from around 10 betting sites for over 50 different sports.
+      </p>
+      <p>
+        Arbitrage betting isn't breaking any laws, however, it is frowned upon by betting sites and they can ban you from their sites if they suspect you
+        are guaranteed profits. So be cautious on how much money you place on bets (the closer to a dollar value, the better eg. $7).
+      </p>
+      <p>
+        Once I set up this website, I wanted to add my arbitrage betting program so that it was publicly accessible and meant that I didn't have to run a Python script from my laptop.
+        So I got to work at converting the code from Python to Javascript, which was a lot more tedious than I initially though it would be. Eventually, I got everything working and, due to API Keys only allowing 50 requests per month, I've also implemented an API Key rotation feature
+        so that users can make more requests.
+      </p>
     </Modal>
   );
 }
@@ -989,20 +979,20 @@ class TrioGame extends Component {
 
     render() {
         return(
-            <div className="trio-wrapper">
+            <div className="text-center min-h-screen">
               <div className="row" style={{width: '100%', margin: 'auto'}}>
                     <div style={{position: "absolute", left: "40%"}}>
-                        <Button className="made-button" variant="primary" onClick={() => this.setState({madeModalShow: true})}>
+                        <button className="bg-accent text-black font-semibold px-4 py-2 rounded cursor-pointer" onClick={() => this.setState({madeModalShow: true})}>
                             Creation
-                        </Button>
+                        </button>
                     </div>
                     <div style={{width: '100%'}}>
-                        <div className="trio-title"><h1>Trio</h1></div>
+                        <div className="text-accent text-2xl font-semibold py-3"><h1>Trio</h1></div>
                     </div>
                     <div style={{position: "absolute", right: "40%"}}>
-                        <Button className="help-button" variant="primary" onClick={() => this.setState({helpModalShow: true})}>
+                        <button className="bg-accent text-black font-semibold px-4 py-2 rounded cursor-pointer" onClick={() => this.setState({helpModalShow: true})}>
                             Help
-                        </Button>
+                        </button>
                     </div>
                 </div>
                 <div id = 'play'>
