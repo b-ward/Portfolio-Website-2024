@@ -1,20 +1,6 @@
 import React, { useState } from 'react'
-import './arbitrage.css'
+import Modal from '../../Shared/Modal'
 import getArbitrageBets from './arbitrageCalcutations'
-
-function InfoModal({ title, children, onClose }) {
-  return (
-    <div className="arb-modal-backdrop" onClick={onClose}>
-      <div className="arb-modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
-        <div className="arb-modal-header">
-          <h3>{title}</h3>
-          <button className="arb-modal-close" onClick={onClose} aria-label="Close">×</button>
-        </div>
-        <div className="arb-modal-body">{children}</div>
-      </div>
-    </div>
-  )
-}
 
 function ArbitrageCard({ bet }) {
   // v4 API returns actual outcome names (team names / 'Draw')
@@ -23,41 +9,41 @@ function ArbitrageCard({ bet }) {
     : bet.outcomeCount === 3 ? ['Home', 'Away', 'Draw'] : ['Home', 'Away']
 
   return (
-    <div className="arb-card arb-card--arb">
-      <div className="arb-card-header">
-        <span className="arb-badge arb-badge--profit">
+    <div className="border border-green-400/25 rounded-xl p-4">
+      <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+        <span className="rounded-full px-2.5 py-0.5 text-xs font-bold bg-green-400/15 text-green-400 border border-green-400/30">
           +${bet.winnings.toFixed(2)} guaranteed
         </span>
-        <span className="arb-card-time">
+        <span className="text-slate-500 text-xs">
           {bet.gameTime.toLocaleString('en-AU', {
             dateStyle: 'medium',
             timeStyle: 'short',
           })}
         </span>
       </div>
-      <h4 className="arb-card-title">{bet.teams.join(' vs ')}</h4>
-      <div className="arb-card-margin">
+      <h4 className="m-0 mb-3 text-white text-base">{bet.teams.join(' vs ')}</h4>
+      <div className="flex items-center gap-2 mb-3 text-slate-400 text-sm">
         Margin: <strong>{bet.margin.toFixed(2)}%</strong>
-        <span className="arb-margin-bar">
-          <span className="arb-margin-fill" style={{ width: `${bet.margin}%` }} />
+        <span className="flex-1 h-1.5 rounded-full bg-white/10 overflow-hidden">
+          <span className="block h-full bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full" style={{ width: `${bet.margin}%` }} />
         </span>
       </div>
-      <table className="arb-table">
+      <table className="w-full border-collapse text-sm">
         <thead>
           <tr>
-            <th>Outcome</th>
-            <th>Best Odds</th>
-            <th>Site</th>
-            <th>Bet ($100 stake)</th>
+            <th className="text-slate-500 font-semibold text-left px-2 py-1.5 border-b border-white/10 text-xs uppercase tracking-wider">Outcome</th>
+            <th className="text-slate-500 font-semibold text-left px-2 py-1.5 border-b border-white/10 text-xs uppercase tracking-wider">Best Odds</th>
+            <th className="text-slate-500 font-semibold text-left px-2 py-1.5 border-b border-white/10 text-xs uppercase tracking-wider">Site</th>
+            <th className="text-slate-500 font-semibold text-left px-2 py-1.5 border-b border-white/10 text-xs uppercase tracking-wider">Bet ($100 stake)</th>
           </tr>
         </thead>
         <tbody>
           {bet.odds.map((odd, i) => (
             <tr key={i}>
-              <td>{outcomeLabels[i] || `Outcome ${i + 1}`}</td>
-              <td className="arb-odds">{odd}</td>
-              <td>{bet.sites[i] || '—'}</td>
-              <td className="arb-bet">${bet.bets[i].toFixed(2)}</td>
+              <td className="px-2 py-1.5 border-b border-white/5 text-slate-200 last:border-b-0 sm:px-1.5 sm:py-1.5">{outcomeLabels[i] || `Outcome ${i + 1}`}</td>
+              <td className="px-2 py-1.5 border-b border-white/5 text-slate-200 last:border-b-0 sm:px-1.5 sm:py-1.5 text-accent font-bold">{odd}</td>
+              <td className="px-2 py-1.5 border-b border-white/5 text-slate-200 last:border-b-0 sm:px-1.5 sm:py-1.5">{bet.sites[i] || '—'}</td>
+              <td className="px-2 py-1.5 border-b border-white/5 text-slate-200 last:border-b-0 sm:px-1.5 sm:py-1.5 text-green-400 font-semibold">${bet.bets[i].toFixed(2)}</td>
             </tr>
           ))}
         </tbody>
@@ -68,37 +54,37 @@ function ArbitrageCard({ bet }) {
 
 function LayBetCard({ bet }) {
   return (
-    <div className="arb-card arb-card--lay">
-      <div className="arb-card-header">
-        <span className="arb-badge arb-badge--lay">Lay Opportunity</span>
-        <span className="arb-card-time">
+    <div className="border border-blue-400/25 rounded-xl p-4">
+      <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+        <span className="rounded-full px-2.5 py-0.5 text-xs font-bold bg-blue-400/15 text-blue-400 border border-blue-400/30">Lay Opportunity</span>
+        <span className="text-slate-500 text-xs">
           {bet.gameTime.toLocaleString('en-AU', {
             dateStyle: 'medium',
             timeStyle: 'short',
           })}
         </span>
       </div>
-      <h4 className="arb-card-title">{bet.teams.join(' vs ')}</h4>
-      <div className="arb-lay-grid">
-        <div className="arb-lay-row">
-          <span className="arb-lay-label">Bet on</span>
-          <span className="arb-lay-value">{bet.betOn}</span>
+      <h4 className="m-0 mb-3 text-white text-base">{bet.teams.join(' vs ')}</h4>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-2">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-slate-500 text-xs uppercase tracking-wider font-semibold">Bet on</span>
+          <span className="text-slate-200 text-base">{bet.betOn}</span>
         </div>
-        <div className="arb-lay-row">
-          <span className="arb-lay-label">Betting site</span>
-          <span className="arb-lay-value">{bet.bettingSite}</span>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-slate-500 text-xs uppercase tracking-wider font-semibold">Betting site</span>
+          <span className="text-slate-200 text-base">{bet.bettingSite}</span>
         </div>
-        <div className="arb-lay-row">
-          <span className="arb-lay-label">Back odds</span>
-          <span className="arb-lay-value arb-odds">{bet.bet}</span>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-slate-500 text-xs uppercase tracking-wider font-semibold">Back odds</span>
+          <span className="text-slate-200 text-base text-accent font-bold">{bet.bet}</span>
         </div>
-        <div className="arb-lay-row">
-          <span className="arb-lay-label">Lay odds (Betfair)</span>
-          <span className="arb-lay-value arb-odds">{bet.lay}</span>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-slate-500 text-xs uppercase tracking-wider font-semibold">Lay odds (Betfair)</span>
+          <span className="text-slate-200 text-base text-accent font-bold">{bet.lay}</span>
         </div>
-        <div className="arb-lay-row">
-          <span className="arb-lay-label">Difference</span>
-          <span className="arb-lay-value arb-badge arb-badge--diff">+{bet.difference.toFixed(3)}</span>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-slate-500 text-xs uppercase tracking-wider font-semibold">Difference</span>
+          <span className="text-slate-200 text-base rounded-full px-2.5 py-0.5 text-xs font-bold bg-yellow-400/15 text-yellow-400 border border-yellow-400/30 inline-block">+{bet.difference.toFixed(3)}</span>
         </div>
       </div>
     </div>
@@ -106,7 +92,7 @@ function LayBetCard({ bet }) {
 }
 
 function EmptyState({ message }) {
-  return <p className="arb-empty">{message}</p>
+  return <p className="text-slate-500 text-center py-8">{message}</p>
 }
 
 export default function Arbitrage() {
@@ -136,24 +122,24 @@ export default function Arbitrage() {
   const diagnostics = results?.diagnostics
 
   return (
-    <div className="arb-page">
+    <div className="min-h-screen p-5 text-white sm:p-3">
       {/* Header */}
-      <div className="arb-header">
-        <div className="arb-header-actions arb-header-actions--left">
-          <button className="arb-link-button" onClick={() => setMadeOpen(true)}>Creation</button>
+      <div className="flex items-center justify-between gap-4 mb-5 sm:flex-wrap">
+        <div className="flex-none">
+          <button className="bg-transparent border border-accent/50 text-accent rounded-lg px-3.5 py-1.5 text-sm font-semibold cursor-pointer hover:bg-accent/10 hover:border-accent" onClick={() => setMadeOpen(true)}>Creation</button>
         </div>
-        <h1 className="arb-title">Arbitrage Betting</h1>
-        <div className="arb-header-actions arb-header-actions--right">
-          <button className="arb-link-button" onClick={() => setHelpOpen(true)}>Help</button>
+        <h1 className="text-accent text-2xl font-semibold text-center flex-1 m-0 sm:text-xl">Arbitrage Betting</h1>
+        <div className="flex-none">
+          <button className="bg-transparent border border-accent/50 text-accent rounded-lg px-3.5 py-1.5 text-sm font-semibold cursor-pointer hover:bg-accent/10 hover:border-accent" onClick={() => setHelpOpen(true)}>Help</button>
         </div>
       </div>
 
       {/* Fetch button */}
-      <div className="arb-controls">
-        <button className="arb-fetch-button" onClick={handleFetch} disabled={loading}>
+      <div className="text-center mb-6">
+        <button className="border border-accent bg-accent text-black rounded-lg px-5 py-2.5 text-base font-bold cursor-pointer disabled:opacity-65 disabled:cursor-not-allowed" onClick={handleFetch} disabled={loading}>
           {loading ? (
-            <span className="arb-loading-state">
-              <span className="arb-spinner" aria-hidden="true" />
+            <span className="inline-flex items-center gap-2">
+              <span className="w-3.5 h-3.5 rounded-full border-2 border-black/35 border-t-black animate-spin" aria-hidden="true" />
               Scanning odds…
             </span>
           ) : (
@@ -161,19 +147,19 @@ export default function Arbitrage() {
           )}
         </button>
         {loading && (
-          <p className="arb-loading-hint">
+          <p className="mt-3 mx-auto max-w-[480px] text-slate-400 text-sm">
             Checking 50+ sports across multiple bookmakers — this may take 30–60 seconds.
           </p>
         )}
       </div>
 
-      {error && <p className="arb-error">{error}</p>}
+      {error && <p className="text-red-400 bg-red-400/10 border border-red-400/35 rounded-lg px-4 py-3 mb-4">{error}</p>}
 
       {/* Results */}
       {results && (
-        <div className="arb-results">
+        <div className="max-w-[900px] mx-auto">
           {diagnostics && (
-            <div className="arb-diagnostics" role="status" aria-live="polite">
+            <div className="mb-3 text-slate-400 text-sm bg-slate-400/8 border border-slate-400/25 rounded-lg px-3 py-2" role="status" aria-live="polite">
               Scanned {diagnostics.matchesWithBookmakers}/{diagnostics.matchesScanned} matches with bookmaker odds
               across {diagnostics.sportsScanned}/{diagnostics.sportsRequested} sports
               {diagnostics.sportsWithErrors > 0 ? ` (${diagnostics.sportsWithErrors} sports returned API errors)` : ''}
@@ -182,24 +168,24 @@ export default function Arbitrage() {
           )}
 
           {/* Tab switcher */}
-          <div className="arb-tabs">
+          <div className="flex border-b-2 border-accent/25 mb-5">
             <button
-              className={`arb-tab ${activeTab === 'arbitrage' ? 'arb-tab--active' : ''}`}
+              className={`bg-transparent border-0 border-b-2 border-transparent -mb-0.5 px-5 py-2.5 text-slate-400 text-base font-semibold cursor-pointer flex items-center gap-2 hover:text-accent ${activeTab === 'arbitrage' ? 'text-accent border-b-accent' : ''}`}
               onClick={() => setActiveTab('arbitrage')}
             >
               Arbitrage Bets
-              <span className="arb-tab-count">{arbCount}</span>
+              <span className="bg-accent/15 text-accent rounded-full px-2 py-0.5 text-xs font-bold">{arbCount}</span>
             </button>
             <button
-              className={`arb-tab ${activeTab === 'lay' ? 'arb-tab--active' : ''}`}
+              className={`bg-transparent border-0 border-b-2 border-transparent -mb-0.5 px-5 py-2.5 text-slate-400 text-base font-semibold cursor-pointer flex items-center gap-2 hover:text-accent ${activeTab === 'lay' ? 'text-accent border-b-accent' : ''}`}
               onClick={() => setActiveTab('lay')}
             >
               Lay Bets
-              <span className="arb-tab-count">{layCount}</span>
+              <span className="bg-accent/15 text-accent rounded-full px-2 py-0.5 text-xs font-bold">{layCount}</span>
             </button>
           </div>
 
-          <div className="arb-tab-content">
+          <div className="flex flex-col gap-4">
             {activeTab === 'arbitrage' && (
               <>
                 {arbCount === 0 ? (
@@ -224,7 +210,7 @@ export default function Arbitrage() {
 
       {/* Help Modal */}
       {helpOpen && (
-        <InfoModal title="How it works" onClose={() => setHelpOpen(false)}>
+        <Modal title="How it works" onClose={() => setHelpOpen(false)}>
           <p>
             This tool finds betting odds where you can make a profit through <strong>arbitrage</strong> and{' '}
             <strong>lay betting</strong>. It uses{' '}
@@ -258,12 +244,12 @@ export default function Arbitrage() {
               OddsMonkey
             </a>
           </p>
-        </InfoModal>
+        </Modal>
       )}
 
       {/* Creation Modal */}
       {madeOpen && (
-        <InfoModal title="How this was made" onClose={() => setMadeOpen(false)}>
+        <Modal title="How this was made" onClose={() => setMadeOpen(false)}>
           <p>
             During COVID-19 lockdowns I stumbled across{' '}
             <a href="https://www.youtube.com/watch?v=TGinzvSDayU&ab_channel=NewMoney" target="_blank" rel="noreferrer">
@@ -286,7 +272,7 @@ export default function Arbitrage() {
             Note: arbitrage betting is legal but frowned upon by bookmakers. If they suspect guaranteed profits,
             they may limit or ban your account. Keep bet amounts modest (close to round dollar values).
           </p>
-        </InfoModal>
+        </Modal>
       )}
     </div>
   )
