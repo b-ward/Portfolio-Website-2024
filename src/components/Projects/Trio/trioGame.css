@@ -408,6 +408,7 @@
   z-index: 1;
   text-align: center;
   cursor: hand;
+  color: black;
 }
 #p2 {
   position:absolute;
@@ -420,6 +421,7 @@
   z-index: 1;
   text-align: center;
   cursor: hand;
+  color: black;
 }
 #p3 {
   position:absolute;
@@ -432,6 +434,7 @@
   z-index: 1;
   text-align: center;
   cursor: hand;
+  color: black;
 }
 #p4 {
   position:absolute;
@@ -442,6 +445,7 @@
   width: 100px;
   height: 100px;
   text-align: center;
+  color: black;
 }
 
 #add_to_player_trio_1{
