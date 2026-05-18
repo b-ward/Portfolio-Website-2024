@@ -8,15 +8,13 @@ const TrioHome = () => {
     return (
         <div className="trio-wrapper">
             <div className="row" style={{width: '100%', margin: 'auto'}}>
-                <div style={{position: "absolute", left: 20}}>
+                    <div style={{width: '100%'}}>
+                    <div className="trio-title"><h1>Trio</h1></div>
+                </div>
+                <div style={{position: "absolute", right: 20}} className="flex gap-2">
                     <button onClick={() => setMadeModalShow(true)} className="bg-accent text-black font-semibold px-4 py-2 rounded">
                         Creation
                     </button>
-                </div>
-                <div style={{width: '100%'}}>
-                    <div className="trio-title"><h1>Trio</h1></div>
-                </div>
-                <div style={{position: "absolute", right: 20}}>
                     <button onClick={() => setHelpModalShow(true)} className="bg-accent text-black font-semibold px-4 py-2 rounded">
                         Help
                     </button>

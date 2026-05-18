@@ -5,11 +5,11 @@ import Modal from "../../Shared/Modal";
 // CONSTANTS / DATA
 // ==========================
 const SUITS = [
-  { key: "S", label: "Spades", icon: "♠" },
-  { key: "C", label: "Clubs", icon: "♣" },
-  { key: "D", label: "Diamonds", icon: "♦" },
-  { key: "H", label: "Hearts", icon: "♥" },
-  { key: "NT", label: "No Trumps", icon: "NT" },
+  { key: "S", label: "Spades", icon: "♠", iconColor: "text-black" },
+  { key: "C", label: "Clubs", icon: "♣", iconColor: "text-black" },
+  { key: "D", label: "Diamonds", icon: "♦", iconColor: "text-red-600" },
+  { key: "H", label: "Hearts", icon: "♥", iconColor: "text-red-600" },
+  { key: "NT", label: "No Trumps", icon: "NT", iconColor: "text-black" },
 ];
 
 const SCORE_TABLE = {
@@ -250,7 +250,7 @@ export default function FiveHundredScorer() {
                     }`}
                     onClick={() => setModel((m) => ({ ...m, suit: s.key }))}
                   >
-                    <span className="mr-1.5">{s.icon}</span>
+                    <span className={`mr-1.5 text-xl ${s.iconColor}`}>{s.icon}</span>
                     {s.label}
                   </button>
                 ))}
@@ -371,37 +371,37 @@ function ScoringTable() {
         <thead>
           <tr>
             <th className="text-left p-2.5 bg-white text-black border-b-2 border-accent">Tricks</th>
-            <th className="text-left p-2.5 bg-white text-black border-b-2 border-accent">♠</th>
-            <th className="text-left p-2.5 bg-white text-black border-b-2 border-accent">♣</th>
-            <th className="text-left p-2.5 bg-white text-black border-b-2 border-accent">♦</th>
-            <th className="text-left p-2.5 bg-white text-black border-b-2 border-accent">♥</th>
+            <th className="text-left p-2.5 bg-white text-black border-b-2 border-accent"><span className="text-xl">♠</span></th>
+            <th className="text-left p-2.5 bg-white text-black border-b-2 border-accent"><span className="text-xl">♣</span></th>
+            <th className="text-left p-2.5 bg-white text-black border-b-2 border-accent"><span className="text-xl text-red-600">♦</span></th>
+            <th className="text-left p-2.5 bg-white text-black border-b-2 border-accent"><span className="text-xl text-red-600">♥</span></th>
             <th className="text-left p-2.5 bg-white text-black border-b-2 border-accent">No Trumps</th>
           </tr>
         </thead>
         <tbody>
           {[6, 7, 8, 9, 10].map((lvl) => (
             <tr key={lvl}>
-              <td className="p-2.5 border-t border-accent/30 text-black">{lvl} Tricks</td>
-              <td className="p-2.5 border-t border-accent/30 text-black">{SCORE_TABLE[lvl].S}</td>
-              <td className="p-2.5 border-t border-accent/30 text-black">{SCORE_TABLE[lvl].C}</td>
-              <td className="p-2.5 border-t border-accent/30 text-black">{SCORE_TABLE[lvl].D}</td>
-              <td className="p-2.5 border-t border-accent/30 text-black">{SCORE_TABLE[lvl].H}</td>
-              <td className="p-2.5 border-t border-accent/30 text-black">{SCORE_TABLE[lvl].NT}</td>
+              <td className="p-2.5 border-t border-accent/30 bg-white text-black">{lvl} Tricks</td>
+              <td className="p-2.5 border-t border-accent/30 bg-white text-black">{SCORE_TABLE[lvl].S}</td>
+              <td className="p-2.5 border-t border-accent/30 bg-white text-black">{SCORE_TABLE[lvl].C}</td>
+              <td className="p-2.5 border-t border-accent/30 bg-white text-black">{SCORE_TABLE[lvl].D}</td>
+              <td className="p-2.5 border-t border-accent/30 bg-white text-black">{SCORE_TABLE[lvl].H}</td>
+              <td className="p-2.5 border-t border-accent/30 bg-white text-black">{SCORE_TABLE[lvl].NT}</td>
             </tr>
           ))}
           <tr>
-            <td className="p-2.5 border-t border-accent/30 text-black">
+            <td className="p-2.5 border-t border-accent/30 bg-white text-black">
               <em>Misère</em>
             </td>
-            <td className="p-2.5 border-t border-accent/30 text-black" colSpan={5}>
+            <td className="p-2.5 border-t border-accent/30 bg-white text-black" colSpan={5}>
               {SCORE_TABLE.MISERE}
             </td>
           </tr>
           <tr>
-            <td className="p-2.5 border-t border-accent/30 text-black">
+            <td className="p-2.5 border-t border-accent/30 bg-white text-black">
               <em>Open Misère</em>
             </td>
-            <td className="p-2.5 border-t border-accent/30 text-black" colSpan={5}>
+            <td className="p-2.5 border-t border-accent/30 bg-white text-black" colSpan={5}>
               {SCORE_TABLE.OPEN_MISERE}
             </td>
           </tr>
