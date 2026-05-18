@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { SpotifyAuthProvider, useSpotifyAuth } from './auth/SpotifyAuthProvider'
 import { aggregateArtistsByCountry, resolveArtistsWithCountry } from './services/musicBrainzService'
-import './topArtistsMap.css'
+import Modal from '../../Shared/Modal'
 
 const GEO_URL = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
 const TIME_RANGE_OPTIONS = [
@@ -416,7 +416,7 @@ function TopArtistsMapContent() {
     const bucket = countryCode ? countryBuckets[countryCode] : null
     const count = bucket?.count || 0
     const fillColor = getFillColor(count, maxCountryCount)
-    
+
     const geometry = feature.geometry
     let pathData = ''
 
@@ -475,27 +475,26 @@ function TopArtistsMapContent() {
           cursor: bucket ? 'pointer' : 'default',
           transition: 'fill 0.2s ease',
         }}
-        className={hoveredCountry?.countryCode === countryCode ? 'hovered' : ''}
       />
     )
   }
 
   return (
-    <div className="top-artists-map">
-      <div className="top-artists-card">
-        <div className="top-artists-header">
-          <h2 className="top-artists-heading">Top Spotify Artists World Map</h2>
+    <div className="text-white p-5 sm:p-2.5">
+      <div className="bg-surface border-2 border-accent rounded-xl p-4 sm:p-3">
+        <div className="flex items-center justify-between gap-4 mb-3 max-md:flex-col max-md:items-start">
+          <h2 className="text-accent text-xl font-semibold m-0">Top Spotify Artists World Map</h2>
 
-          <button type="button" className="top-artists-button info" onClick={() => setShowInfoModal(true)}>
+          <button type="button" className="bg-white text-slate-700 border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-semibold cursor-pointer hover:bg-slate-50" onClick={() => setShowInfoModal(true)}>
             How it works
           </button>
         </div>
 
-        <div className="top-artists-controls">
+        <div className="flex flex-wrap items-center gap-3 mb-3">
           <label htmlFor="timeRange">Time range:</label>
           <select
             id="timeRange"
-            className="top-artists-select"
+            className="border border-accent rounded-lg px-2.5 py-1.5 bg-[#1f1d20] text-white text-sm"
             value={timeRange}
             onChange={(event) => setTimeRange(event.target.value)}
           >
@@ -508,13 +507,13 @@ function TopArtistsMapContent() {
 
           <button
             type="button"
-            className="top-artists-button"
+            className="border border-accent bg-accent text-black rounded-lg px-3 py-1.5 text-sm font-semibold cursor-pointer disabled:opacity-65 disabled:cursor-not-allowed"
             onClick={loadTopArtists}
             disabled={isLoading || isAuthenticating}
           >
             {isLoading || isAuthenticating ? (
-              <span className="loading-state">
-                <span className="loading-spinner" aria-hidden="true" />
+              <span className="inline-flex items-center gap-1.5">
+                <span className="w-3.5 h-3.5 rounded-full border-2 border-black/35 border-t-black animate-spin" aria-hidden="true" />
                 Loading
               </span>
             ) : (
@@ -523,24 +522,24 @@ function TopArtistsMapContent() {
           </button>
 
           {isAuthenticated && (
-            <button type="button" className="top-artists-button secondary" onClick={logout}>
+            <button type="button" className="bg-transparent border border-accent text-accent rounded-lg px-3 py-1.5 text-sm font-semibold cursor-pointer hover:bg-accent/10" onClick={logout}>
               Log out
             </button>
           )}
         </div>
 
         {!clientId && (
-          <p className="top-artists-hint">
+          <p className="m-0 text-white/80 text-sm">
             Missing Spotify config: set VITE_SPOTIFY_CLIENT_ID (and optionally VITE_SPOTIFY_REDIRECT_URI).
           </p>
         )}
 
         {authError && (
-          <p className="top-artists-hint">
+          <p className="m-0 text-white/80 text-sm">
             {/register|quota|access_denied|not authorized/i.test(authError) ? (
               <>
                 This app is in development mode — only approved users can sign in. Email{' '}
-                <a href="mailto:brendon.c.ward@gmail.com" className="top-artists-hint-link">
+                <a href="mailto:brendon.c.ward@gmail.com" className="text-accent underline">
                   brendon.c.ward@gmail.com
                 </a>{' '}
                 to request access (include your Spotify account email).
@@ -548,7 +547,7 @@ function TopArtistsMapContent() {
             ) : (
               <>
                 Sign-in failed: {authError}. Email{' '}
-                <a href="mailto:brendon.c.ward@gmail.com" className="top-artists-hint-link">
+                <a href="mailto:brendon.c.ward@gmail.com" className="text-accent underline">
                   brendon.c.ward@gmail.com
                 </a>{' '}
                 if this persists.
@@ -556,7 +555,7 @@ function TopArtistsMapContent() {
             )}
           </p>
         )}
-        {error && <p className="top-artists-hint">Error: {error}</p>}
+        {error && <p className="m-0 text-white/80 text-sm">Error: {error}</p>}
 
         <div
           className={`map-wrapper ${zoomLevel > 1 ? 'is-zoomed' : ''} ${isDragging ? 'is-dragging' : ''}`}
@@ -655,7 +654,7 @@ function TopArtistsMapContent() {
         )}
 
         {!hasData && !isLoading && (
-          <p className="top-artists-hint">
+          <p className="m-0 text-white/80 text-sm">
             Authenticate with Spotify to fetch your top artists and map their origin country using MusicBrainz.
           </p>
         )}
