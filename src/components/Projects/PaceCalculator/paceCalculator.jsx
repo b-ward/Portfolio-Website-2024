@@ -49,8 +49,11 @@ export default function PaceCalcualtor() {
     return H * 3600 + M * 60 + S;
   }, [hh, mm, ss]);
 
-  const calc = useMemo(() => {
+  useEffect(() => {
     setError("");
+  }, [distance, hh, mm, ss]);
+
+  const calc = useMemo(() => {
     const d = Number(distance);
     if (!d || d <= 0) return { pace: "—", paceUnit: "", detail: "Enter values to see results." };
     if (seconds === null || seconds <= 0) return { pace: "—", paceUnit: "", detail: "Enter values to see results." };
