@@ -61,6 +61,7 @@ function addDelta(teams, index, delta) {
 // MAIN COMPONENT
 // ==========================
 export default function FiveHundredScorer() {
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [model, setModel] = usePersistentState({
     teams: [
       { name: "Team A", score: 0 },
@@ -110,7 +111,11 @@ export default function FiveHundredScorer() {
   }
 
   function resetScores() {
-    if (!window.confirm("Reset all scores to 0 and clear history?")) return;
+    setShowResetConfirm(true);
+  }
+
+  function confirmReset() {
+    setShowResetConfirm(false);
     setModel((m) => ({
       ...m,
       teams: m.teams.map((t) => ({ ...t, score: 0 })),
@@ -158,12 +163,30 @@ export default function FiveHundredScorer() {
             >
               Undo
             </button>
-            <button
-              className="bg-white border-2 border-accent text-black px-3 py-2 rounded-xl cursor-pointer font-extrabold"
-              onClick={resetScores}
-            >
-              Reset
-            </button>
+            {showResetConfirm ? (
+              <span className="inline-flex gap-2 items-center">
+                <span className="text-sm font-semibold text-black">Reset all scores?</span>
+                <button
+                  className="bg-red-600 border-2 border-red-600 text-white px-3 py-2 rounded-xl cursor-pointer font-extrabold"
+                  onClick={confirmReset}
+                >
+                  Yes, reset
+                </button>
+                <button
+                  className="bg-white border-2 border-accent text-black px-3 py-2 rounded-xl cursor-pointer font-extrabold"
+                  onClick={() => setShowResetConfirm(false)}
+                >
+                  Cancel
+                </button>
+              </span>
+            ) : (
+              <button
+                className="bg-white border-2 border-accent text-black px-3 py-2 rounded-xl cursor-pointer font-extrabold"
+                onClick={resetScores}
+              >
+                Reset
+              </button>
+            )}
           </div>
         </div>
 
