@@ -47,7 +47,12 @@ Plans:
   2. The hamburger menu opens and closes the side drawer on a mobile-width viewport
   3. Navigating between pages via the nav links does not trigger a full page reload
   4. The active route link is visually distinct (e.g., accent colour or underline) in the navigation
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [x] 02-01-PLAN.md — Convert App.jsx to functional component; add pt-14 to main
+- [x] 02-02-PLAN.md — Rewrite Toolbar with Tailwind; delete toolbar.css
+- [x] 02-03-PLAN.md — Rewrite SideDrawer with Tailwind; delete sideDrawer.css
+- [x] 02-04-PLAN.md — Human verify navigation: desktop toolbar, mobile hamburger, active route highlight
 **UI hint**: yes
 
 ### Phase 3: Landing Page
@@ -102,14 +107,14 @@ Plans:
 **Plans**: 9 plans
 Plans:
 - [ ] 06-01-PLAN.md — Create shared Modal.jsx component (Wave 1 foundation)
-- [ ] 06-02-PLAN.md — TrainGame: class→functional, Bootstrap→shared Modal, delete trainGame.css
-- [ ] 06-03-PLAN.md — TrioHome: class→functional, Bootstrap→shared Modal, delete trioHome.css
-- [ ] 06-04-PLAN.md — NoisyDetector: class→functional stub, delete dead code, delete noisyDetector.css
+- [ ] 06-02-PLAN.md — TrainGame: class->functional, Bootstrap->shared Modal, delete trainGame.css
+- [ ] 06-03-PLAN.md — TrioHome: class->functional, Bootstrap->shared Modal, delete trioHome.css
+- [ ] 06-04-PLAN.md — NoisyDetector: class->functional stub, delete dead code, delete noisyDetector.css
 - [ ] 06-05-PLAN.md — Arbitrage: replace all arb-* CSS classes with Tailwind inline, delete arbitrage.css
 - [ ] 06-06-PLAN.md — NBALadder: replace nba-* CSS classes with dark Tailwind, delete nbaLadder.css
 - [ ] 06-07-PLAN.md — PaceCalculator: replace inline styles object with Tailwind classes
 - [ ] 06-08-PLAN.md — 500 Scorer: delete StyleTag, delete COLORS, replace inline styles with Tailwind
-- [ ] 06-09-PLAN.md — TrioGame: Bootstrap removal only (stay class component), Carousel→step indicator, trim trioGame.css
+- [ ] 06-09-PLAN.md — TrioGame: Bootstrap removal only (stay class component), Carousel->step indicator, trim trioGame.css
 **UI hint**: yes
 
 ### Phase 7: Remaining Pages
@@ -122,9 +127,9 @@ Plans:
   3. The BusinessBrains page renders its content with correct Tailwind layout
 **Plans**: 3 plans
 Plans:
-- [x] 07-01-PLAN.md — Photos: class→functional, aspect-video iframes, delete photos.css
-- [x] 07-02-PLAN.md — Music: class→functional, 80%-wide wrapper, delete music.css
-- [x] 07-03-PLAN.md — BusinessBrains: class→functional, 80%-wide wrapper, delete businessBrains.css
+- [x] 07-01-PLAN.md — Photos: class->functional, aspect-video iframes, delete photos.css
+- [x] 07-02-PLAN.md — Music: class->functional, 80%-wide wrapper, delete music.css
+- [x] 07-03-PLAN.md — BusinessBrains: class->functional, 80%-wide wrapper, delete businessBrains.css
 **UI hint**: yes
 
 ### Phase 8: TopArtistsMap / Spotify
@@ -134,13 +139,16 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. The Spotify OAuth login flow initiates and completes successfully, returning the user to the app with a valid session
   2. The TopArtistsMap renders correctly with Tailwind styling after authentication, displaying the expected map and artist data
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 08-01-PLAN.md — Migrate topArtistsMap.jsx to Tailwind; replace info modal with Modal.jsx; delete topArtistsMap.css
+- [ ] 08-02-PLAN.md — Human verify: visual styling, info modal dark theme, Spotify OAuth flow, map render after auth
 **UI hint**: yes
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -151,4 +159,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 5. Projects Index | 1/1 | Complete | 2026-05-15 |
 | 6. Mini-Projects | 9/9 | Complete | 2026-05-18 |
 | 7. Remaining Pages | 3/3 | Complete | 2026-05-18 |
-| 8. TopArtistsMap / Spotify | 0/? | Not started | - |
+| 8. TopArtistsMap / Spotify | 0/2 | Not started | - |
