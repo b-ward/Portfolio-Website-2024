@@ -8,6 +8,7 @@ function HelpModal({ show, onHide }) {
   if (!show) return null;
   return (
     <Modal title="Help" onClose={onHide}>
+      <p className="mb-3">This program is based off the popular card game Trio. A video explanation of the game can be found below:</p>
       <div className="aspect-video mb-4">
         <iframe
           className="w-full h-full rounded"
@@ -17,6 +18,7 @@ function HelpModal({ show, onHide }) {
           allowFullScreen
         />
       </div>
+      <p className="mb-3">Instruction images can also be found below:</p>
       <div className="flex flex-col items-center gap-4">
         <img
           src={`../Trio/Instruction_images/Trio - User Manual - ${slide + 1}.png`}
@@ -1065,10 +1067,10 @@ class TrioGame extends Component {
                     show={this.state.helpModalShow}
                     onHide={() => this.setState({helpModalShow: false})}
                 />
-                {/* <MadeModal
+                <MadeModal
                     show={this.state.madeModalShow}
                     onHide={() => this.setState({madeModalShow: false})}
-                /> */}
+                />
             </div>
         )
     }
