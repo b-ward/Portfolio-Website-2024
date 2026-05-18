@@ -5,7 +5,7 @@ const BusinessBrains = () => (
     <h3 className="text-accent text-center text-2xl font-semibold mb-4">Business Brains</h3>
     <div className="w-4/5 mx-auto mt-8 mb-8">
       <iframe
-        className="mb-8 bg-[#121212]"
+        className="mb-8 rounded-xl"
         title="Pod 2"
         src="https://open.spotify.com/embed/episode/3uqsIqXuVVHPeMTlB5FQ1i?theme=0"
         width="100%"
@@ -15,7 +15,7 @@ const BusinessBrains = () => (
         allow="encrypted-media"
       ></iframe>
       <iframe
-        className="mb-8 bg-[#121212]"
+        className="mb-8 rounded-xl"
         title="Pod 1"
         src="https://open.spotify.com/embed/episode/0eoHeo60heCHlVDOHZOug7?theme=0"
         width="100%"
