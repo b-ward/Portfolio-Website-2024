@@ -141,7 +141,7 @@ Plans:
   2. The TopArtistsMap renders correctly with Tailwind styling after authentication, displaying the expected map and artist data
 **Plans**: 2 plans
 Plans:
-- [ ] 08-01-PLAN.md — Migrate topArtistsMap.jsx to Tailwind; replace info modal with Modal.jsx; delete topArtistsMap.css
+- [x] 08-01-PLAN.md — Migrate topArtistsMap.jsx to Tailwind; replace info modal with Modal.jsx; delete topArtistsMap.css
 - [ ] 08-02-PLAN.md — Human verify: visual styling, info modal dark theme, Spotify OAuth flow, map render after auth
 **UI hint**: yes
 
@@ -159,4 +159,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 5. Projects Index | 1/1 | Complete | 2026-05-15 |
 | 6. Mini-Projects | 9/9 | Complete | 2026-05-18 |
 | 7. Remaining Pages | 3/3 | Complete | 2026-05-18 |
-| 8. TopArtistsMap / Spotify | 0/2 | Not started | - |
+| 8. TopArtistsMap / Spotify | 1/2 | In progress | - |
