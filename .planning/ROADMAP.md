@@ -19,7 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 5: Projects Index** - Rewrite project listing page and shared card component with Tailwind (completed 2026-05-15)
 - [x] **Phase 6: Mini-Projects** - Migrate all 7 interactive tools to Tailwind styling (completed 2026-05-18)
 - [x] **Phase 7: Remaining Pages** - Migrate Photos, Music, and BusinessBrains pages to Tailwind (completed 2026-05-18)
-- [ ] **Phase 8: TopArtistsMap / Spotify** - Rewrite Spotify integration UI shell with Tailwind, preserving all auth/API logic
+- [x] **Phase 8: TopArtistsMap / Spotify** - Rewrite Spotify integration UI shell with Tailwind, preserving all auth/API logic (completed 2026-05-18)
 
 ## Phase Details
 
@@ -142,7 +142,7 @@ Plans:
 **Plans**: 2 plans
 Plans:
 - [x] 08-01-PLAN.md — Migrate topArtistsMap.jsx to Tailwind; replace info modal with Modal.jsx; delete topArtistsMap.css
-- [ ] 08-02-PLAN.md — Human verify: visual styling, info modal dark theme, Spotify OAuth flow, map render after auth
+- [x] 08-02-PLAN.md — Human verify: visual styling, info modal dark theme, Spotify OAuth flow, map render after auth
 **UI hint**: yes
 
 ## Progress
@@ -159,4 +159,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 5. Projects Index | 1/1 | Complete | 2026-05-15 |
 | 6. Mini-Projects | 9/9 | Complete | 2026-05-18 |
 | 7. Remaining Pages | 3/3 | Complete | 2026-05-18 |
-| 8. TopArtistsMap / Spotify | 1/2 | In progress | - |
+| 8. TopArtistsMap / Spotify | 2/2 | Complete | 2026-05-18 |
