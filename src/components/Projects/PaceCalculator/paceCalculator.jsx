@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 const KM_PER_MILE = 1.609344;
 
@@ -100,15 +100,13 @@ export default function PaceCalcualtor() {
     setError("");
   }
 
-  function autoAdvance(setter, maxLen, nextRef) {
-    return (e) => {
-      const v = e.target.value.replace(/\D+/g, "");
-      setter(v);
-      if (maxLen && v.length >= maxLen && nextRef?.current) {
-        nextRef.current.focus();
-      }
-    };
-  }
+  const autoAdvance = useCallback((setter, maxLen, nextRef) => (e) => {
+    const v = e.target.value.replace(/\D+/g, "");
+    setter(v);
+    if (maxLen && v.length >= maxLen && nextRef?.current) {
+      nextRef.current.focus();
+    }
+  }, []);
 
   const mmRef = React.useRef(null);
   const ssRef = React.useRef(null);
