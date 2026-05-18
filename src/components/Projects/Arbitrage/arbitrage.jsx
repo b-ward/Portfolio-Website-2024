@@ -124,12 +124,10 @@ export default function Arbitrage() {
   return (
     <div className="min-h-screen p-5 text-white sm:p-3">
       {/* Header */}
-      <div className="flex flex-col items-center gap-2 mb-5 sm:flex-row sm:justify-between">
-        <div className="flex-none">
+      <div className="flex flex-col items-center gap-2 mb-5">
+        <h1 className="text-accent text-2xl font-semibold text-center m-0 sm:text-xl">Arbitrage Betting</h1>
+        <div className="flex items-center gap-2">
           <button className="bg-transparent border border-accent/50 text-accent rounded-lg px-3.5 py-1.5 text-sm font-semibold cursor-pointer hover:bg-accent/10 hover:border-accent" onClick={() => setMadeOpen(true)}>Creation</button>
-        </div>
-        <h1 className="text-accent text-2xl font-semibold text-center flex-1 m-0 sm:text-xl">Arbitrage Betting</h1>
-        <div className="flex-none">
           <button className="bg-transparent border border-accent/50 text-accent rounded-lg px-3.5 py-1.5 text-sm font-semibold cursor-pointer hover:bg-accent/10 hover:border-accent" onClick={() => setHelpOpen(true)}>Help</button>
         </div>
       </div>
