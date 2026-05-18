@@ -69,7 +69,7 @@ export default function NBALadder() {
     return confs
   }
 
-  const selectedConference = conferences.find((c) => c.alias === selectedConfAlias) || conferences[0]
+  const selectedConference = conferences.find((c) => c.alias === selectedConfAlias) ?? null
 
   return (
     <div className="bg-surface rounded-xl border border-white/10 p-4 m-4 max-w-[860px] mx-auto">
