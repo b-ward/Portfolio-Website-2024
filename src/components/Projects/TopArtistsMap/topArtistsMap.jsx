@@ -485,7 +485,7 @@ function TopArtistsMapContent() {
         <div className="flex items-center justify-between gap-4 mb-3 max-md:flex-col max-md:items-start">
           <h2 className="text-accent text-xl font-semibold m-0">Top Spotify Artists World Map</h2>
 
-          <button type="button" className="bg-transparent border border-white/30 text-white/80 rounded-lg px-3 py-1.5 text-sm font-semibold cursor-pointer hover:bg-white/10 hover:text-white" onClick={() => setShowInfoModal(true)}>
+          <button type="button" className="bg-transparent border border-accent text-accent rounded-lg px-3 py-1.5 text-sm font-semibold cursor-pointer hover:bg-accent/10" onClick={() => setShowInfoModal(true)}>
             How it works
           </button>
         </div>
