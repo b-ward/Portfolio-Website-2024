@@ -81,10 +81,14 @@ function TopArtistsMapContent() {
   useEffect(() => {
     refreshAuthState()
     // Load GeoJSON data
-    fetch(GEO_URL)
+    const controller = new AbortController()
+    fetch(GEO_URL, { signal: controller.signal })
       .then((res) => res.json())
       .then((data) => setGeojsonData(data))
-      .catch((err) => console.error('Failed to load GeoJSON:', err))
+      .catch((err) => {
+        if (err.name !== 'AbortError') console.error('Failed to load GeoJSON:', err)
+      })
+    return () => controller.abort()
   }, [refreshAuthState])
 
   const hasData = useMemo(() => Object.keys(countryBuckets).length > 0, [countryBuckets])
