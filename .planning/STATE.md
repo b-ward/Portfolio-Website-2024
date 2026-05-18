@@ -4,12 +4,12 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: ~
-last_updated: "2026-05-18T01:00:00.000Z"
-last_activity: 2026-05-18 — Phase 7 complete (3/3 plans)
+last_updated: "2026-05-18T02:00:00.000Z"
+last_activity: 2026-05-18 — Phase 8 planned (2 plans ready to execute)
 progress:
   total_phases: 8
   completed_phases: 7
-  total_plans: 23
+  total_plans: 25
   completed_plans: 23
   percent: 88
 ---
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-15)
 
 **Core value:** Every page and interactive tool works correctly and looks polished, with a consistent visual style using the existing dark + gold colour scheme.
-**Current focus:** Phase 7 — Remaining Pages
+**Current focus:** Phase 8 — TopArtistsMap / Spotify
 
 ## Current Position
 
 Phase: 8 of 8 (TopArtistsMap / Spotify)
-Plan: 0 of ? in current phase
-Status: Phase 7 complete — ready to discuss/plan Phase 8
-Last activity: 2026-05-18 — Phase 7 complete (3/3 plans executed)
+Plan: 0 of 2 in current phase
+Status: Ready to execute — 2 plans planned
+Last activity: 2026-05-18 — Phase 8 planned (2/2 plans ready)
 
 Progress: [██████░░░░] 75%
 
