@@ -578,13 +578,13 @@ function TopArtistsMapContent() {
           onWheel={handleWheelZoom}
         >
           <div className="absolute top-2.5 right-2.5 z-[6] flex gap-1.5 max-md:flex-col max-md:top-auto max-md:bottom-2.5">
-            <button type="button" className="border border-slate-500/75 bg-white/90 text-slate-700 rounded-md min-w-8 h-8 text-base font-bold px-2 max-md:min-w-11 max-md:h-11 max-md:text-xl max-md:rounded-lg max-md:p-0 max-md:flex max-md:items-center max-md:justify-center" onClick={zoomIn}>
+            <button type="button" className="flex items-center justify-center border border-slate-500/75 bg-white/90 text-slate-700 rounded-md min-w-8 h-8 text-base font-bold px-2 max-md:min-w-11 max-md:h-11 max-md:text-xl max-md:rounded-lg max-md:p-0" onClick={zoomIn}>
               +
             </button>
-            <button type="button" className="border border-slate-500/75 bg-white/90 text-slate-700 rounded-md min-w-8 h-8 text-base font-bold px-2 max-md:min-w-11 max-md:h-11 max-md:text-xl max-md:rounded-lg max-md:p-0 max-md:flex max-md:items-center max-md:justify-center" onClick={zoomOut}>
+            <button type="button" className="flex items-center justify-center border border-slate-500/75 bg-white/90 text-slate-700 rounded-md min-w-8 h-8 text-base font-bold px-2 max-md:min-w-11 max-md:h-11 max-md:text-xl max-md:rounded-lg max-md:p-0" onClick={zoomOut}>
               −
             </button>
-            <button type="button" className="border border-slate-500/75 bg-white/90 text-slate-700 rounded-md min-w-8 h-8 text-sm font-semibold px-2.5 max-md:min-w-11 max-md:h-11 max-md:text-xs max-md:rounded-lg max-md:p-0 max-md:flex max-md:items-center max-md:justify-center" onClick={resetZoom}>
+            <button type="button" className="flex items-center justify-center border border-slate-500/75 bg-white/90 text-slate-700 rounded-md min-w-8 h-8 text-sm font-semibold px-2.5 max-md:min-w-11 max-md:h-11 max-md:text-xs max-md:rounded-lg max-md:p-0" onClick={resetZoom}>
               Reset
             </button>
           </div>
