@@ -49,21 +49,13 @@ function MadeModal({ show, onHide }) {
   return (
     <Modal title="How this was made" onClose={onHide}>
       <p>
-        During the COVID-19 lockdown, I didn't have much to do in the evenings after work so I was wondering if
-        there was any way of making some money from my laptop at home. I stumbled across this YouTube video that explained the arbitrage process:
-        <a href="https://www.youtube.com/watch?v=TGinzvSDayU&ab_channel=NewMoney">https://www.youtube.com/watch?v=TGinzvSDayU&ab_channel=NewMoney</a>
-        I found that you can actually make a little bit of money off this method, however, it could be quite time consuming as you have to score multiple betting sites in order to find odds that produce a profitable outcome.
-        Having a developer background, I thought that there should be an easier way to find profitable arbitrage bets so I got to work on writing some python code that would
-        leverage an API called The Odds API (<a href="https://the-odds-api.com/">https://the-odds-api.com/</a>) which returns betting odds from around 10 betting sites for over 50 different sports.
+        Trio was created as my major work for Year 12 Software Design and Development. The goal was to build a fully
+        playable digital version of the card game Trio, complete with a CPU opponent, game logic, and an interactive UI.
       </p>
       <p>
-        Arbitrage betting isn't breaking any laws, however, it is frowned upon by betting sites and they can ban you from their sites if they suspect you
-        are guaranteed profits. So be cautious on how much money you place on bets (the closer to a dollar value, the better eg. $7).
-      </p>
-      <p>
-        Once I set up this website, I wanted to add my arbitrage betting program so that it was publicly accessible and meant that I didn't have to run a Python script from my laptop.
-        So I got to work at converting the code from Python to Javascript, which was a lot more tedious than I initially though it would be. Eventually, I got everything working and, due to API Keys only allowing 50 requests per month, I've also implemented an API Key rotation feature
-        so that users can make more requests.
+        The project was built using JavaScript and React, and gave me my first real experience designing and implementing
+        a complex stateful application from scratch. It remains one of the projects I&apos;m most proud of from my early
+        development days.
       </p>
     </Modal>
   );
