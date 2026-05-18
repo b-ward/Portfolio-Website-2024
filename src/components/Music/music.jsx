@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Music = () => (
-  <div>
+  <div className="pb-8">
     <h3 className="text-accent text-center text-2xl font-semibold mb-4">Music</h3>
     <div className="w-4/5 mx-auto mt-8 mb-8">
       <iframe
