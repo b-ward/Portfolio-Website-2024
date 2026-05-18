@@ -21,7 +21,7 @@ const TrainGame = () => {
       if (sols.length > 0) {
         solutionRows.push(<h3 key="title">Solutions</h3>);
         for (let i = 0; i < sols.length; i++) {
-          solutionRows.push(<div key={i}>{sols[i]}</div>);
+          solutionRows.push(<div key={sols[i]}>{sols[i]}</div>);
         }
       } else {
         solutionRows.push(<h3 key="title">No Solutions Found</h3>);
