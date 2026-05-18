@@ -1,31 +1,21 @@
-import React, {Component} from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
-import './card.css';
+import React from 'react';
 
-class SharedCard extends Component {
-    render() {
-        return(
-            <div className="col-sm-12 col-lg-12">
-                <Card style={{margin: '0 0 2rem 0'}}>
-                    <Row className='no-gutters'>
-                        {this.props.imageSrc &&
-                            <Col xs="auto">
-                                <Card.Img style={{maxHeight: '100px', width: 'auto', float: 'left'}} variant="top" src={this.props.imageSrc} />
-                            </Col>
-                        }
-                        <Col>
-                            <Card.Body>
-                                <Card.Title>{this.props.cardTitle}</Card.Title>
-                                <Card.Text>
-                                {this.props.cardBody}
-                                </Card.Text>
-                            </Card.Body>
-                        </Col>
-                    </Row>
-                </Card>
-        </div>
-        )
-    }
-}
+const SharedCard = ({ cardTitle, cardBody, imageSrc }) => (
+  <div className="bg-white text-black rounded-lg mb-8">
+    <div className="flex flex-row">
+      {imageSrc && (
+        <img
+          src={imageSrc}
+          alt=""
+          className="max-h-[100px] w-auto pr-4 self-start mt-6 ml-6 mb-6"
+        />
+      )}
+      <div className="p-6">
+        {cardTitle && <h5 className="font-semibold mb-2">{cardTitle}</h5>}
+        <div>{cardBody}</div>
+      </div>
+    </div>
+  </div>
+);
 
 export default SharedCard;

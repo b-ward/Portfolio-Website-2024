@@ -1,147 +1,28 @@
-import React, {Component} from 'react';
-import { Card, CardGroup } from 'react-bootstrap';
-import './projects.css';
+import React from 'react';
+import ProjectCard from './ProjectCard';
 
-class Projects extends Component {
-    render() {
-        return(
-            <div className="projects-wrapper">
-                <div className="projects-title"><h1>Personal Projects</h1></div>
-                <CardGroup style={{margin: '2rem 5rem 2rem 5rem'}}>
-                    <div className="col-sm-6 col-lg-3 py-2">
-                        <Card className="project-card" style={{minWidth: '200px', maxWidth: '300px'}}>
-                            <a href = "/Projects/TrainGame">
-                                <Card.Img variant="top" src="../train_numbers.jpg" style={{height: '150px'}} />
-                                <Card.Body>
-                                    <Card.Title>Train Game</Card.Title>
-                                    <Card.Text style={{height: '80px'}}>
-                                    A program that takes four digits and uses different operations to make ten.
-                                    </Card.Text>
-                                </Card.Body>
-                            </a>
-                        </Card>
-                    </div>
-                    <div className="col-sm-6 col-lg-3 py-2">
-                        <Card className="project-card" style={{minWidth: '200px', maxWidth: '300px'}}>
-                            <a href = "/Projects/Arbitrage" >
-                                <Card.Img variant="top" src="../arbitrage.jpg" style={{height: '150px'}} />
-                                <Card.Body>
-                                    <Card.Title>Arbitrage Betting</Card.Title>
-                                    <Card.Text style={{height: '80px'}}>
-                                    A program that aggregates betting odds from different sites to find profitable arbitrage bets.
-                                    </Card.Text>
-                                </Card.Body>
-                            </a>
-                        </Card>
-                    </div>
-                    {/* <div className="col-sm-6 col-lg-3 py-2">
-                        <Card className="project-card" style={{minWidth: '200px'}}>
-                            <a href = "/Projects/AlexaSpotify" >
-                                <Card.Img variant="top" src="../spotify-alexa.png" style={{height: '150px'}} />
-                                <Card.Body>
-                                    <Card.Title>Alexa Spotify</Card.Title>
-                                    <Card.Text style={{height: '80px'}}>
-                                    Use Alexa to play the most recently added songs to a playlist on Spotify.
-                                    </Card.Text>
-                                </Card.Body>
-                            </a>
-                        </Card>
-                    </div>
-                    <div className="col-sm-6 col-lg-3 py-2">
-                        <Card className="project-card" style={{minWidth: '200px'}}>
-                            <a href = "/Projects/Noise" >
-                                <Card.Img variant="top" src="../angry.png" style={{height: '150px'}}/>
-                                <Card.Body>
-                                    <Card.Title>Noisy Detector</Card.Title>
-                                    <Card.Text style={{height: '80px', padding: '20px 0'}}>
-                                    Uses the microphone to detect when you are being too loud.
-                                    </Card.Text>
-                                </Card.Body>
-                            </a>
-                        </Card>
-                    </div>
-                    <div className="col-sm-6 col-lg-3 py-2">
-                        <Card className="project-card" style={{minWidth: '200px'}}>
-                            <a href = "/Projects/Analytics" >
-                                <Card.Img variant="top" src="../facebook.png" style={{height: '150px'}}/>
-                                <Card.Body>
-                                    <Card.Title>Facebook Analytics</Card.Title>
-                                    <Card.Text style={{height: '80px', padding: '20px 0'}}>
-                                    Data analytics on Facebook messages.
-                                    </Card.Text>
-                                </Card.Body>
-                            </a>
-                        </Card>
-                    </div> */}
-                    <div className="col-sm-6 col-lg-3 py-2">
-                        <Card className="project-card" style={{minWidth: '200px', maxWidth: '300px'}}>
-                            <a href = "/Projects/TrioGame" >
-                                <Card.Img variant="top" src="../card-games.jpg" style={{height: '150px'}}/>
-                                <Card.Body>
-                                    <Card.Title>Trio</Card.Title>
-                                    <Card.Text style={{height: '80px'}}>
-                                    A virtual version of the card game Trio
-                                    </Card.Text>
-                                </Card.Body>
-                            </a>
-                        </Card>
-                    </div>
-                    <div className="col-sm-6 col-lg-3 py-2">
-                        <Card className="project-card" style={{minWidth: '200px', maxWidth: '300px'}}>
-                            <a href = "/Projects/PaceCalculator" >
-                                <Card.Img variant="top" src="../runner.jpg" style={{height: '150px'}}/>
-                                <Card.Body>
-                                    <Card.Title>Pace Calculator</Card.Title>
-                                    <Card.Text style={{height: '80px'}}>
-                                    Calculate your running pace as you go
-                                    </Card.Text>
-                                </Card.Body>
-                            </a>
-                        </Card>
-                    </div>
-                    <div className="col-sm-6 col-lg-3 py-2">
-                        <Card className="project-card" style={{minWidth: '200px', maxWidth: '300px'}}>
-                            <a href = "/Projects/FiveHundred" >
-                                <Card.Img variant="top" src="../500.jpg" style={{height: '150px'}}/>
-                                <Card.Body>
-                                    <Card.Title>500 Scorer</Card.Title>
-                                    <Card.Text style={{height: '80px'}}>
-                                    A scoring assistant for the 500 card game
-                                    </Card.Text>
-                                </Card.Body>
-                            </a>
-                        </Card>
-                    </div>
-                    <div className="col-sm-6 col-lg-3 py-2">
-                        <Card className="project-card" style={{minWidth: '200px', maxWidth: '300px'}}>
-                            <a href = "/Projects/NBA-Ladder" >
-                                <Card.Img variant="top" src="../nba.png" style={{height: '150px'}}/>
-                                <Card.Body>
-                                    <Card.Title>NBA Ladder</Card.Title>
-                                    <Card.Text style={{height: '80px'}}>
-                                    Live NBA standings using the Sportradar API
-                                    </Card.Text>
-                                </Card.Body>
-                            </a>
-                        </Card>
-                    </div>
-                    <div className="col-sm-6 col-lg-3 py-2">
-                        <Card className="project-card" style={{minWidth: '200px', maxWidth: '300px'}}>
-                            <a href = "/Projects/TopArtistsMap" >
-                                <Card.Img variant="top" src="../pin.png" style={{height: '150px'}}/>
-                                <Card.Body>
-                                    <Card.Title>Top Artists World Map</Card.Title>
-                                    <Card.Text style={{height: '80px'}}>
-                                    Spotify top artists visualized by origin country on an interactive world map.
-                                    </Card.Text>
-                                </Card.Body>
-                            </a>
-                        </Card>
-                    </div>
-                </CardGroup>
-            </div>
-        )
-    }
-}
+const PROJECTS = [
+  { src: '/train_numbers.jpg', title: 'Train Game',            description: 'A program that takes four digits and uses different operations to make ten.',                        route: '/Projects/TrainGame' },
+  { src: '/arbitrage.jpg',     title: 'Arbitrage Betting',     description: 'A program that aggregates betting odds from different sites to find profitable arbitrage bets.',     route: '/Projects/Arbitrage' },
+  { src: '/card-games.jpg',    title: 'Trio',                  description: 'A virtual version of the card game Trio',                                                            route: '/Projects/TrioGame' },
+  { src: '/runner.jpg',        title: 'Pace Calculator',       description: 'Calculate your running pace as you go',                                                              route: '/Projects/PaceCalculator' },
+  { src: '/500.jpg',           title: '500 Scorer',            description: 'A scoring assistant for the 500 card game',                                                          route: '/Projects/FiveHundred' },
+  { src: '/nba.png',           title: 'NBA Ladder',            description: 'Live NBA standings using the Sportradar API',                                                        route: '/Projects/NBA-Ladder' },
+  { src: '/pin.png',           title: 'Top Artists World Map', description: 'Spotify top artists visualized by origin country on an interactive world map.',                     route: '/Projects/TopArtistsMap' },
+  // { src: '/spotify-alexa.png', title: 'Alexa Spotify',      description: 'Use Alexa to play the most recently added songs to a playlist on Spotify.',                         route: '/Projects/AlexaSpotify' },
+  // { src: '/angry.png',         title: 'Noisy Detector',     description: 'Uses the microphone to detect when you are being too loud.',                                         route: '/Projects/Noise' },
+  // { src: '/facebook.png',      title: 'Facebook Analytics', description: 'Data analytics on Facebook messages.',                                                               route: '/Projects/Analytics' },
+];
+
+const Projects = () => (
+  <div className="py-8 px-4 sm:px-8 lg:px-20">
+    <h1 className="text-accent text-center mb-6">Personal Projects</h1>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {PROJECTS.map((card) => (
+        <ProjectCard key={card.route} {...card} />
+      ))}
+    </div>
+  </div>
+);
 
 export default Projects;
