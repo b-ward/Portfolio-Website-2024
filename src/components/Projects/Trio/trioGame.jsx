@@ -980,16 +980,12 @@ class TrioGame extends Component {
     render() {
         return(
             <div className="text-center min-h-screen">
-              <div className="row" style={{width: '100%', margin: 'auto'}}>
-                    <div style={{position: "absolute", left: "40%"}}>
+              <div className="relative z-10 flex items-center justify-between w-full px-5">
+                    <div className="text-accent text-2xl font-semibold py-3"><h1>Trio</h1></div>
+                    <div className="flex gap-2">
                         <button className="bg-accent text-black font-semibold px-4 py-2 rounded cursor-pointer" onClick={() => this.setState({madeModalShow: true})}>
                             Creation
                         </button>
-                    </div>
-                    <div style={{width: '100%'}}>
-                        <div className="text-accent text-2xl font-semibold py-3"><h1>Trio</h1></div>
-                    </div>
-                    <div style={{position: "absolute", right: "40%"}}>
                         <button className="bg-accent text-black font-semibold px-4 py-2 rounded cursor-pointer" onClick={() => this.setState({helpModalShow: true})}>
                             Help
                         </button>
