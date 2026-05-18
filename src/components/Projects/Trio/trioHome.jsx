@@ -7,7 +7,7 @@ const TrioHome = () => {
 
     return (
         <div className="trio-wrapper">
-            <div className="flex items-center justify-between w-full px-5">
+            <div className="relative z-10 flex items-center justify-between w-full px-5">
                 <div className="trio-title"><h1>Trio</h1></div>
                 <div className="flex gap-2">
                     <button onClick={() => setMadeModalShow(true)} className="bg-accent text-black font-semibold px-4 py-2 rounded">
