@@ -62,6 +62,7 @@ function addDelta(teams, index, delta) {
 // ==========================
 export default function FiveHundredScorer() {
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [showRules, setShowRules] = useState(false);
   const [model, setModel] = usePersistentState({
     teams: [
       { name: "Team A", score: 0 },
@@ -129,7 +130,7 @@ export default function FiveHundredScorer() {
 
   return (
     <div className="min-h-screen bg-surface text-black p-5 max-w-[1100px] mx-auto sm:p-5 [padding:16px_12px_calc(20px+env(safe-area-inset-bottom))_12px] sm:[padding:20px]">
-      <Header />
+      <Header onShowRules={() => setShowRules(true)} />
 
       {/* Scores */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
@@ -148,7 +149,7 @@ export default function FiveHundredScorer() {
       {/* Bet selector */}
       <section className="border-2 border-accent rounded-2xl p-4 bg-white text-black mb-4 sm:p-4 [padding:12px]">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
-          <h2 className="m-0 text-black">Current Bet</h2>
+          <h2 className="m-0 text-black text-2xl font-extrabold tracking-wide">Current Bet</h2>
           <div className="flex gap-2 flex-wrap">
             <button
               className="bg-white border-2 border-accent text-black px-3 py-2 rounded-xl cursor-pointer font-extrabold"
@@ -247,7 +248,7 @@ export default function FiveHundredScorer() {
                 {[6, 7, 8, 9, 10].map((lvl) => (
                   <button
                     key={lvl}
-                    className={`px-3 py-2.5 rounded-full border-2 bg-white text-black cursor-pointer font-extrabold transition-all sm:flex-none flex-1 basis-[80px] ${
+                    className={`w-12 h-12 rounded-full border-2 bg-white text-black cursor-pointer font-extrabold transition-all flex-none flex items-center justify-center ${
                       model.level === lvl
                         ? "bg-yellow-100 border-yellow-600 shadow-[0_0_0_4px_rgba(252,192,1,0.31)]"
                         : "border-accent"
@@ -273,7 +274,7 @@ export default function FiveHundredScorer() {
                     }`}
                     onClick={() => setModel((m) => ({ ...m, suit: s.key }))}
                   >
-                    <span className={`mr-1.5 text-xl ${s.iconColor}`}>{s.icon}</span>
+                    <span className={`mr-1.5 text-base leading-none ${s.iconColor}`}>{s.icon}</span>
                     {s.label}
                   </button>
                 ))}
@@ -333,18 +334,32 @@ export default function FiveHundredScorer() {
           <ScoringTable />
         </Modal>
       )}
+
+      {showRules && (
+        <Modal onClose={() => setShowRules(false)} title="How to Play 500">
+          <RulesContent />
+        </Modal>
+      )}
     </div>
   );
 }
 
-function Header() {
+function Header({ onShowRules }) {
   return (
     <header className="mb-6 border-b-[3px] border-accent pb-3 bg-white text-black rounded-xl p-3">
-      <div className="flex items-baseline gap-2.5">
-        <div className="w-3.5 h-3.5 rounded-full bg-accent" />
-        <h1 className="m-0 font-extrabold tracking-wide text-black" style={{ fontSize: "clamp(1.25rem, 1rem + 2vw, 2.25rem)" }}>
-          500 Scorekeeper
-        </h1>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-baseline gap-2.5">
+          <div className="w-3.5 h-3.5 rounded-full bg-accent" />
+          <h1 className="m-0 font-extrabold tracking-wide text-black" style={{ fontSize: "clamp(1.25rem, 1rem + 2vw, 2.25rem)" }}>
+            500 Scorekeeper
+          </h1>
+        </div>
+        <button
+          className="bg-white border-2 border-accent text-black px-3 py-2 rounded-xl cursor-pointer font-extrabold text-sm whitespace-nowrap"
+          onClick={onShowRules}
+        >
+          How to Play
+        </button>
       </div>
     </header>
   );
@@ -383,6 +398,59 @@ function TeamCard({ team, onNameChange, onAdjust, onSelectBidder, active }) {
           </button>
         ))}
       </div>
+    </div>
+  );
+}
+
+function RulesContent() {
+  return (
+    <div className="space-y-4 text-sm leading-relaxed">
+      <section>
+        <h3 className="font-extrabold text-base mb-1">Overview</h3>
+        <p>500 is a trick-taking card game for 4 players in 2 partnerships. The goal is to be the first team to reach 500 points — or to force the opponents to −500.</p>
+      </section>
+
+      <section>
+        <h3 className="font-extrabold text-base mb-1">The Deck</h3>
+        <p>500 uses a 43-card deck. To build one from a standard 52-card deck:</p>
+        <ul className="list-disc pl-5 mt-1 space-y-1">
+          <li>Remove all <strong>2s</strong> and <strong>3s</strong> (8 cards)</li>
+          <li>Remove the <strong>4♠</strong> and <strong>4♣</strong> (2 cards)</li>
+          <li>Add <strong>one Joker</strong></li>
+        </ul>
+        <p className="mt-1">This leaves: A–5 in ♥/♦ (11 cards each) and A–5 in ♠/♣ (10 cards each), plus the Joker.</p>
+        <p className="mt-2">Trump card ranking (highest → lowest): <strong>Joker</strong>, <strong>Right Bower</strong> (J of trump suit), <strong>Left Bower</strong> (J of same-colour suit), then A K Q 10 … of trump.</p>
+      </section>
+
+      <section>
+        <h3 className="font-extrabold text-base mb-1">Bidding</h3>
+        <p>Players take turns bidding the number of tricks (6–10) they expect their team to win, along with a trump suit or No Trumps. Each bid must be higher in value than the last. The highest bidder wins the contract.</p>
+        <p className="mt-1">Special bids:</p>
+        <ul className="list-disc pl-5 mt-1 space-y-1">
+          <li><strong>Misère (250 pts):</strong> The bidder plays alone with no trumps, attempting to lose every single trick.</li>
+          <li><strong>Open Misère (500 pts):</strong> Same as Misère, but the bidder's hand is laid face-up on the table after the first trick.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3 className="font-extrabold text-base mb-1">Playing</h3>
+        <p>The winning bidder leads the first trick. Players must follow suit if able; otherwise they may play any card. The highest trump wins the trick, or the highest card of the led suit if no trumps are played.</p>
+      </section>
+
+      <section>
+        <h3 className="font-extrabold text-base mb-1">Scoring</h3>
+        <ul className="list-disc pl-5 space-y-1">
+          <li><strong>Made the bid:</strong> The bidding team scores the bid value (see scoring table).</li>
+          <li><strong>Failed the bid:</strong> The bid value is deducted from the bidding team's score.</li>
+          <li><strong>Non-bidding team:</strong> Score 10 points per trick won regardless of outcome.</li>
+          <li><strong>Slam bonus:</strong> If the bidding team wins all 10 tricks and their bid was worth less than 250, they score 250 instead.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3 className="font-extrabold text-base mb-1">Winning</h3>
+        <p>The first team to reach <strong>+500 points</strong> wins. A team that reaches <strong>−500 points</strong> immediately loses.</p>
+      </section>
     </div>
   );
 }
@@ -430,9 +498,7 @@ function ScoringTable() {
           </tr>
         </tbody>
       </table>
-      <p className="text-gray-500 mt-3">
-        Tip: Pick a bet above, then tap <strong>Made Bet</strong> or <strong>Failed Bet</strong>.
-      </p>
+
     </div>
   );
 }
