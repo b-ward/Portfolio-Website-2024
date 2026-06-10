@@ -16,6 +16,8 @@ import Music from './Music/music';
 import BusinessBrains from './BusinessBrains/businessBrains';
 import NBALadder from './Projects/NBA-Ladder/NBA-Ladder';
 import TopArtistsMap from './Projects/TopArtistsMap/topArtistsMap';
+import PLPredictions from './Projects/PLPredictions/plPredictions';
+import FPLDraftChecker from './Projects/FPLDraft/fplDraftChecker';
 
 
 const Main = () => (
@@ -33,6 +35,8 @@ const Main = () => (
         <Route path="/Projects/Noise" element={<NoisyDetector/>}/>
         <Route path="/Projects/NBA-Ladder" element={<NBALadder/>}/>
         <Route path="/Projects/TopArtistsMap" element={<TopArtistsMap/>}/>
+        <Route path="/Projects/PLPredictions" element={<PLPredictions/>}/>
+        <Route path="/Projects/FPLDraft" element={<FPLDraftChecker/>}/>
         <Route path="/Photos" element={<Photos/>}/>
         <Route path="/Music" element={<Music/>}/>
         <Route path="/BusinessBrains" element={<BusinessBrains/>}/>
